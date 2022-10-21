@@ -1,0 +1,183 @@
+import "./App.css";
+import "./component/style.css";
+import React, { useState, useRef } from "react";
+// import { Input } from "./component/ref";
+
+// const App = () => {
+//   const [value, setValue] = useState({
+//     name: "",
+//     email: "",
+//   });
+
+//   return (
+//     <div className='container'>
+//       {/* <div className='top'>
+//         <h2 className='sign'>SIGN UP</h2>
+//         <div className='line1'></div>
+//       </div>
+//       <h2 className='name'>Name</h2>
+//       <div className='inp-top'>
+//         <input type={'text'} placeholder='Enter your name' value={value.name} onChange={(e)=>{
+//           setValue({...value, name:e.target.value });
+//         }} />
+//       </div>
+
+//       <h2 className='email-name'>Email</h2>
+//       <div className='email'>
+//         <input type={'email'} placeholder='Enter your email' value={value.email} onChange={(e)=>{
+//           setValue({...value, email:e.target.value });
+//         }} />
+//       </div>
+//       <button className='sub-bot' type={'submit'} onClick={
+//         ()=> {
+//           console.log(value)
+//         }
+//       }>SUBMIT</button> */}
+// {/* <Ref /> */}
+// <Input />
+
+//     </div>
+//   )
+// };
+
+// export default App;
+// //sign-up page
+
+const App = () => {
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const [value, setValue] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+  });
+  function check() {
+    if (value.name === "") {
+      nameRef.current.focus();
+    }
+    if (value.email === "") {
+      emailRef.current.focus();
+    }
+  }
+  return (
+    <div className="container">
+      <div className="top">
+        <h2 className="sign">SIGN UP</h2>
+        <div className="line1"></div>
+      </div>
+      <h2 className="name">Name</h2>
+      <div className="inp-top">
+        <input
+          ref={nameRef}
+          type={"text"}
+          placeholder="Enter your name"
+          value={value.name}
+          onChange={(e) => {
+            setValue({ ...value, name: e.target.value });
+          }}
+        />
+      </div>
+
+      <h2 className="name">Email</h2>
+      <div className="email">
+        <input
+          ref={emailRef}
+          type={"email"}
+          placeholder="Enter your email"
+          value={value.email}
+          onChange={(e) => {
+            setValue({ ...value, email: e.target.value });
+          }}
+        />
+      </div>
+      <h2 className="name">Phone Number</h2>
+      <input type="number" placeholder="Enter your phone number" />
+      <button
+        className="sub-bot"
+        type={"submit"}
+        onClick={check}
+      >
+        SUBMIT
+      </button>
+    </div>
+  );
+};
+export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+database&search function 
+
+import { useState } from "react";
+import users from "../src/users.json";
+
+
+
+function App() {
+  const [output, setOutput] = useState(users);
+
+  console.log(users);
+  const search = (val) => {
+    setOutput(() => {
+      return users.filter((user) => {
+        return user.username.toLowerCase().includes(val.toLowerCase());
+      });
+    });
+  };
+  return (
+    <div
+      className="App"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "20px",
+      }}
+    >
+      <input
+        type={"search"}
+        style={{ width: "500px" }}
+        onChange={(e) => {
+          e.preventDefault();
+          search(e.target.value);
+        }}
+      ></input>
+      {output.length === 0 && <h1>No Users Found`</h1>}
+      {output.map((userData, index) => {
+        return <UserPrint userData={userData} key={index} />;
+      })}
+    </div>
+  );
+}
+
+const UserPrint = ({ userData }) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        border: "1px solid black",
+        width: "300px",
+        height: "500px",
+        borderRadius: "5%",
+      }}
+    >
+      <img src={userData.avatar} />
+      <p>{userData.username}</p>
+      <p>{userData.email}</p>
+      <p>{userData.date_of_birth}</p>
+    </div>
+  );
+};
