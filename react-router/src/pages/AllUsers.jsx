@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import UserPrint from "./UserProfile";
 import users from "../users.json";
+import Oneuser from "./Oneuser";
 
 export const AllUsers = () => {
   const [output, setOutput] = useState(users);
@@ -34,7 +35,11 @@ export const AllUsers = () => {
       ></input>
       {output.length === 0 && <h1>No Users Found`</h1>}
       {output.map((userData, index) => {
-        return <UserPrint userData={userData} key={index} />;
+        return (
+          <div>
+            <UserPrint userData={userData} key={index} />
+          </div>
+        );
       })}
     </div>
   );
