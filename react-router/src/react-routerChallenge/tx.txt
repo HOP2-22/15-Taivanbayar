@@ -1,0 +1,25 @@
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Home } from "./react-routerChallenge/main";
+import { HomePage } from "./react-routerChallenge/homePage";
+import { ProductsPage } from "./react-routerChallenge/productPage";
+import { LoginPage } from "./react-routerChallenge/LoginPage";
+import { ServicePage } from "./react-routerChallenge/servicePage";
+import { ContactPage } from "./react-routerChallenge/contactPage";
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/homePage" element={<HomePage />} />
+        <Route path="/productPage" element={<ProductsPage />} />
+        <Route path="/LoginPage" element={<LoginPage />} />
+        <Route path="/servicePage" element={<ServicePage />} />
+        <Route path="/contactPage" element={<ContactPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default App;
