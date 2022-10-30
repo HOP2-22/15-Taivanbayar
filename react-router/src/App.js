@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "./chinaGame/card"
 
 const App = () =>{
+
+
   return(
     <div className="App">
       <div className="screen">
@@ -12,4 +14,3 @@ const App = () =>{
 }
 
 export default App;
-
