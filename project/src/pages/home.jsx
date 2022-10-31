@@ -4,6 +4,8 @@ import MeetingImg from "../assets/images/meetingImg.svg";
 import ParaContainer from "../components/layout/paraContainer";
 import smilingWoman from "../assets/images/smilingwoman.svg";
 import smilingWomanBr from "../assets/images/smilingwoman2.svg";
+import { Link } from "react-router-dom";
+import Comment from "../components/layout/comments"
 
 export const Home = () => {
   return (
@@ -33,16 +35,24 @@ export const Home = () => {
         </div>
         <img src={MeetingImg} />
       </main>
+
+
       <div className="midContainer">
-        <div>
+        <div className="mid-infos">
           <ParaContainer />
           <img src={smilingWoman} />
         </div>
-        <div>
-          <ParaContainer />
+        <div className="mid-infos">
+          <ParaContainer />;
           <img src={smilingWomanBr} />
         </div>
       </div>
+
+      <div className="main-end">
+        <Comment />
+      </div>
+
+      
     </div>
   );
 };
