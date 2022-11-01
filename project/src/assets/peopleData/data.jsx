@@ -1,12 +1,9 @@
 import React from "react";
-import DataSend  from "./dataSend";
 
 export const Data = (props) => {
-    const { surname, starNum, comment, profile} = props }
-  const StarCount = (data) => {
+  const { surname, starNum, comment, profile } = props;
     const star = ["⭐", "⭐", "⭐", "⭐", "⭐"];
     star.length = starNum;
-  };
 
   return (
     <div>
@@ -17,7 +14,7 @@ export const Data = (props) => {
       </div>
       <p>{comment}</p>
       <div>
-        <img style={{width:"30px", height:"30px"}} src={profile} />
+        <img style={{ width: "30px", height: "30px" }} src={profile} />
         <div>{surname}</div>
       </div>
     </div>
