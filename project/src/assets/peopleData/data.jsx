@@ -2,20 +2,62 @@ import React from "react";
 
 export const Data = (props) => {
   const { surname, starNum, comment, profile } = props;
-    const star = ["⭐", "⭐", "⭐", "⭐", "⭐"];
-    star.length = starNum;
-
+  console.log("star:", props);
   return (
-    <div>
-      <div style={{ width: "15px", height: "15px" }}>
-        {star.map((element, index) => {
-          return <div key={index}>{element}</div>;
-        })}
+    <div
+      style={{
+        display: "flex",
+        gap: "20px",
+        width: "400px",
+        height: "350px",
+        flexDirection: "column",
+        backgroundColor: "white",
+        justifyContent: "center",
+        alignContent: "center",
+        padding:"42px"
+      }}
+    >
+      <div style={{ width: "15px", height: "15px", display: "flex" }}>
+        {Array(starNum && starNum)
+          .fill("⭐")
+          .map((element, index) => {
+            return (
+              <div key={index}>
+                {element}
+              </div>
+            );
+          })}
       </div>
-      <p>{comment}</p>
-      <div>
+      <p
+        style={{
+          fontFamily: "Mulish",
+          fontWeight: "500",
+          fontSize: "18px",
+          width: "250px",
+          height:"100px"
+        }}
+      >
+        {comment}
+      </p>
+      <div
+        style={{
+          display: "flex",
+          marginTop: "40px",
+          gap: "20px",
+        }}
+      >
         <img style={{ width: "30px", height: "30px" }} src={profile} />
-        <div>{surname}</div>
+        <h3
+          style={{
+            fontFamily: "Mulish",
+            fontWeight: "600",
+            fontSize: "18px",
+            lineHeight: "29px",
+            marginTop:"-2px"
+          }}
+        >
+          {surname}
+        </h3>
       </div>
     </div>
   );
