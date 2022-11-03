@@ -121,3 +121,7 @@ input {
   gap: 10px;
 }
 
+.mid-infos{
+  display: inline;
+    gap: 20px;
+}

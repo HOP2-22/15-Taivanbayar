@@ -10,7 +10,6 @@ import InputLogo from "../assets/images/rightArrow.svg";
 import { CompMid } from "../components/CompMid";
 import AllPeopleData from "../assets/peopleData/peopleData";
 import { Data } from "../assets/peopleData/data";
-import { useEffect } from "react";
 
 export const Home = () => {
   return (
@@ -46,7 +45,7 @@ export const Home = () => {
         />
         <CompMid
           image={smilingWomanBr}
-          topic={"Schedul ing that actually works"}
+          topic={"Scheduling that actually works"}
           marginRight={false}
           imageSize={false}
           marginAll={false}
@@ -86,27 +85,27 @@ export const Home = () => {
           <div className="footer-bot-left">
             <div className="linked-sources">
               <img src={logo1} />
-              <p className="source">Instagram</p>
+              <p className="ending-words">Instagram</p>
             </div>
             <div className="linked-sources">
               <img src={logo2} />
-              <p className="source">Facebook</p>
+              <p className="ending-words">Facebook</p>
             </div>
             <div className="linked-sources">
               <img src={logo3} />
-              <p className="source">Twitter</p>
+              <p className="ending-words">Twitter</p>
             </div>
             <div className="linked-sources">
               <img src={logo1} />
-              <p className="source">Instagram</p>
+              <p className="ending-words">Instagram</p>
             </div>
             <div className="linked-sources">
               <img src={logo2} />
-              <p className="source">Facebook</p>
+              <p className="ending-words">Facebook</p>
             </div>
             <div className="linked-sources">
               <img src={logo3} />
-              <p className="source">Twitter</p>
+              <p className="ending-words">Twitter</p>
             </div>
           </div>
         </div>

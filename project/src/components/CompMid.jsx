@@ -70,7 +70,7 @@ export const CompMid = ({
             }}
           >
             Give everyone you work with—inside and outside your company—a more
-            productive way to stay in sync. <br /> Respond faster with emoji,
+            productive way to stay in sync. Respond faster with emoji,
             keep conversations focused <br /> in channels, and simplify all your
             communication into <br /> one place.
           </p>

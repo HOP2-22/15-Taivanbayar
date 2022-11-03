@@ -9,12 +9,14 @@ export const Data = (props) => {
         display: "flex",
         gap: "20px",
         width: "400px",
-        height: "350px",
+        height: "260px",
         flexDirection: "column",
         backgroundColor: "white",
         justifyContent: "center",
         alignContent: "center",
-        padding:"42px"
+        padding:"42px",
+        boxShadow: '2px 3px 21px -1px  rgba(0,0,0,0.75)'  ,
+
       }}
     >
       <div style={{ width: "15px", height: "15px", display: "flex" }}>
