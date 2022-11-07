@@ -1,0 +1,81 @@
+.footer {
+  height: 45vh;
+  width: 100%;
+  background: #252b3b;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+  margin-top: 100px;
+}
+.linked-sources {
+  display: flex;
+  flex-direction: column;
+}
+.links {
+  display: flex;
+}
+.logo-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+}
+.logo {
+  display: flex;
+}
+.logo p {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 50px;
+}
+.logo div {
+  width: 10px;
+  height: 10px;
+  background-color: #0bbef2;
+  margin-top: 86px;
+}
+
+.footer-mid {
+  display: flex;
+  gap: 20%;
+  width: 30%;
+  margin-top: 39px;
+}
+.mid-sources {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+ 
+.mid-sources-caption {
+  font-family: "Mulish";
+  font-weight: 500;
+  font-size: 26px;
+}
+.footer-input {
+  margin-top: -11%;
+}
+.footer-input p {
+  font-family: "Mulish";
+  font-weight: 500;
+  font-size: 30px;
+}
+.footer-input input::placeholder{
+    color: #4DA0FD;
+}
+.footer-input input{
+    width: 100%;
+    height: 50px;
+}
+.input{
+    display: flex;
+}
+.input img {
+    margin-left: -40px;
+}
+.mid-styler{
+    display: flex;
+    flex-direction: column;
+}
