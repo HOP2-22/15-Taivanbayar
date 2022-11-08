@@ -1,88 +1,115 @@
 import React from "react";
-import "../components/style.css";
 import InstaImg from "../Data/Instagram.svg";
 import FbImg from "../Data/Facebook.svg";
 import TwtImg from "../Data/Twitter.svg";
 import nav from "../Data/arrow.svg";
+import { Box, Typography } from "@mui/material";
+import { height, Stack } from "@mui/system";
+import "./style.css";
 
 export const Footer = () => {
   return (
-    <div className="footer">
-      <div className="logo-links">
-        <div className="logo">
-          <p>team</p>
-          <div></div>
-        </div>
-        <div className="linked-sources">
-          <div className="links">
+    <Box
+      sx={{
+        height: "50vh",
+        background: "#252B3B",
+        width: "90%",
+        display: "flex",
+        justifyContent: "space-around",
+        color: "white",
+        marginTop: "4%",
+        alignItems: "center",
+        paddingRight: "5vw",
+        paddingLeft: "5vw",
+      }}
+    >
+      <Box>
+        <Box sx={{ display: "flex", marginBottom: "20%" }}>
+          <Typography variant="h4">team</Typography>
+          <Box
+            sx={{
+              backgroundColor: "#0BBEF2",
+              width: "8px",
+              height: "8px",
+              marginTop: "25%",
+            }}
+          ></Box>
+        </Box>
+        <Stack spacing={3} sx={{ display: "flex", flexDirection: "column" }}>
+          <Box sx={{ display: "flex", gap: "9%" }}>
             <img src={InstaImg} />
-            <p>Instagram</p>
-          </div>
-          <div className="links">
+            <Typography>Instagram</Typography>
+          </Box>
+          <Box sx={{ display: "flex", gap: "9%" }}>
             <img src={FbImg} />
-            <p>Facebook</p>
-          </div>
-          <div className="links">
+            <Typography>Facebook</Typography>
+          </Box>
+          <Box sx={{ display: "flex", gap: "9%" }}>
             <img src={TwtImg} />
-            <p>Twitter</p>
-          </div>
-          <div className="links">
+            <Typography>Twitter</Typography>
+          </Box>
+          <Box sx={{ display: "flex", gap: "9%" }}>
             <img src={InstaImg} />
-            <p>Instagram</p>
-          </div>
-          <div className="links">
+            <Typography>Instagram</Typography>
+          </Box>
+          <Box sx={{ display: "flex", gap: "9%" }}>
             <img src={FbImg} />
-            <p>Facebook</p>
-          </div>
-          <div className="links">
+            <Typography>Facebook</Typography>
+          </Box>
+          <Box sx={{ display: "flex", gap: "9%" }}>
             <img src={TwtImg} />
-            <p>Twitter</p>
-          </div>
-        </div>
-      </div>
-      <div className="footer-mid">
-        <div className="mid-sources">
-          <p className="mid-sources-caption">Use Cases</p>
-          <div className="mid-styler">
-            <p>UI Design</p>
-            <p>UX Design</p>
-            <p>Prototyping</p>
-            <p>UI Design</p>
-            <p>UX Design</p>
-            <p>Prototyping</p>
-          </div>
-        </div>
-        <div className="mid-sources">
-          <p className="mid-sources-caption">Explore</p>
-          <div className="mid-styler">
-            <p>Figma</p>
-            <p>Customers</p>
-            <p>Why I Love Figma</p>
-            <p>Figma</p>
-            <p>Customers</p>
-            <p>Why I Love Figma</p>
-          </div>
-        </div>
-        <div className="mid-sources">
-          <p className="mid-sources-caption">Resources</p>
-          <div className="mid-styler">
-            <p>Community Resources Hub</p>
-            <p>Support</p>
-            <p>Education</p>
-            <p>Community Resources Hub</p>
-            <p>Support</p>
-            <p>Education</p>
-          </div>
-        </div>
-      </div>
-      <div className="footer-input">
-        <p>Subscribe to our newsletter</p>
-        <div className="input">
-          <input placeholder="Email" />
-          <img src={nav} />
-        </div>
-      </div>
-    </div>
+            <Typography>Twitter</Typography>
+          </Box>
+        </Stack>
+      </Box>
+      <Box
+        sx={{ display: "flex", justifyContent: "space-around", width: "40%" }}
+      >
+        <Stack spacing={3}>
+          <Typography>Use Cases</Typography>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: "19px" }}>
+            <Typography>UI Design</Typography>
+            <Typography>UX Design</Typography>
+            <Typography>Prototyping</Typography>
+            <Typography>UI Design</Typography>
+            <Typography>UX Design</Typography>
+            <Typography>Prototyping</Typography>
+          </Box>
+        </Stack>
+        <Stack spacing={3}>
+          <Typography>Explore</Typography>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: "19px" }}>
+            <Typography>Figma</Typography>
+            <Typography>Customers</Typography>
+            <Typography>Why I Love Figma</Typography>
+            <Typography>Figma</Typography>
+            <Typography>Customers</Typography>
+            <Typography>Why I Love Figma</Typography>
+          </Box>
+        </Stack>
+        <Stack spacing={3}>
+          <Typography>Resources</Typography>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: "19px" }}>
+            <Typography>Community Resources Hub</Typography>
+            <Typography>Support</Typography>
+            <Typography>Education</Typography>
+            <Typography>Community Resources Hub</Typography>
+            <Typography>Support</Typography>
+            <Typography>Education</Typography>
+          </Box>
+        </Stack>
+      </Box>
+      <Stack spacing={3} sx={{ marginTop: "-12%" }}>
+        <Typography variant="h5">Subscribe to our newsletter</Typography>
+        <Box sx={{ display: "flex" }}>
+          <input
+            style={{ width: "100%", height: "50px" }}
+            placeholder="Email"
+          />
+          <img src={nav} style={{ marginLeft: "-14%" }} />
+        </Box>
+      </Stack>
+    </Box>
   );
 };
 

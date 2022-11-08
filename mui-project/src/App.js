@@ -6,7 +6,6 @@ import { Box, Container } from "@mui/system";
 import { AllData } from "./Data/data";
 import Footer from "./components/Footer";
 
-
 function App() {
   return (
     <div
