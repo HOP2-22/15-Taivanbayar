@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Avatar, Stack } from "@mui/material";
+import { Box } from "@mui/system";
 
 export function MediaCad(props) {
   const { name, avatar, comment, caption } = props;
@@ -39,9 +40,12 @@ export function MediaCad(props) {
           {comment}
         </Typography>
       </CardContent>
-      <CardActions sx={{ display: "flex", gap: "20px" }}>
+      <CardActions sx={{ display: "flex", justifyContent: "space-around" }}>
         <Avatar alt="avatar" src={avatar} />
         <Typography sx={{ color: "#6D7D8B" }}>{name}</Typography>
+        <Box
+          sx={{ height: "3vh", width: "2px", backgroundColor: "#6D7D8B" }}
+        ></Box>
         <Typography sx={{ color: "#6D7D8B" }}>2nd January, 2022</Typography>
       </CardActions>
     </Card>
