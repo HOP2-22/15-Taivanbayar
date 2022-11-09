@@ -16,8 +16,8 @@ function App() {
         justifyContent: "center",
       }}
     >
-      <Header />
-      <Container>
+      <Container maxWidth="xl">
+        <Header />
         <Box sx={{ marginBottom: "90px" }} />
         <h1 style={{ marginBottom: "40px", fontSize: "44px" }}>Blog posts</h1>
         <p style={{ color: "#6D7D8B", fontSize: "20px" }}>

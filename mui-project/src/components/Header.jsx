@@ -3,7 +3,7 @@ import { Container, AppBar, Box, Typography } from "@mui/material";
 
 export const Header = () => (
   <AppBar sx={{ backgroundColor: "white", boxShadow: "none", height: "70px" }}>
-    <Container sx={{ backgroundColor: "white", border: "none" }}>
+    <Container sx={{ backgroundColor: "white", border: "none" }} maxWidth="xl">
       <Box
         sx={{
           display: "flex",
@@ -29,7 +29,9 @@ export const Header = () => (
             }}
           ></Typography>
         </Box>
-        <Box sx={{ display: "flex", gap: 3, alignItems: "center", height:"70px" }}>
+        <Box
+          sx={{ display: "flex", gap: 3, alignItems: "center", height: "70px" }}
+        >
           <Typography sx={{ color: "gray", textDecoration: "underline" }}>
             Products
           </Typography>

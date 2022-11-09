@@ -4,8 +4,7 @@ import FbImg from "../Data/Facebook.svg";
 import TwtImg from "../Data/Twitter.svg";
 import nav from "../Data/arrow.svg";
 import { Box, Container, Typography } from "@mui/material";
-import { height, Stack } from "@mui/system";
-import "./style.css";
+import { Stack } from "@mui/system";
 
 export const Footer = () => {
   return (
