@@ -3,11 +3,10 @@ import { Container, AppBar, Box, Typography, Switch } from "@mui/material";
 import { ColorModeContext } from "../context/ThemeContext";
 
 export const Header = () => {
-  const { theme, changeTheme } = useContext(ColorModeContext);
-  console.log(theme);
+  const { theme, changeTheme, color } = useContext(ColorModeContext);
   return (
     <AppBar
-      sx={{ backgroundColor: "white", boxShadow: "none", height: "70px" }}
+      sx={{ boxShadow: "none", height: "70px", backgroundColor: theme }}
     >
       <Container
         sx={{
@@ -27,7 +26,7 @@ export const Header = () => {
             <Typography
               variant="h5"
               sx={{
-                color: "black",
+                color: color
               }}
             >
               team
@@ -36,7 +35,7 @@ export const Header = () => {
               sx={{
                 width: "8px",
                 height: "8px",
-                backgroundColor: "black",
+                backgroundColor: color,
                 marginTop: "16px",
               }}
             ></Typography>

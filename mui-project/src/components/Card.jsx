@@ -7,9 +7,9 @@ import Typography from "@mui/material/Typography";
 import { Avatar, Stack } from "@mui/material";
 import { Box } from "@mui/system";
 
+
 export function MediaCad(props) {
   const { name, avatar, comment, caption } = props;
-
   return (
     <Card
       sx={{

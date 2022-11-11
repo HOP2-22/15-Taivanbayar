@@ -7,8 +7,8 @@ import Typography from "@mui/material/Typography";
 import { Avatar } from "@mui/material";
 import { Box } from "@mui/system";
 
-export function MediaCad(props) {
-  const { name, avatar, comment, caption } = props;
+export default function MediaCad(props) {
+  const { name, avatar, comment, caption, image } = props;
 
   return (
     <Card
@@ -20,7 +20,7 @@ export function MediaCad(props) {
       <CardMedia
         component="img"
         height="200"
-        image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+        image={image}
         alt="green iguana"
       />
       <CardContent sx={{ textAlign: "center" }}>
