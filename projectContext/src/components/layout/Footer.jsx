@@ -1,11 +1,10 @@
 import React from "react";
-import InstaImg from "../Data/Instagram.svg";
-import FbImg from "../Data/Facebook.svg";
-import TwtImg from "../Data/Twitter.svg";
-import nav from "../Data/arrow.svg";
-import { Box, Container, Typography } from "@mui/material";
-import { height, Stack } from "@mui/system";
-import "./style.css";
+import InstaImg from "../../Data/Instagram.svg";
+import FbImg from "../../Data/Facebook.svg";
+import TwtImg from "../../Data/Twitter.svg";
+import nav from "../../Data/arrow.svg";
+import { Box, Typography } from "@mui/material";
+import { Stack } from "@mui/system";
 
 export const Footer = () => {
   return (
@@ -18,8 +17,7 @@ export const Footer = () => {
         marginTop: "4%",
       }}
     >
-      <Container
-        maxWidth="xl"
+      <Box
         sx={{
           display: "flex",
           flexDirection: "row",
@@ -113,7 +111,7 @@ export const Footer = () => {
             <img src={nav} style={{ marginLeft: "-14%" }} />
           </Box>
         </Stack>
-      </Container>
+      </Box>
     </Box>
   );
 };

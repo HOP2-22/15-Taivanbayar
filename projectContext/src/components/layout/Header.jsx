@@ -1,21 +1,32 @@
-import React from "react";
-import { Container, AppBar, Box, Typography } from "@mui/material";
+import React, { useContext } from "react";
+import { AppBar, Box, Typography, Switch } from "@mui/material";
+import { ColorModeContext } from "../../context/ThemeContext";
 
-export const Header = () => (
-  <AppBar sx={{ backgroundColor: "white", boxShadow: "none", height: "70px" }}>
-    <Container sx={{ backgroundColor: "white", border: "none" }} maxWidth="xl">
+export const Header = () => {
+  const { theme, changeTheme, color } = useContext(ColorModeContext);
+  return (
+    <AppBar sx={{ boxShadow: "none", height: "70px", backgroundColor: theme }}>
       <Box
         sx={{
+          backgroundColor: theme,
+          border: "none",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
+        {/* <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        > */}
         <Box sx={{ display: "flex" }}>
           <Typography
             variant="h5"
             sx={{
-              color: "black",
+              color: color,
             }}
           >
             team
@@ -24,14 +35,24 @@ export const Header = () => (
             sx={{
               width: "8px",
               height: "8px",
-              backgroundColor: "black",
+              backgroundColor: color,
               marginTop: "16px",
             }}
           ></Typography>
         </Box>
         <Box
-          sx={{ display: "flex", gap: 3, alignItems: "center", height: "70px" }}
+          sx={{
+            display: "flex",
+            gap: 3,
+            alignItems: "center",
+            height: "70px",
+          }}
         >
+          <Switch
+            checked={theme === "white" ? true : false}
+            onChange={changeTheme}
+            inputProps={{ "aria-label": "controlled" }}
+          />
           <Typography sx={{ color: "gray", textDecoration: "underline" }}>
             Products
           </Typography>
@@ -61,9 +82,10 @@ export const Header = () => (
             Get Access
           </Typography>
         </Box>
+        {/* </Box> */}
       </Box>
-    </Container>
-  </AppBar>
-);
+    </AppBar>
+  );
+};
 
 export default Header;

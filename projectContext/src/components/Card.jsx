@@ -4,12 +4,12 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Avatar, Stack } from "@mui/material";
+import { Avatar } from "@mui/material";
 import { Box } from "@mui/system";
 
+export default function MediaCad(props) {
+  const { name, avatar, comment, caption, image } = props;
 
-export function MediaCad(props) {
-  const { name, avatar, comment, caption } = props;
   return (
     <Card
       sx={{
@@ -20,7 +20,7 @@ export function MediaCad(props) {
       <CardMedia
         component="img"
         height="200"
-        image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+        image={image}
         alt="green iguana"
       />
       <CardContent sx={{ textAlign: "center" }}>
