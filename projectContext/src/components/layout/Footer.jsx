@@ -3,7 +3,7 @@ import InstaImg from "../../Data/Instagram.svg";
 import FbImg from "../../Data/Facebook.svg";
 import TwtImg from "../../Data/Twitter.svg";
 import nav from "../../Data/arrow.svg";
-import { Box, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 
 export const Footer = () => {
@@ -14,10 +14,11 @@ export const Footer = () => {
         background: "#252B3B",
         display: "flex",
         color: "white",
-        marginTop: "4%",
+
       }}
     >
-      <Box
+      <Container
+      maxWidth="xl"
         sx={{
           display: "flex",
           flexDirection: "row",
@@ -111,7 +112,7 @@ export const Footer = () => {
             <img src={nav} style={{ marginLeft: "-14%" }} />
           </Box>
         </Stack>
-      </Box>
+      </Container>
     </Box>
   );
 };

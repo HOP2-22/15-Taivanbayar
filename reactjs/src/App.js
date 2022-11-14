@@ -22,7 +22,6 @@ const App = () => {
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               setList([...list, inpValue]);
-              console.log(setList )
           }
         }}
           />

@@ -17,7 +17,7 @@ export const List1 = ({ toDo, index, list, setList }) => {
           className="inp-top"
           type={"checkbox"}
           onClick={(e) => setCheck(e.target.checked)}
-        />    
+        />      
         <div style={{ textDecoration: check ? "line-through" : "none" }}>
           {toDo}
         </div>

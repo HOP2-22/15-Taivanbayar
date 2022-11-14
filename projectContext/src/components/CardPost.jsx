@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 import Card from "./Card";
 import axios from "axios";
-import UserShow from "../page/User";
 
 const instance = axios.create({
   baseURL: "https://dummyapi.io/data/v1/post",
@@ -11,7 +10,6 @@ const instance = axios.create({
 
 export const AllCard = () => {
   const [post, setPost] = useState([]);
-
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -36,15 +34,8 @@ export const AllCard = () => {
                 "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate, voluptatibus commodi? Perspiciatis aut magnam non quis aliquam, dicta nobis iste voluptatibus corrupti libero deserunt itaque, minus quisquam explicabo repellat ducimus"
               }
               image={el.image}
+              id={el.id}
             />
-            {/* <UserShow 
-            name={el.owner.firstName + " " + el.owner.lastName}
-            caption={el.text}
-            avatar={el.owner.picture}
-            comment={
-              "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate, voluptatibus commodi? Perspiciatis aut magnam non quis aliquam, dicta nobis iste voluptatibus corrupti libero deserunt itaque, minus quisquam explicabo repellat ducimus"
-            }
-            image={el.image}/> */}
           </Grid>
         );
       })}

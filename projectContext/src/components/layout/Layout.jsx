@@ -1,11 +1,9 @@
+import { Container } from "@mui/system";
 import React from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 
-
-
-export const Layout = ({ children }) => {
-
+const Layout = ({ children }) => {
   return (
     <>
       <Header />
@@ -13,8 +11,6 @@ export const Layout = ({ children }) => {
       <Footer />
     </>
   );
-  
 };
-
 
 export default Layout;
