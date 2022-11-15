@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Grid } from "@mui/material";
 import Card from "./Card";
-import axios from "axios";
-
-const instance = axios.create({
-  baseURL: "https://dummyapi.io/data/v1/post",
-  headers: { "app-id": "636e0d6642c1f665f684f489" },
-});
+import { ColorModeContext } from "../context/ThemeContext";
 
 export const AllCard = () => {
+  const {instance} = useContext(ColorModeContext)
   const [post, setPost] = useState([]);
   useEffect(() => {
     const fetchPosts = async () => {
@@ -16,7 +12,7 @@ export const AllCard = () => {
         const res = await instance.get("/");
         setPost(res.data.data);
       } catch (error) {
-        console.log(error.message);
+        setPost("Page isn't working")
       }
     };
     fetchPosts();

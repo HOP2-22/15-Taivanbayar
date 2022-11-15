@@ -1,10 +1,9 @@
-import { Container } from "@mui/system";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./page/Home";
 import UserShow from "./page/User";
 import Layout from "./components/layout/Layout";
-import ThemeContext, { ColorModeContext } from "./context/ThemeContext";
+import ThemeContext from "./context/ThemeContext";
 
 const App = () => {
   return (

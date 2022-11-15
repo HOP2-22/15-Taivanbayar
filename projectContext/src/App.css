@@ -38,6 +38,6 @@
 }
 
 
-.comment-section-input input::placeholder {
-  font-size: 20px;
+.input-section input::placeholder {
+  color: #BBC8D4;
 }
