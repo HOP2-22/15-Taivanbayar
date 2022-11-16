@@ -20,7 +20,7 @@ const ThemeContext = ({ children }) => {
         theme: theme,
         changeTheme: ColorHandler,
         color: color,
-        instance: instance
+        instance: instance,
       }}
     >
       {children}

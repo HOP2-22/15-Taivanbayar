@@ -1,11 +1,10 @@
 import React from "react";
-import InstaImg from "../Data/Instagram.svg";
-import FbImg from "../Data/Facebook.svg";
-import TwtImg from "../Data/Twitter.svg";
-import nav from "../Data/arrow.svg";
+import InstaImg from "../../assets/images/Instagram.svg";
+import FbImg from "../../assets/images/Facebook.svg";
+import TwtImg from "../../assets/images/Twitter.svg";
+import nav from "../../assets/images/arrow.svg";
 import { Box, Container, Typography } from "@mui/material";
-import { height, Stack } from "@mui/system";
-import "./style.css";
+import { Stack } from "@mui/system";
 
 export const Footer = () => {
   return (
@@ -15,7 +14,6 @@ export const Footer = () => {
         background: "#252B3B",
         display: "flex",
         color: "white",
-        marginTop: "4%",
       }}
     >
       <Container

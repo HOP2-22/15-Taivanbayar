@@ -4,6 +4,7 @@ import Card from "./Card";
 import { ColorModeContext } from "../context/ThemeContext";
 
 export const AllCard = () => {
+  
   const {instance} = useContext(ColorModeContext)
   const [post, setPost] = useState([]);
   useEffect(() => {

@@ -1,24 +1,14 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import "../style/style.css";
+import React, { useContext, useEffect, useState } from "react";
+import { AppBar, Box, Typography, Switch, Container } from "@mui/material";
+import { ColorModeContext } from "../../context/ThemeContext";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const Header = () => {
+  const { theme, changeTheme, color } = useContext(ColorModeContext);
   const [offsetY, setOffsetY] = useState(0);
-
-  const style = {
-    scrollingNavbar: {
-      backgroundColor: offsetY === 0 ? "transparent" : "white",
-    },
-    scrollingLinks: {
-      color: offsetY === 0 ? "" : "#0bbef2",
-    },
-    scrollingGetAccessBut: {
-      border: offsetY === 0 ? "" : "2px solid #0bbef2",
-      color: offsetY === 0 ? "" : "#0bbef2",
-    },
-  };
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log(location);
 
   useEffect(() => {
     const handler = () => {
@@ -28,48 +18,123 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
+  const colorChange = () => {
+    return location.pathname !== "/" ? color : offsetY === 0 ? "white" : color;
+  };
+
+  const dotColorChange = () => {
+    return location.pathname !== "/"
+      ? color
+      : offsetY === 0
+      ? "#0BBEF2"
+      : color;
+  };
+
   return (
-    <nav style={style.scrollingNavbar}>
-      <div className="nav-left">
-        <Link className="top-logo" to="HomePage" style={style.scrollingLinks}>
-          team
-        </Link>
-        <div className="top-dot"></div>
-      </div>
-      <div className="top-right">
-        <Link
-          className="linked-navs"
-          to="Products"
-          style={style.scrollingLinks}
+    <AppBar
+      sx={{
+        boxShadow: "none",
+        height: "8vh",
+        backgroundColor: offsetY === 0 ? "transparent" : theme,
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      <Container
+        maxWidth="xl"
+        sx={{
+          backgroundColor: offsetY === 0 ? "transparent" : theme,
+          border: "none",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
         >
-          Products
-        </Link>
-        <Link
-          className="linked-navs"
-          style={style.scrollingLinks}
-          to="ServicePage"
-        >
-          Services
-        </Link>
-        <Link
-          className="linked-navs"
-          style={style.scrollingLinks}
-          to="/ContactPage"
-        >
-          Contact
-        </Link>
-        <Link
-          className="linked-navs"
-          style={style.scrollingLinks}
-          to="LoginPage"
-        >
-          Log in
-        </Link>
-        <Link className="get-access-but" style={style.scrollingGetAccessBut}>
-          Get Access
-        </Link>
-      </div>
-    </nav>
+          <Box sx={{ display: "flex" }}>
+            <Typography
+              variant="h5"
+              sx={{
+                color: colorChange(),
+              }}
+            >
+              team
+            </Typography>
+            <Typography
+              sx={{
+                width: "8px",
+                height: "8px",
+                backgroundColor: dotColorChange(),
+                marginTop: "16px",
+              }}
+            ></Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              gap: 3,
+              alignItems: "center",
+              height: "70px",
+            }}
+          >
+            <Switch
+              checked={theme && color === "white" ? true : false}
+              onChange={changeTheme}
+              inputProps={{ "aria-label": "controlled" }}
+            />
+            <Typography
+              sx={{
+                color: "gray",
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+              onClick={() => navigate(`/`)}
+            >
+              Home
+            </Typography>
+            <Typography sx={{ color: "gray", textDecoration: "underline" }}>
+              Products
+            </Typography>
+            <Typography
+              sx={{
+                color: "gray",
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+              onClick={() => navigate(`/blog`)}
+            >
+              Services
+            </Typography>
+            <Typography sx={{ color: "gray", textDecoration: "underline" }}>
+              Contact
+            </Typography>
+            <Typography sx={{ color: "gray", textDecoration: "underline" }}>
+              Log in
+            </Typography>
+            <Typography
+              sx={{
+                color: "#4DA0FD",
+                backgroundColor: "",
+                width: "100px",
+                height: "50px",
+                border: "2px solid rgba(77, 160, 253, 0.42)",
+                borderRadius: "4px",
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              Get Access
+            </Typography>
+          </Box>
+        </Box>
+      </Container>
+    </AppBar>
   );
 };
 

@@ -1,13 +1,14 @@
+import { Container } from "@mui/system";
 import React from "react";
+import Footer from "./Footer";
 import Header from "./Header";
-import PeopleComment from "../../assets/peopleData/data"
 
-
-export const Layout = ({ children }) => {
+const Layout = ({ children }) => {
   return (
     <>
       <Header />
-      {children || <PeopleComment />}
+      {children}
+      <Footer />
     </>
   );
 };

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { ColorModeContext } from "../context/ThemeContext";
 export const CompMid = ({
   isReversed = true,
   image,
@@ -8,6 +9,7 @@ export const CompMid = ({
   imageSize = true,
   marginAll,
 }) => {
+  const {color} = useContext(ColorModeContext)
   return (
     <div
       style={{
@@ -41,6 +43,7 @@ export const CompMid = ({
             fontFamily: "Mulish",
             fontWeight: "800",
             fontSize: "70px",
+            color: color
           }}
         >
           {topic}
@@ -58,7 +61,8 @@ export const CompMid = ({
               fontFamily: "Mulish",
               fontWeight: "400",
               fontSize: "40px",
-              marginTop:"-30px"
+              marginTop:"-30px",
+              color: color
               }}
           >
             Give everyone you work with—inside and outside your   <br />company—a more
@@ -71,5 +75,5 @@ export const CompMid = ({
         <Link style={{ color: "#4DA0FD" }}>Learn more ☞</Link>
       </div>
     </div>
-  );
+  );  
 };

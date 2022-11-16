@@ -1,10 +1,7 @@
 .App {
   text-align: center;
 }
-body {
-  padding -left: 300px;
-  padding -right: 300px;
-}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -38,4 +35,9 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.input-section input::placeholder {
+  color: #BBC8D4;
 }
