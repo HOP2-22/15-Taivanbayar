@@ -1,79 +1,66 @@
 import React, { useContext } from "react";
+import { Box, Container } from "@mui/system";
+
 import { Link } from "react-router-dom";
 import { ColorModeContext } from "../context/ThemeContext";
-export const CompMid = ({
-  isReversed = true,
-  image,
-  topic,
-  marginRight = true,
-  imageSize = true,
-  marginAll,
-}) => {
-  const {color} = useContext(ColorModeContext)
+import {Typography } from "@mui/material";
+
+import arrowImg from "../assets/images/arrowRight.svg";
+
+export const MidPosts = ({ isReversed = true, image, topic }) => {
+  const { color, theme } = useContext(ColorModeContext);
   return (
-    <div
-      style={{
-        height: "100vh",
-        width: "100%",
-        marginTop: "120px",
+    <Container
+      maxWidth="xl"
+      sx={{
         display: "flex",
-        flexDirection: !isReversed ? "row" : "row-reverse",
+        flexDirection: isReversed ? "row" : "row-reverse",
+        justifyContent: "space-around",
         alignItems: "center",
-        gap: "40px",
+        gap: "30vh",
+        backgroundColor: theme,
       }}
     >
-      <img
-        src={image}
-        style={{
-          width: !imageSize ? "900px" : "1000px",
-          marginRight: !marginRight ? "100px" : "0",
-        }}
-      />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "start",
-          justifyContent: "center",
-          gap:"30px"
-        }}
-      >
-        <h1
-          style={{
-            fontFamily: "Mulish",
-            fontWeight: "800",
-            fontSize: "70px",
-            color: color
-          }}
-        >
-          {topic}
-        </h1>
-        <div
-          style={{
+        <Box
+          sx={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
+            gap: "5vh",
+            width: "50%",
           }}
         >
-          <p
-            style={{
-              fontFamily: "Mulish",
-              fontWeight: "400",
-              fontSize: "40px",
-              marginTop:"-30px",
-              color: color
-              }}
+          <Typography
+            sx={{
+              color: color,
+              fontSize: "50px",
+              fontWeight: "500",
+            }}
           >
-            Give everyone you work with—inside and outside your   <br />company—a more
-            productive way
-            to stay in sync.  <br /> Respond faster with emoji, keep conversations
-            focused  <br /> in channels, and simplify all your communication into
-            <br /> one place.
-          </p>
-        </div>
-        <Link style={{ color: "#4DA0FD" }}>Learn more ☞</Link>
-      </div>
-    </div>
-  );  
+            {topic}
+          </Typography>
+          <Typography
+            sx={{
+              color: color,
+            }}
+          >
+            Give everyone you work with—inside and outside your company—a more
+            productive way to stay in sync. Respond faster with emoji, keep
+            conversations focused in channels, and simplify all your
+            communication into one place.
+          </Typography>
+          <Box>
+            <Link
+              style={{
+                color: "#4DA0FD",
+              }}
+            >
+              Learn more{" "}
+            </Link>
+            <img src={arrowImg} />
+          </Box>
+        </Box>
+
+        <img src={image} style={{ width: "50%" }} />
+    </Container>
+  );
 };
