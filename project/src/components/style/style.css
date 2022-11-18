@@ -2,28 +2,28 @@
 article {
   font-family: "Work Sans";
   font-weight: 600;
-  font-size: 48px;
+  font-size: 70px;
   align-items: center;
   color: #ffffff;
 }
 
 section {
   font-family: "Mulish";
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 30px;
   color: #ffffff;
 }
 
 input {
-  width: 300px;
-  height: 50px;
+  width: 25vw;
+  height: 6vh;
   background: #ffffff;
   border: 2px solid #bbc8d4;
   border-radius: 4px;
 }
 
 .but-bot {
-  height: 54px;
+  height: 7 vh;
   width: 150px;
   background: #0bbef2;
   border-radius: 4px;
@@ -32,6 +32,10 @@ input {
   font-size: 16px;
   color: #ffffff;
   border: none;
+}
+.main-top {
+  display: flex;
+  gap: 0.5vw
 }
 
 .main-end {

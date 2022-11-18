@@ -30,7 +30,7 @@ const Home = () => {
               display: "flex",
               flexDirection: "column",
               paddingTop:"25vh",
-              gap:"4vh"
+              gap:"10vh"
             }}
           >
             <article>

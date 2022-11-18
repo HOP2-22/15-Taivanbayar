@@ -4,26 +4,30 @@ import { Box } from "@mui/system";
 import { useParams } from "react-router-dom";
 import { ColorModeContext } from "../context/ThemeContext";
 import CommentPrinter from "../components/CommentPrint";
-import { Container, Typography } from "@mui/material";
+import { CircularProgress, Container, Typography } from "@mui/material";
 
 export const UserShow = () => {
   const { instance, theme, color } = useContext(ColorModeContext);
   const [postDetails, setPostDetails] = useState();
   const [inputValue, setInputValue] = useState("");
   const [output, setOutput] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
   useEffect(() => {
     const fetchPosts = async () => {
+      setLoading(true);
       try {
         const res = await instance.get(`/${id}`);
         setPostDetails(res?.data);
       } catch (error) {
         setPostDetails("Sorry, Page isn't working properly");
       }
+      setLoading(false);
     };
     fetchPosts();
   }, []);
+
   return (
     <Box
       sx={{
@@ -32,6 +36,12 @@ export const UserShow = () => {
     >
       <Container maxWidth="xl" px={100}>
         <Box sx={style.containerStyle}>
+          {loading && (
+            <Box sx={{ display: "flex", width: "50%", height: "50vh" }}>
+              Loading ...
+              <CircularProgress />
+            </Box>
+          )}
           <Typography
             sx={{
               color: color,
@@ -137,6 +147,7 @@ export const UserShow = () => {
                     output={output}
                     setOutput={setOutput}
                     index={index}
+                    image={postDetails?.owner.picture}
                   />
                 );
               })}
@@ -147,7 +158,7 @@ export const UserShow = () => {
             </Typography>
             <Box className="input-section" sx={style.inputSection}>
               <img src={postDetails?.owner.picture} style={style.avatarImage} />
-              <input
+              <textarea
                 type={"text"}
                 placeholder="Comments"
                 style={style.inputStyle}
@@ -157,9 +168,9 @@ export const UserShow = () => {
                   setInputValue(el.target.value);
                 }}
                 onKeyDown={(e) => {
-                  console.log(e);
                   if (e.code === "Enter") {
                     setOutput([...output, inputValue]);
+                    setInputValue("");
                   }
                 }}
               />
@@ -179,7 +190,7 @@ const style = {
     alignItems: "center",
     justifyContent: "center",
     gap: "6vh",
-    px: 20
+    px: 20,
   },
   description: {
     display: "flex",

@@ -49,18 +49,16 @@ export const Header = () => {
         }}
       >
         <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
+          sx={style.linkContainer}
         >
           <Box sx={{ display: "flex" }}>
             <Typography
               variant="h5"
               sx={{
                 color: colorChange(),
+                cursor:"pointer"
               }}
+              onClick={() => navigate(`/`)}
             >
               team
             </Typography>
@@ -87,32 +85,27 @@ export const Header = () => {
               inputProps={{ "aria-label": "controlled" }}
             />
             <Typography
-              sx={{
-                color: "gray",
-                textDecoration: "underline",
-                cursor: "pointer",
-              }}
-              onClick={() => navigate(`/`)}
+              sx={style.linkTouch}
+              onClick={() => navigate(`/products`)}
             >
-              Home
-            </Typography>
-            <Typography sx={{ color: "gray", textDecoration: "underline" }}>
               Products
             </Typography>
             <Typography
-              sx={{
-                color: "gray",
-                textDecoration: "underline",
-                cursor: "pointer",
-              }}
+              sx={style.linkTouch}
               onClick={() => navigate(`/blog`)}
             >
               Services
             </Typography>
-            <Typography sx={{ color: "gray", textDecoration: "underline" }}>
+            <Typography
+              sx={style.linkTouch}
+              onClick={() => navigate(`/contact`)}
+            >
               Contact
             </Typography>
-            <Typography sx={{ color: "gray", textDecoration: "underline" }}>
+            <Typography
+              sx={style.linkTouch}
+              onClick={() => navigate(`/login`)}
+            >
               Log in
             </Typography>
             <Typography
@@ -138,4 +131,16 @@ export const Header = () => {
   );
 };
 
+export const style = {
+  linkContainer :{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+  },
+  linkTouch: {
+    color: "gray",
+    textDecoration: "underline",
+    cursor: "pointer",
+  },
+};
 export default Header;

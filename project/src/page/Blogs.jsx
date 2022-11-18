@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Container } from "@mui/material";
 import { Box } from "@mui/system";
 import { AllCard } from "../components/CardPost";
@@ -6,6 +6,7 @@ import { ColorModeContext } from "../context/ThemeContext";
 
 function App() {
   const { theme, color } = useContext(ColorModeContext);
+
   return (
     <Box
       sx={{

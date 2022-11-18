@@ -10,11 +10,14 @@ import arrowImg from "../assets/images/arrowRight.svg";
 export const MidPosts = ({ isReversed = true, image, topic }) => {
   const { color, theme } = useContext(ColorModeContext);
   return (
+    <Box sx={{
+      display: 'flex',
+      flexDirection: isReversed ? "row" : "row-reverse",
+    }}>
     <Container
       maxWidth="xl"
       sx={{
         display: "flex",
-        flexDirection: isReversed ? "row" : "row-reverse",
         justifyContent: "space-around",
         alignItems: "center",
         gap: "30vh",
@@ -60,7 +63,8 @@ export const MidPosts = ({ isReversed = true, image, topic }) => {
           </Box>
         </Box>
 
-        <img src={image} style={{ width: "50%" }} />
     </Container>
+        <img src={image} style={{ width: "70%" }} />
+    </Box>
   );
 };
