@@ -37,9 +37,10 @@ function App() {
 export const GifPrinter = ({ post, index }) => (
   <div style={{ display: "flex", gap:"10px" }}>
     <p>{index}</p>
-    <img src={post.embed_url} style={{width:"50px", height:"05px"}}/>
+    <p>{post.title}</p>
+    <img src={post.bitly_url} style={{width:"150px", height:"150px"}}/>
     <div>
-    {post.embed_url}
+    {post.bitly_url}
     </div>
   </div>
 );

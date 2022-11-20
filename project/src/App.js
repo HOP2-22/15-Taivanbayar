@@ -27,7 +27,7 @@ const App = () => {
             <Route path="/login" element={<Login />}/>
           </Routes>
         </Layout>
-      </BrowserRouter>
+      </BrowserRouter> q
     </ThemeContext>
   );
 };
