@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,33 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+
+.processing-div {
+  animation: process backwards  2s linear;
+  width: 1px;
+  background-color: white;
+  height: 1vh;
+}
+
+@keyframes process {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 100%;
+  }
+}
+ 
+.mute-img {
+  background-image: url("./images/mute.png");
+  width: 25px;
+  height: 25px;
+}
+.mute-img:active {
+  background-image: url("./images/play-buttton.png");
+}
+.playBut:active{
+  animation-play-state: process paused;
 }
