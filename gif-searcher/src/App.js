@@ -6,11 +6,12 @@ function App() {
   const [posts, setPost] = useState([]);
   const [print, setPrint] = useState("");
 
+
   useEffect(() => {
-    console.log(print);
     const gitContainer = axios.create({
       baseURL: `https://api.giphy.com/v1/gifs/search?api_key=AFkVcLnDM8r6ki73bSr1mh0kLpOlDN5C&q=${print}&limit=25&offset=0&rating=g&lang=en`,
     });
+    document.title= "Gif Searcher"
     const fetchGif = async () => {
       try {
         const gif = await gitContainer.get("/");
@@ -24,7 +25,7 @@ function App() {
 
   console.log(posts);
   return (
-    <div
+      <div
       className="App"
       style={{ marginTop: "1vh", gap: " 2vh"}}
     >
@@ -50,5 +51,16 @@ function App() {
     </div>
   );
 }
+
+export const GifPrinter = ({ post, index }) => (
+  <div style={{ display: "flex", gap:"10px" }}>
+    <p>{index}</p>
+    <p>{post.title}</p>
+    <img src={post.bitly_url} style={{width:"150px", height:"150px"}}/>
+    <div>
+    {post.bitly_url}
+    </div>
+  </div>
+);
 
 export default App;

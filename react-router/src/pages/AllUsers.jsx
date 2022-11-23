@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import UserPrint from "./UserProfile";
 import users from "../users.json";
-import Oneuser from "./Oneuser";
 
 export const AllUsers = () => {
   const [output, setOutput] = useState(users);
