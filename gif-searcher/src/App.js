@@ -10,7 +10,8 @@ function App() {
   const loader = () => {
     console.log(loading);
     return loading === true ? <p>Loading ...</p> : "";
-  };
+  }; 
+  loader();
 
   document.title = "Gif Searcher";
   const fetchGif = async () => {
@@ -58,9 +59,8 @@ function App() {
         </button>
       </div>
       <div>
-        {loading === true
-          ? {}
-          : posts?.map((post) => {
+        {
+           posts?.map((post) => {
               return (
                 <div>
                   <p>{post.title}</p>

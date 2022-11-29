@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 import menu from "./images/menu.png";
@@ -9,11 +9,8 @@ import story from "./images/prince.jpeg";
 import avatar from "./images/princess.jpeg";
 
 function App() {
-  const [playLogo, setPlay] = useState(`${play}`);
+  const [playLogo, setPlay] = useState(`${pause}`);
 
-  useEffect(()=> {
-    
-  }, [])
 
   return (
     <div
@@ -50,13 +47,24 @@ function App() {
           }}
         >
           <div
-            className="processing-div"
             style={{
+              background: "gray",
               width: "100%",
-              height: "1vh",
-              borderRadius: "5px",
+              borderRadius: "18px",
+              height: "5px",
             }}
-          ></div>
+          >
+            <div
+              style={{
+                animation: " process backwards  2s linear",
+                width: "100%",
+                height: "5px",
+
+                borderRadius: "18px",
+              }}
+              className="processing-div"
+            ></div>
+          </div>
         </div>
         <div
           style={{
@@ -68,6 +76,7 @@ function App() {
           <div style={{ display: "flex", gap: "15px" }}>
             <img
               src={avatar}
+              alt="something"
               style={{ width: "45px", height: "45px", borderRadius: "50%" }}
             />
             <p>taivnaa</p>
@@ -75,17 +84,34 @@ function App() {
           </div>
 
           <div style={{ display: "flex", gap: "20px" }}>
-            <div 
-            className="playBut"
-            onClick={()=> {
-              setPlay(
-              playLogo === play ? pause : play
-              )
-            }}>
-              <img src={playLogo} style={{ width: "25px", height: "25px" }} />
+            <div
+              className="playBut"
+              onClick={() => {
+                setPlay(playLogo === pause ? play : pause);
+              }}
+            >
+              <img
+                alt="something"
+                src={playLogo}
+                style={{ width: "25px", height: "25px" }}
+                onClick={() => {
+                  document.getElementsByClassName("processing-div")[0].style =
+                    playLogo === pause
+                      ? "animation-play-state: paused"
+                      : "animation-play-state: running";
+                }}
+              />
             </div>
-            <img src={mute} style={{ width: "25px", height: "25px" }} />
-            <img src={menu} style={{ width: "25px", height: "25px" }} />
+            <img
+              alt="something"
+              src={mute}
+              style={{ width: "25px", height: "25px" }}
+            />
+            <img
+              alt="something"
+              src={menu}
+              style={{ width: "25px", height: "25px" }}
+            />
           </div>
         </div>
       </div>

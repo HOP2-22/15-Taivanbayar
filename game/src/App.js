@@ -2,10 +2,14 @@ import { Box, Container } from "@mui/system";
 import { ObjectItem } from "./components/Object";
 import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
-import hammer from "./images/hammer.png"
+import hammer from "./images/hammer.png";
 
 const App = () => {
-  const [score, setScore] = useState(0);
+  const [point, setPoint] = useState(0);
+  const [number, setNumber] = useState(0);
+  const [count, setCount] = useState(false);
+  const [second, setSecond] = useState(0);
+  const [minute, setMinute] = useState(0);
   const [holeMove, setHoleMove] = useState(false);
   const [holeActive, setHoleActive] = useState(
     new Array(3).fill(null).map(() => new Array(5).fill(false))
@@ -17,7 +21,6 @@ const App = () => {
         a[i][j] = Math.round(Math.random()) ? true : false;
       }
     }
-    console.log(a);
     setHoleActive(a);
   };
 
@@ -31,22 +34,37 @@ const App = () => {
     return () => clearInterval(interval);
   }, [holeMove]);
 
+  useEffect(() => {
+    if (count) {
+      const timeiInterval = setInterval(() => {
+        setNumber((pre) => pre + 1);
+      }, 10);
+      if (number === 100) {
+        setNumber(0);
+        setSecond(second + 1);
+        if (second === 60) {
+          setSecond(0);
+          setMinute(minute + 1);
+        }
+      }
+      return () => clearInterval(timeiInterval);
+    }
+  }, [count, number, second, minute]);
+
   return (
     <Box
       sx={{
         width: "100%",
         height: "100vh",
-        background: "#B40000",  
-        cursor: `url(${hammer}), auto`
+        background: "#B40000",
+        cursor: `url(${hammer}), auto`,
       }}
     >
       <Container
         sx={{
           display: "flex",
           flexDirection: "column",
-          gap: "8vh",
-          justifyContent: "space-between",
-
+          justifyContent: "space-around",
         }}
       >
         <Box
@@ -60,14 +78,14 @@ const App = () => {
               color: "white",
             }}
           >
-            Time:00:00:00
+            Time:{minute}:{second}:{number}
           </h1>
           <h1
             style={{
               color: "white",
             }}
           >
-            Score: {score}    
+            Score: {point}
           </h1>
         </Box>
         <Box
@@ -78,9 +96,6 @@ const App = () => {
         >
           {holeActive.map((row, index) => (
             <Box
-            onClick={()=> {
-              setScore()
-            }}
               key={index}
               sx={{
                 display: "flex",
@@ -88,7 +103,7 @@ const App = () => {
               }}
             >
               {row.map((active, index) => (
-                <ObjectItem value={active} key={index} />
+                <ObjectItem value={active} key={index} setPoint={setPoint} point={point} />
               ))}
             </Box>
           ))}
@@ -109,6 +124,7 @@ const App = () => {
             }}
             onClick={() => {
               setHoleMove(!holeMove);
+              setCount(!count);
             }}
           >
             Start

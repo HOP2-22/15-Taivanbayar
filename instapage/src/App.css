@@ -37,12 +37,10 @@
   }
 } */
 
-
 .processing-div {
-  animation: process backwards  2s linear;
-  width: 1px;
+  animation: process backwards 2s linear;
   background-color: white;
-  height: 1vh;
+  height: 5px;
 }
 
 @keyframes process {
@@ -53,7 +51,7 @@
     width: 100%;
   }
 }
- 
+
 .mute-img {
   background-image: url("./images/mute.png");
   width: 25px;
@@ -62,6 +60,6 @@
 .mute-img:active {
   background-image: url("./images/play-buttton.png");
 }
-.playBut:active{
+.playBut:active {
   animation-play-state: process paused;
 }
