@@ -2,28 +2,38 @@ import { Box, Container } from "@mui/system";
 import { ObjectItem } from "./components/Object";
 import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
-import hammer from "./images/hammer.png";
+import { Cursor } from "./components/Cursor";
+import { ResultShow } from "./components/ResultShow";
+import { TemplateChooser } from "./components/TemplateOption";
+import { LevelChooser } from "./components/LevelChoose";
 
 const App = () => {
+  const [templater, setTemplater] = useState({
+    a: 3,
+    b: 5,
+  });
+  const [level, setLevel] = useState("easy");
+
   const [point, setPoint] = useState(0);
   const [number, setNumber] = useState(0);
-  const [second, setSecond] = useState(5);
+  const [second, setSecond] = useState(10);
   const [count, setCount] = useState(false);
 
-  const [valueX, setValueX] = useState();
-  const [valueY, setValueY] = useState();
-  const [mouseClick, setMouseClick] = useState(false);
-  const [award, setAward] = useState();
   const [result, setResult] = useState(false);
+  const [award, setAward] = useState();
 
   const [holeMove, setHoleMove] = useState(false);
   const [holeActive, setHoleActive] = useState(
-    new Array(3).fill(null).map(() => new Array(5).fill(false))
+    new Array(templater.a)
+      .fill(null)
+      .map(() => new Array(templater.b).fill(false))
   );
   const create = () => {
-    let newRow = new Array(3).fill(null).map(() => new Array(5).fill(false));
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 5; j++) {
+    let newRow = new Array(templater.a)
+      .fill(null)
+      .map(() => new Array(templater.b).fill(false));
+    for (let i = 0; i < templater.a; i++) {
+      for (let j = 0; j < templater.b; j++) {
         newRow[i][j] = Math.round(Math.random()) ? true : false;
       }
     }
@@ -31,31 +41,16 @@ const App = () => {
   };
 
   useEffect(() => {
-    const moveMouse = (e) => {
-      setValueX(e.clientX);
-      setValueY(e.clientY);
-      console.log(e.clientX, e.clientY);
-    };
-
-    const mouseClick = (val) => {
-      setMouseClick(val.isTrusted);
-      setTimeout(() => {
-        setMouseClick(false);
-      }, 100);
-    };
-
-    document.addEventListener("mousemove", moveMouse);
-    document.addEventListener("click", mouseClick);
-    return () => {
-      document.removeEventListener("mousemove", moveMouse);
-      document.removeEventListener("click", mouseClick);
-    };
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      create();
-    }, 1000);
+    const interval = setInterval(
+      () => {
+        create();
+      },
+      level === "easy"
+        ? 1000
+        : level === "medium"
+        ? 400
+        : level === "hard" && 200
+    );
     if (!holeMove) {
       clearInterval(interval);
     }
@@ -77,7 +72,7 @@ const App = () => {
         clearInterval(timeiInterval);
         setNumber(0);
         setSecond(0);
-        if ((point) => 6) {
+        if (point > 5) {
           setAward(true);
         } else {
           setAward(false);
@@ -92,48 +87,20 @@ const App = () => {
     <Box
       sx={{
         width: "100%",
-        height: "100vh",
+        height: "120vh",
         background: "#B40000",
       }}
     >
-      <Box
-        sx={{
-          position: "absolute",
-          left: valueX,
-          top: valueY,
-        }}
-      >
-        <img
-          src={hammer}
-          alt="cursor"
-          style={{
-            width: "100px",
-            height: "100px",
-            transform: mouseClick && "rotate(90deg)",
-          }}
-        />
-      </Box>
-      {/* cursor display */}
-      <Box
-        sx={{
-          display: result ? "flex" : "none",
-          position: "absolute",
-          fontSize: "100px",
-          zIndex: "5",
-          left:"40%",
-          top:"40%",
-        }}
-      >
-        {award ? "You won" : "You lost"}
-        <Button onClick={()=> {
-          setResult(false);
-          setHoleMove(true);
-          setPoint(0);
-          setSecond(5);
-          
-        }}>Play again</Button>
-      </Box>
-      {/* result display */}
+      <Cursor />
+      <ResultShow
+        result={result}
+        award={award}
+        setResult={setResult}
+        setHoleMove={setHoleMove}
+        setPoint={setPoint}
+        setSecond={setSecond}
+      />
+
       <Container
         sx={{
           display: "flex",
@@ -146,11 +113,13 @@ const App = () => {
           sx={{
             display: "flex",
             justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           <h1
             style={{
               color: "white",
+              width: "10vw",
             }}
           >
             Time:{second}:{number}
@@ -158,11 +127,41 @@ const App = () => {
           <h1
             style={{
               color: "white",
+              width: "10vw",
             }}
           >
             Score: {point}
           </h1>
+          <Button
+            sx={style.bottomBut}
+            onClick={() => {
+              setHoleMove(!holeMove);
+              setCount(!count);
+            }}
+          >
+            Start
+          </Button>
+          <LevelChooser setLevel={setLevel}/>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <h1
+              style={{
+                color: "white",
+              }}
+            >
+              Template:
+            </h1>
+            <TemplateChooser
+              setTemplater={setTemplater}
+              templater={templater}
+            />
+          </Box>
         </Box>
+
         <Box
           sx={{
             display: "flex",
@@ -188,32 +187,19 @@ const App = () => {
             </Box>
           ))}
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <Button
-            sx={{
-              width: "100px",
-              height: "70px",
-              borderRadius: "30%",
-              background: "#00CEA9",
-              color: "white",
-              marginTop: 20,
-            }}
-            onClick={() => {
-              setHoleMove(!holeMove);
-              setCount(!count);
-            }}
-          >
-            Start
-          </Button>
-        </Box>
       </Container>
     </Box>
   );
+};
+
+const style = {
+  bottomBut: {
+    width: "100px",
+    height: "70px",
+    borderRadius: "30%",
+    background: "#00CEA9",
+    color: "white",
+  },
 };
 
 export default App;
