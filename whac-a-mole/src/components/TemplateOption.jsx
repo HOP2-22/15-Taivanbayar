@@ -1,30 +1,29 @@
-
-export const TemplateChooser = ({setTemplater, template}) => {
-    return(
-        <select
-        style={{
-          width: "100%",
-          height: "5vh",
-          backgroundColor: "#B40000",
-          color: "#FFFFFF",
-          fontWeight:"bolder",
-          border:"none",
-          fontSize:"32px"
-        }}
-      >
-        <option value={"3x3"} onClick={() => setTemplater(3, 3)}>
-          3x3
-        </option>
-        <option
-          value={"3x5"}
-          selected
-          onClick={() => setTemplater({a: 3, b:5})}
-        >
-          3x5
-        </option>
-        <option value={"5x5"} onClick={() => setTemplater({a: 5, b:5})}>
-          5x5
-        </option>
-      </select>
-    )
-}
+export const TemplateChooser = ({ setTemplater, templater }) => {
+  return (
+    <select
+      style={{
+        width: "100%",
+        height: "5vh",
+        backgroundColor: "#B40000",
+        color: "#FFFFFF",
+        fontWeight: "bolder",
+        border: "none",
+        fontSize: "32px",
+      }}
+      onChange={(e) => {
+        console.log(e.target.value);
+        setTemplater({
+          a: Number(e.target.value[0]),
+          b: Number(e.target.value[2]),
+        });
+        console.log(templater);
+      }}
+    >
+      <option value={"3x3"}>3x3</option>
+      <option value={"3x5"} selected>
+        3x5
+      </option>
+      <option value={"4x5"}>4x5</option>
+    </select>
+  );
+};

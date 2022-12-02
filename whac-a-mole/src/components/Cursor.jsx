@@ -11,7 +11,6 @@ export const Cursor = () => {
     const moveMouse = (e) => {
       setValueX(e.clientX);
       setValueY(e.clientY);
-      console.log(e.clientX, e.clientY);
     };
 
     const mouseClick = (val) => {
@@ -35,6 +34,8 @@ export const Cursor = () => {
         position: "absolute",
         left: valueX - 20,
         top: valueY - 20,
+        zIndex:"5",
+        pointerEvents: "none",
       }}
     >
       <img

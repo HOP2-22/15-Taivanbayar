@@ -13,7 +13,6 @@ const App = () => {
     b: 5,
   });
   const [level, setLevel] = useState("easy");
-
   const [point, setPoint] = useState(0);
   const [number, setNumber] = useState(0);
   const [second, setSecond] = useState(10);
@@ -41,6 +40,8 @@ const App = () => {
   };
 
   useEffect(() => {
+  document.title='Whac a Mole!';
+
     const interval = setInterval(
       () => {
         create();
