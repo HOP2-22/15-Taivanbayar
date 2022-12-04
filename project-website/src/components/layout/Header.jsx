@@ -8,6 +8,7 @@ export const Header = () => {
   const [offsetY, setOffsetY] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
+
   console.log(location);
 
   useEffect(() => {
