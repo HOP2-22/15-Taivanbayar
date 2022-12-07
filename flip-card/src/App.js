@@ -5,66 +5,80 @@ import { Button, Grid } from "@mui/material";
 import { Images } from "./assets/imgCollection";
 import CardCover from "./assets/images/card-image.jpeg";
 
-const Card = ({ image, flipsame, rotate, setRotate }) => {
-
+const Card = ({ image, flip, isFlipped}) => {
   return (
     <Box
-      onClick={() => {
-        setRotate(!rotate);
-        flipsame(rotate);
-      }}
+      onClick={() => flip()}
       sx={{
         display: "flex",
         justifyContent: "center",
         height: "200px",
         position: "relative",
-        transform: `rotateY(${rotate ? "180deg" : "0deg"})`,
+        transform: `rotateY(${isFlipped ? "180deg" : "0deg"})`,
         transformStyle: "preserve-3d",
         transition: "transform 0.6s",
         boxSizing: "border-box",
       }}
     >
-      <img
-        src={image.src}
-        alt="something"
-        style={{
-          position: "absolute",
-          height: "100%",
-          width: "200px",
-        }}
-      />
-      <img
-        src={CardCover}
-        alt="cardcover"
-        style={{
-          position: "absolute",
-          height: "100%",
-          width: "200px",
-          transform: "rotateY(180deg)",
-        }}
-      />
+      {image !== null && (
+        <>
+          <img
+            src={CardCover}
+            alt="cardcover"
+            style={{
+              position: "absolute",
+              height: "100%",
+              width: "200px",
+              backfaceVisibility: "hidden",
+            }}
+          />
+
+          <img
+            src={image.src}
+            alt="something"
+            style={{
+              position: "absolute",
+              height: "100%",
+              width: "200px",
+              backfaceVisibility: "hidden",
+              transform: "rotateY(180deg)",
+            }}
+          />
+        </>
+      )}
     </Box>
   );
 };
 
 const CardContainer = () => {
   const [images, setImage] = useState([]);
-  const [rotate, setRotate] = useState(false);
+  const [cardFlip, setCardFlip] = useState(false);
+  const [firstFlip, setFisrtFlip] = useState(null);
 
+  const [flipped, setFlipped] = useState(new Array(10).fill(false));
 
   const generate = () => {
-    let newImages = [...Images, ...Images].sort((a, b) => Math.random() - 0.5);
+  const newImages = [...Images, ...Images].sort((a, b) => Math.random() - 0.5);
     setImage(newImages);
   };
-
-  const flipsame = (rotate) => {
-    if (rotate === typeof Array) {
+  const flip = (index) => {
+    let newFlipped = flipped.map((item, i) => (i === index ? !item : item));
+    // let flippedCount = newFlipped.filter((flip) => flip === true);
+    setFlipped(newFlipped);
+    if (firstFlip === null) {
+      setFisrtFlip(index);
+    } else {
+      if (images[firstFlip] === images[index] && index !== firstFlip)  {
+        setTimeout(() => {
+          setImage(images.map((img) => (img === images[index] ? null : img)));
+        }, 600);
+      }
       setTimeout(() => {
-        for (let i = 1; i <= 2; i++) {
-          rotate[i].id === rotate[i + 1].id ? setRotate([]) : setRotate(false)
-        }
-      });
+        setFisrtFlip(null);
+        setFlipped(new Array(10).fill(false));
+      }, 600);
     }
+
   };
 
   return (
@@ -82,19 +96,18 @@ const CardContainer = () => {
             return (
               <Grid item xl={2.4} md={2.4}>
                 <Card
+                  flip={() => flip(index)}
                   image={image}
-                  index={index}
+                  isFlipped={flipped[index]}
+                  cardFlip={cardFlip}
                   key={index}
-                  flipsame={flipsame}
-                  setRotate={setRotate}
-                  rotate={rotate}
                 />
               </Grid>
             );
           })}
         </Grid>
-        <Button onClick={() => generate()}>Generate</Button>
       </Container>
+      <Button sx={{display:"flex", justifyContent:"center", alignItems:"center  "}} onClick={() => generate()}>Generate</Button>
     </Box>
   );
 };
