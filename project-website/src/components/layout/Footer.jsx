@@ -39,27 +39,27 @@ export const Footer = () => {
           </Box>
           <Stack spacing={3} sx={{ display: "flex", flexDirection: "column" }}>
             <Box sx={{ display: "flex", gap: "9%" }}>
-              <img src={InstaImg} />
+              <img alt='imagees' src={InstaImg} />
               <Typography>Instagram</Typography>
             </Box>
             <Box sx={{ display: "flex", gap: "9%" }}>
-              <img src={FbImg} />
+              <img alt='imagees' src={FbImg} />
               <Typography>Facebook</Typography>
             </Box>
             <Box sx={{ display: "flex", gap: "9%" }}>
-              <img src={TwtImg} />
+              <img alt='imagees' src={TwtImg} />
               <Typography>Twitter</Typography>
             </Box>
             <Box sx={{ display: "flex", gap: "9%" }}>
-              <img src={InstaImg} />
+              <img alt='imagees' src={InstaImg} />
               <Typography>Instagram</Typography>
             </Box>
             <Box sx={{ display: "flex", gap: "9%" }}>
-              <img src={FbImg} />
+              <img alt='imagees' src={FbImg} />
               <Typography>Facebook</Typography>
             </Box>
             <Box sx={{ display: "flex", gap: "9%" }}>
-              <img src={TwtImg} />
+              <img alt='imagees' src={TwtImg} />
               <Typography>Twitter</Typography>
             </Box>
           </Stack>
@@ -108,7 +108,7 @@ export const Footer = () => {
               style={{ width: "100%", height: "50px" }}
               placeholder="Email"
             />
-            <img src={nav} style={{ marginLeft: "-14%" }} />
+            <img alt='imagees' src={nav} style={{ marginLeft: "-14%" }} />
           </Box>
         </Stack>
       </Container>
