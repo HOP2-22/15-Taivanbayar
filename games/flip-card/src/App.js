@@ -1,17 +1,16 @@
 import { Box, Container } from "@mui/system";
 import { useState } from "react";
 import { Button, Grid } from "@mui/material";
-
+import "./App.css";
 import { Images } from "./assets/imgCollection";
 import CardCover from "./assets/images/card-image.jpeg";
 
-const Card = ({ image, flip, isFlipped}) => {
+const Card = ({ image, flip, isFlipped }) => {
   return (
     <Box
       onClick={() => flip()}
       sx={{
-        display: "flex",
-        justifyContent: "center",
+        width:"20%",
         height: "200px",
         position: "relative",
         transform: `rotateY(${isFlipped ? "180deg" : "0deg"})`,
@@ -27,8 +26,8 @@ const Card = ({ image, flip, isFlipped}) => {
             alt="cardcover"
             style={{
               position: "absolute",
+              width:"100%",
               height: "100%",
-              width: "200px",
               backfaceVisibility: "hidden",
             }}
           />
@@ -38,8 +37,8 @@ const Card = ({ image, flip, isFlipped}) => {
             alt="something"
             style={{
               position: "absolute",
+              width:"100%",
               height: "100%",
-              width: "200px",
               backfaceVisibility: "hidden",
               transform: "rotateY(180deg)",
             }}
@@ -52,23 +51,24 @@ const Card = ({ image, flip, isFlipped}) => {
 
 const CardContainer = () => {
   const [images, setImage] = useState([]);
-  const [cardFlip, setCardFlip] = useState(false);
   const [firstFlip, setFisrtFlip] = useState(null);
 
   const [flipped, setFlipped] = useState(new Array(10).fill(false));
 
   const generate = () => {
-  const newImages = [...Images, ...Images].sort((a, b) => Math.random() - 0.5);
+    const newImages = [...Images, ...Images].sort(
+      (a, b) => Math.random() - 0.5
+    );
     setImage(newImages);
   };
   const flip = (index) => {
     let newFlipped = flipped.map((item, i) => (i === index ? !item : item));
-    // let flippedCount = newFlipped.filter((flip) => flip === true);
+
     setFlipped(newFlipped);
     if (firstFlip === null) {
       setFisrtFlip(index);
     } else {
-      if (images[firstFlip] === images[index] && index !== firstFlip)  {
+      if (images[firstFlip] === images[index] && index !== firstFlip) {
         setTimeout(() => {
           setImage(images.map((img) => (img === images[index] ? null : img)));
         }, 600);
@@ -79,35 +79,49 @@ const CardContainer = () => {
       }, 600);
     }
 
+    if (images.filter((img) => (img === null ? null : img)) === null) {
+      return <div>You won</div>;
+    }
   };
 
   return (
-    <Box>
+    <Box
+      sx={{
+        width: "100%",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Container
+      sx={{
+        displays: "flex",
+        flexWrap:"wrap",
+        width: "100%",
+      }}>
+        {images.map((image, index) => {
+          return (
+            <Card
+              flip={() => flip(index)}
+              image={image}
+              isFlipped={flipped[index]}
+              key={index}
+            />
+          );
+        })}
+      </Container>
+      <Button
         sx={{
           display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
           justifyContent: "center",
+          alignItems: "center  ",
         }}
+        onClick={() => generate()}
       >
-        <Grid spacing={3} container>
-          {images.map((image, index) => {
-            return (
-              <Grid item xl={2.4} md={2.4}>
-                <Card
-                  flip={() => flip(index)}
-                  image={image}
-                  isFlipped={flipped[index]}
-                  cardFlip={cardFlip}
-                  key={index}
-                />
-              </Grid>
-            );
-          })}
-        </Grid>
-      </Container>
-      <Button sx={{display:"flex", justifyContent:"center", alignItems:"center  "}} onClick={() => generate()}>Generate</Button>
+        Generate
+      </Button>
     </Box>
   );
 };
