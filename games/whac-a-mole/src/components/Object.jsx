@@ -1,4 +1,4 @@
-import upperback from "../images/Upper";
+import upperback from "../images/UpperBack.png";
 import lowerback from "../images/LowerBack.png";
 import rat from "../images/rat.png";
 import { Box } from "@mui/system";

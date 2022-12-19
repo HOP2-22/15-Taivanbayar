@@ -6,7 +6,7 @@ const app = express();
 const port = 8100;
 
 
-app.use("./router/routes", router)
+app.use(router)
 
 app.listen(port, () => {
   console.log(`hey ${port} listening`);
