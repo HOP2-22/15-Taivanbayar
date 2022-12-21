@@ -1,3 +1,4 @@
+
 const lists = [
   {
     title: "something",
@@ -6,24 +7,24 @@ const lists = [
   },
 ];
 
-exports.createLists = (req, res) => {
-  lists.push(req.body);
-  res.status(200).send({ lists: lists });
-}; //post
-exports.showLists = (req, res) => {
+exports.showLists = async (req, res) => {
   res.status(200).send({
     lists: lists,
   });
 }; //get
+exports.createLists = async (req, res) => {
+  const lists = lists.push(req.body);
+  res.status(200).send({ lists: lists });
+}; //post
 
-exports.deleteItems = (req, res) => {
+exports.deleteItems = async (req, res) => {
   const { id } = req.body;
   const NewLists = lists.filter((_list, index) => index !== id);
   res.send({ lists: NewLists });
 }; //delete
 
-exports.updateItems = (req, res) => {
-  const { id } = req.body;
+exports.updateItems = async (req, res) => {
+  const { id } = req.body; 
   lists[id].isDone = true;
   res.send({ lists: lists });
-}; //put
+} //put
