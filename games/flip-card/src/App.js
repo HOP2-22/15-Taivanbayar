@@ -3,15 +3,15 @@ import { useState } from "react";
 import { Button, Grid } from "@mui/material";
 import "./App.css";
 import { Images } from "./assets/imgCollection";
-import CardCover from "./assets/images/card-image.jpeg";
+import CardCover from "./assets/images/cover.webp";
 
 const Card = ({ image, flip, isFlipped }) => {
   return (
     <Box
       onClick={() => flip()}
       sx={{
-        width:"20%",
-        height: "200px",
+        width: "150px",
+        height: "150px",
         position: "relative",
         transform: `rotateY(${isFlipped ? "180deg" : "0deg"})`,
         transformStyle: "preserve-3d",
@@ -26,7 +26,7 @@ const Card = ({ image, flip, isFlipped }) => {
             alt="cardcover"
             style={{
               position: "absolute",
-              width:"100%",
+              width: "100%",
               height: "100%",
               backfaceVisibility: "hidden",
             }}
@@ -37,7 +37,7 @@ const Card = ({ image, flip, isFlipped }) => {
             alt="something"
             style={{
               position: "absolute",
-              width:"100%",
+              width: "100%",
               height: "100%",
               backfaceVisibility: "hidden",
               transform: "rotateY(180deg)",
@@ -87,7 +87,7 @@ const CardContainer = () => {
   return (
     <Box
       sx={{
-        width: "100%",
+        width: "100vw",
         height: "100vh",
         display: "flex",
         flexDirection: "column",
@@ -96,21 +96,24 @@ const CardContainer = () => {
       }}
     >
       <Container
-      sx={{
-        displays: "flex",
-        flexWrap:"wrap",
-        width: "100%",
-      }}>
-        {images.map((image, index) => {
-          return (
-            <Card
-              flip={() => flip(index)}
-              image={image}
-              isFlipped={flipped[index]}
-              key={index}
-            />
-          );
-        })}
+        sx={{
+          width: "100vw",
+        }}
+      >
+        <Grid spacing={3} container> 
+          {images.map((image, index) => {
+            return (
+              <Grid md={2.4} xl={2.4} item>
+                <Card
+                  flip={() => flip(index)}
+                  image={image}
+                  isFlipped={flipped[index]}
+                  key={index}
+                />
+              </Grid>
+            );
+          })}
+        </Grid>
       </Container>
       <Button
         sx={{

@@ -4,7 +4,7 @@ import { Box } from "@mui/system";
 import { AllCard } from "../components/CardPost";
 import { ColorModeContext } from "../context/ThemeContext";
 
-function App() {
+const App = () => {
   const { theme, color } = useContext(ColorModeContext);
 
   return (
@@ -23,7 +23,7 @@ function App() {
           }}
         >
           <Box sx={{ paddingBottom: "5vh" }}>
-            <p style={{ marginTop:"12vh" , fontSize: "44px", color: color }}>
+            <p style={{ marginTop: "12vh", fontSize: "44px", color: color }}>
               Blog posts
             </p>
             <p style={{ color: "#6D7D8B", fontSize: "20px" }}>
@@ -53,6 +53,6 @@ function App() {
       </Container>
     </Box>
   );
-}
+};
 
 export default App;

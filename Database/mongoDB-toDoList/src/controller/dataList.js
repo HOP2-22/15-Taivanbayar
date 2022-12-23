@@ -20,5 +20,5 @@ exports.deleteItems = async (req, res) => {
 
 exports.updateItems = async (req, res) => {
   await Task.findByIdAndUpdate({ _id: req.body.id  }, { title: req.body.title });
-  res.send({ message: "succeeded" });
+  res.send({ message: "succeeded" }); 
 }; //put
