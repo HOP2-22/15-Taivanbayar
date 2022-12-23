@@ -10,6 +10,7 @@ import { ResultShow } from "../components/ResultShow";
 export const Game = (props) => {
   const { state } = useLocation();
   // console.log(state);
+  const [time, setTime] = useState(state.level)
   const [point, setPoint] = useState(0);
   const [number, setNumber] = useState(0);
   const [second, setSecond] = useState(10);
@@ -36,9 +37,10 @@ export const Game = (props) => {
   };
 
   useEffect(() => {
+    setTime(time ? 1000 : !time ? 500 : 200)
     const interval = setInterval(() => {
       create();
-    }, 500);
+    }, time);
     if (!holeMove) {
       clearInterval(interval);
     }
@@ -69,7 +71,7 @@ export const Game = (props) => {
 
       return () => clearInterval(timeiInterval);
     }
-  }, [count, number, second]);
+  }, [count, number, second, time]);
 
   const style = {
     bottomBut: {

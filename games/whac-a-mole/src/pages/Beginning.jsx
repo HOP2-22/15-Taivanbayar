@@ -12,7 +12,7 @@ export const Beginning = () => {
     a: 3,
     b: 5,
   });
-  const [level, setLevel] = useState("easy");
+  const [level, setLevel] = useState(true);
 
   return (
     <Box
@@ -23,7 +23,7 @@ export const Beginning = () => {
         alignItems: "center",
         display: "flex",
         flexDirection: "column",  
-        gap:"2vw"
+        gap:"2vw" 
       }}
     >
       <Cursor />
