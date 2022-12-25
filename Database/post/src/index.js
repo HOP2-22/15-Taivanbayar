@@ -1,10 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const userRouter = require("./router/routes");
+const userRouter = require("./router/routes.user");
 const postRouter = require("./router/routes.post");
 const app = express();
 app.use(express.json());
-const port = 8500;
+const port = 8600;
 
 mongoose.connect(
   "mongodb+srv://Taivnaa032:88448634@cluster0.qxmgpix.mongodb.net/BlogPost?retryWrites=true&w=majority",
