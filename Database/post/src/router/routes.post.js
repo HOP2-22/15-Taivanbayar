@@ -13,9 +13,9 @@ const postRouter = express.Router();
 
 postRouter
   .get("/post", getList)
-  .get("/user/:id?post", getListByUser)
+  .get("/user/:id/post", getPostById)
   .get("/tag/:id/post", getListByTag)
-  .get("/post/:id", getPostById)
+  .get("/post/:id", getListByUser)
   .post("/create/post", createPost)
   .put("/post/:id", updatePost)
   .delete("/post/:id", deletePost)

@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const userRouter = require("./router/routes.user");
 const postRouter = require("./router/routes.post");
+const User = require("./model/Users");
 const app = express();
 app.use(express.json());
 const port = 8600;
@@ -14,9 +15,8 @@ const connection = mongoose.connection;
 connection.once("open", () => {
   console.log("Connected to Mongo");
 });
-
-app.use(postRouter);
 app.use(userRouter);
+app.use(postRouter);
 
 app.listen(port, () => {
   console.log(`listening on ${port}`);
