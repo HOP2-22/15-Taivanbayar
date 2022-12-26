@@ -4,8 +4,6 @@ const User = require('./Users')
 
 const Schema = mongoose.Schema
 
-const posts = User.find({})
-console.log(posts)
 
 const CommentSchema = new Schema({
     message : {type : String },
@@ -14,6 +12,6 @@ const CommentSchema = new Schema({
     publishDate : {type : String, default: new Date()}
 })
 
-const Comment = mongoose.model("comment", CommentSchema);
+const Comment = mongoose.model("comments", CommentSchema);
 
-module.exports = Comment;
+module.exports = Comment;   

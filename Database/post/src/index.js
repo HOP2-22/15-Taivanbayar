@@ -1,8 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const userRouter = require("./router/routes.user");
-const postRouter = require("./router/routes.post");
+const userRouter = require("./router/user.router");
+const postRouter = require("./router/post.router");
 const User = require("./model/Users");
+const commentRouter = require("./router/comment.router");
+const tagRouter = require("./router/tags.router");
 const app = express();
 app.use(express.json());
 const port = 8600;
@@ -17,6 +19,8 @@ connection.once("open", () => {
 });
 app.use(userRouter);
 app.use(postRouter);
+app.use(commentRouter);
+app.use(tagRouter)
 
 app.listen(port, () => {
   console.log(`listening on ${port}`);

@@ -4,7 +4,7 @@ const Comment = require("../model/comment");
 exports.getList = async (req, res) => {
     try {
         const posts = await Comment.find();
-        response.send(posts)
+        res.send(posts)
     } catch (error) {
         res.status(404).send(error.message);
     }
@@ -24,9 +24,10 @@ exports.getList = async (req, res) => {
 //     }
 // }
 exports.createComment = async (req, res) => {
-    const com =req.body;
+    const com = req.body;
     try {
-        await Comment.create(com)
+        await Comment.create(com);
+        res.send({message: 'Created'})
     } catch (error) {
         res.status(404).send(error.message);
     }
@@ -34,7 +35,8 @@ exports.createComment = async (req, res) => {
 exports.deleteComment = async (req, res) => {
     const _id = req.params.id;
     try {
-        await Comment.findByIdAndDelete({ _id })
+        await Comment.findByIdAndDelete({ _id });
+        res.send({message: 'Deleted'});
     } catch (error) {
         res.status(404).send(error.message);
     }

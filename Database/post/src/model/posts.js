@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
-const User = require("./Users");
 
 const Schema = mongoose.Schema;
 
-console.log(User);
 const PostSchema = new Schema({
   text: { type: String },
   image: { type: String },
