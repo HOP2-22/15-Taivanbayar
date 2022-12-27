@@ -1,7 +1,7 @@
 import React from "react";
 import InstaImg from "../../assets/images/Instagram.svg";
 import FbImg from "../../assets/images/Facebook.svg";
-import TwtImg from "../../assets/images/Twitter.svg";
+import TwtImg from "../../assets/images/twitterImg.svg";
 import nav from "../../assets/images/arrow.svg";
 import { Box, Container, Typography } from "@mui/material";
 import { Stack } from "@mui/system";

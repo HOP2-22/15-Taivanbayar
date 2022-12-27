@@ -3,7 +3,7 @@ import "../components/style/style.css";
 import MeetingImg from "../assets/images/meetingImg.svg";
 import smilingWoman from "../assets/images/smilingwoman.svg";
 import smilingWoman2 from "../assets/images/smilingwoman2.svg";
-import BackImg from "../assets/images/backImg.jpg";
+import BackImg from "../assets/images/backImg.png";
 import { MidPosts } from "../components/MidPosts";
 import AllPeopleData from "../assets/Data/peopleData";
 import { Data } from "../assets/Data/dataPrint";

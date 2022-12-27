@@ -8,9 +8,10 @@ const PostSchema = new Schema({
   likes: { type: Number, default: 0 },
   tags: { type: Array },
   publishDate: { type: Date, default: new Date() },
-  owner: { type: String}
+  ownerId: { type: String}
 });
 
 const Post = mongoose.model("posts", PostSchema);
 
 module.exports = Post;
+  

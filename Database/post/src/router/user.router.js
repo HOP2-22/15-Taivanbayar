@@ -9,11 +9,11 @@ const {
 const userRouter = express.Router();
 
 userRouter
-  .get("/users", getUsers)
-  .get("/user/:id", getSingleUser)
-  .post("/user/create", createUser)
-  .put("/user/:id", updateUser)
-  .delete("/user/:id", deleteUser);
+  .get("/", getUsers)
+  .get("/:id", getSingleUser)
+  .post("/create", createUser)
+  .put("/:id", updateUser)
+  .delete("/:id", deleteUser);
 
 module.exports = userRouter;
   

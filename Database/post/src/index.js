@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const userRouter = require("./router/user.router");
 const postRouter = require("./router/post.router");
-const User = require("./model/Users");
 const commentRouter = require("./router/comment.router");
 const tagRouter = require("./router/tags.router");
 const app = express();
@@ -17,10 +16,10 @@ const connection = mongoose.connection;
 connection.once("open", () => {
   console.log("Connected to Mongo");
 });
-app.use(userRouter);
-app.use(postRouter);
-app.use(commentRouter);
-app.use(tagRouter)
+app.use("/user", userRouter);
+app.use("/post", postRouter);
+app.use("/comment", commentRouter);
+app.use("/tag", tagRouter);
 
 app.listen(port, () => {
   console.log(`listening on ${port}`);

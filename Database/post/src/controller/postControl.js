@@ -6,23 +6,27 @@ exports.getList = async (req, res) => {
   res.send({ posts: posts });
 };
 
-exports.getListByUser = async (req, res) => {};
+exports.getListByUser = async (req, res) => {
+  const user = req.params.id;
+  try {
+    const posts = await Post.find({
+      ownerId: user
+    });
+    res.send({ posts: posts });
+  } catch (error) {
+    res.send({ error: error.message });
+  }
+};
 
 exports.getListByTag = async (req, res) => {
-  const tag = req.params.id;
+  const tags = req.params.id;
   try {
-    const posts = await Post.find();
-    const result = posts.filter((post) => {
-      return post.tags.map((el) => {
-        return el == tag ? res.send(post) : null;
-      });
-    });
-console.log(result)
-    response.send({ result });
+    const posts = await Post.find({ tags: tags });
+    res.send(posts);
   } catch (error) {
     res.status(404).send({ message: error.message });
   }
-};  
+};
 
 exports.getPostById = async (req, res) => {
   const _id = req.params.id;

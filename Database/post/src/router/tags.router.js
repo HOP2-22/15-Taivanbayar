@@ -3,6 +3,6 @@ const { getListOfTag } = require('../controller/tagController');
 
 const tagRouter = express.Router();
 
-tagRouter.get('/tag', getListOfTag);
+tagRouter.get('/', getListOfTag);
 
 module.exports = tagRouter;

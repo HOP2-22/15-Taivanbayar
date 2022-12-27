@@ -12,12 +12,12 @@ const {
 const postRouter = express.Router();
 
 postRouter
-  .get("/post", getList)
-  .get("/user/:id/post", getPostById)
-  .get("/tag/:id/post", getListByTag)
-  .get("/post/:id", getListByUser)
-  .post("/create/post", createPost)
-  .put("/post/:id", updatePost)
-  .delete("/post/:id", deletePost)
+  .get("/", getList)
+  .get("/:id", getPostById)
+  .get("/tag/:id", getListByTag)
+  .get("/user/:id", getListByUser)
+  .post("/create", createPost)
+  .put("/:id", updatePost)
+  .delete("/:id", deletePost)
 
 module.exports = postRouter;
