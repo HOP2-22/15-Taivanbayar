@@ -6,14 +6,12 @@ const Schema = mongoose.Schema
 
 
 const CommentSchema = new Schema({
-    message : {type : String},
-    owner : {type : String},
-    posts : {type : Array},
-    publishDate : {type : String, default: new Date()}
+    message : {type : String, required: true, maxWidth : [300, "must be less than 300 characters"]},
+    owner : {type : String, required: true },
+    posts : {type : Array, required: true },
+    publishDate : {type : String, default: new Date() }
 })
 
 const Comment = mongoose.model("comments", CommentSchema);
 
 module.exports = Comment;   
-
-//, default: message.length > 1 || message.length < 501
