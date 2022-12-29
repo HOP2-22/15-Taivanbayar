@@ -1,39 +1,101 @@
-import "./App.css";
-import "./component10/style.css";
-import logo from "./component10/star_purple500_24px.svg"
-import anya from './component10/anya.jpeg'
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const App = () => {
+  const [desc, setDesc] = useState("");
+  const [text, setText] = useState("");
+  const [alldata, setAllData] = useState([])
+
+
+  useEffect(() => {
+    
+    const fetchPost = async (req, res, next) => {
+      try {
+        const { data } = axios.get("http://localhost:8600/getList");
+        // setAllData(data)
+        console.log(data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchPost();
+  }, []);
+  const postPublisher = async () => {
+    try {
+       const res = await axios.post("http://localhost:8600/createList", {
+          text: text,
+          description: desc,
+        })
+        const el = [...alldata, res.data];
+        setAllData(el);
+        console.log(alldata)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="App">
-      <div className="left">
-        <div className="top-left">
-          <img
-            src={logo}
-          />
-          <img
-            src={logo}
-          />
-          <img
-            src={logo}
-          />
-          <img
-            src={logo}
-          />
-          <img
-            src={logo}
-          />
-        </div>
-        <p className="mid-left">
-          Give everyone you work with—inside and outside your emoji, keep
-          conversations focused in channels, and simplify all your communication
-          into one place.
-        </p>
-        <div className="bot-left">
-          <img className="img-h" src={anya}/>
-          <p className="name">Anya Forger</p>
-        </div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <input
+        style={style.inpStyle}
+        placeholder="description"
+        type="text"
+        onChange={(e) => setDesc(e.target.value)}
+      />
+      <input
+        style={style.inpStyle}
+        placeholder="text"
+        type="text"
+        onChange={(el) => setText(el.target.value)}
+      />
+      <button
+        style={style.inpStyle}
+        onClick={() => {
+          postPublisher();
+        }}
+      >
+        publish
+      </button>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        {alldata?.map((e, index) => {
+          return <List key={index} todo={e} />;
+        })}
       </div>
+    </div>
+  );
+};
+
+const style = {
+  inpStyle: {
+    width: "300px",
+  },
+};
+
+const List = ({ todo }) => {
+  return (
+    <div
+      style={{
+        width: "1000px",
+        display: "flex",
+        justifyContent: "space-around",
+      }}
+    >
+      <div> desciption: {todo.description}</div>
+      <div>text: {todo.text}</div>
+      <button onClick={()=> {
+        console.log(todo)
+      }}>delete</button>
     </div>
   );
 };

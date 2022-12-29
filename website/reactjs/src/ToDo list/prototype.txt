@@ -1,0 +1,59 @@
+//toDo list
+
+// const App = () => {
+//   const names = ["gala", "sono", "bala"];
+//   return (
+//     <div className='App'>
+//       <p>Hello World</p>
+//       {
+//         names.map((name) => {
+//           return <Thought comment={name} />
+//         })
+//       }
+//       <List />
+//     </div>
+//   )
+// }
+
+// export default App;
+
+// const App = () => {
+//   const names = ["gala", "sono", "bala"];
+//   return (
+//     <div className='App'>
+//       <p>Hello World</p>
+//       {
+//         names.map((name) => {
+//           return <Thought comment={name} />
+//         })
+//       }
+//       <List />
+//     </div>
+//   )
+// }
+
+// export default App;
+// //1
+
+// const Add = () => {
+//   const [number, setNumber] = useState(25);
+//   return (
+//     <div className="App">
+//       <p>{number}</p>
+//       <button
+//         onClick={() => {
+//           setNumber(number + 1);
+//         }}
+//       >
+//         +
+//       </button>
+//       <button
+//         onClick={() => {
+//           setNumber(number - 1);
+//         }}
+//       >-</button>
+//     </div>
+//   );
+// };
+
+// export default Add;
