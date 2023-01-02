@@ -8,9 +8,9 @@ export const AllCard = () => {
   const [post, setPost] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchPosts = async (req, res) => {
+      setLoading(true);
       try {
-        setLoading(true);
         const res = await instance.get("/");
         setPost(res.data.data);
       } catch (error) {
@@ -23,17 +23,7 @@ export const AllCard = () => {
   return (
     <Grid spacing={4} container>
       {loading ? (
-        <Box
-          sx={{
-            display: "flex",
-            width: "50%",
-            height: "50vh",
-            alignItems: "center",
-          }}
-        >
-          <p style={{ fontSize: "5vh", color: color }}>Loading ...</p>
-          <CircularProgress />
-        </Box>
+        <CircularProgress width="900px" height="900px" />
       ) : (
         post?.map((el) => {
           return (
