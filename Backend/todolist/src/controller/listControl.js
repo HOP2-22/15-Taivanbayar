@@ -25,6 +25,7 @@ exports.updateList = async (req, res) => {
   const list = req.body;
   try {
     await List.findByIdAndUpdate({ _id }, list);
+    res.send({message: "complete"})
   } catch (error) {
     console.log(error.message);
   }
@@ -34,6 +35,7 @@ exports.deleteList = async (req, res) => {
   const _id = req.params.id;
   try {
     await List.findByIdAndDelete({ _id });
+    res.send({message: "complete"})
   } catch (error) {
     console.log(error);
   }
@@ -41,7 +43,8 @@ exports.deleteList = async (req, res) => {
 
 exports.deleteAll = async (req, res) => {
     try {
-        await List.remove()
+        await List.remove();
+        res.send({message: "complete"}) 
     } catch (error) {
        console.log(error) 
     }

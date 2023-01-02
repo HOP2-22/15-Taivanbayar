@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const App = () => {
-  const [text, setText] = useState();
-  const [desc, setDesc] = useState();
+  const [text, setText] = useState("");
+  const [desc, setDesc] = useState("");
   const [list, setList] = useState([]);
-  console.log(list)
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const data = await axios.get("http://localhost:8600/list");
+        const { data } = await axios.get("http://localhost:8600/list");
         console.log(data);
       } catch (error) {
         console.log(error.message);
@@ -21,9 +20,7 @@ const App = () => {
 
   const deleteALL = async () => {
     try {
-      console.log("test Delte alll");
-      const res = await axios.delete("http://localhost:8600/list/delete");
-      console.log(res, "delete all");
+      await axios.delete("http://localhost:8600/list/delete");
       setList([]);
     } catch (error) {
       console.log(error);
@@ -84,7 +81,6 @@ const App = () => {
         }}
       >
         {list?.map((e, index) => {
-          console.log(e);
           return (
             <List
               todo={e}
@@ -111,19 +107,10 @@ const style = {
 };
 
 const List = ({ todo, list, setList, text, setText, desc, setDesc }) => {
-  const updateList = async (id) => {
-    setText("");
-    setDesc("");
-    try {
-      const res = await axios.put(`http://localhost:8600/list/${id}`, {
-        text: text,
-        description: desc,
-      });
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [isEdited, setIsEdited] = useState(false);
+  const [newText, setNewText] = useState(todo.text);
+  const [newDesc, setNewDesc] = useState(todo.description);
+
   const deleteList = async (id) => {
     try {
       await axios.delete(`http://localhost:8600/list/${id}`);
@@ -134,33 +121,59 @@ const List = ({ todo, list, setList, text, setText, desc, setDesc }) => {
       console.log(error);
     }
   };
-  console.log(todo);
-  return (
-    <div
-      style={{
-        width: "1000px",
-        display: "flex",
-        justifyContent: "space-around",
-      }}
-    >
-      <div> desciption: {todo.description}</div>
-      <div>text: {todo.text}</div>
-      <button
-        onClick={() => {
-          deleteList(todo._id);
+
+  const updateList = async (id) => {
+    const res = await axios.put(`http://localhost:8600/list/${id}`, {
+      text: newText,
+      description: newDesc,
+    });
+    setIsEdited(false);
+    console.log(res);
+  };
+  if (isEdited) {
+    return (
+      <div
+        style={{
+          width: "1000px",
+          display: "flex",
+          justifyContent: "space-around",
         }}
       >
-        delete
-      </button>
-      <button
-        onClick={() => {
-          updateList(todo._id);
+        description:{" "}
+        <input value={newDesc} onChange={(e) => setNewDesc(e.target.value)} />
+        text:{" "}
+        <input value={newText} onChange={(e) => setNewText(e.target.value)} />
+        <button onClick={() => updateList(todo._id)}>save</button>
+      </div>
+    );
+  } else {
+    return (
+      <div
+        style={{
+          width: "1000px",
+          display: "flex",
+          justifyContent: "space-around",
         }}
       >
-        update list
-      </button>
-    </div>
-  );
+        <div> desciption: {todo.description}</div>
+        <div>text: {todo.text}</div>
+        <button
+          onClick={() => {
+            deleteList(todo._id);
+          }}
+        >
+          delete
+        </button>
+        <button
+          onClick={() => {
+            setIsEdited(true);
+            }}
+        >
+          update list
+        </button>
+      </div>
+    );
+  }
 };
 
 export default App;
