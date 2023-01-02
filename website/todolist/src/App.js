@@ -5,27 +5,41 @@ const App = () => {
   const [text, setText] = useState();
   const [desc, setDesc] = useState();
   const [list, setList] = useState([]);
+  console.log(list)
 
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const data = await axios.get("http://localhost:8600/list");
+        console.log(data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchPost();
+  }, []);
 
-  // useEffect(() => {
-
-  //   const fetchPost = async (req, res, next) => {
-  //     try {
-  //       const { data } = axios.get("http://localhost:8600/getList");
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   };
-  //   fetchPost();
-  // }, []);
-
-  const postPublisher = async () => {
+  const deleteALL = async () => {
     try {
-      const res = await axios.post("http://localhost:8600/createList", {
-        text: list.map((e)=> e.text),
-        description: list.map((e)=> e.desc),
+      console.log("test Delte alll");
+      const res = await axios.delete("http://localhost:8600/list/delete");
+      console.log(res, "delete all");
+      setList([]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const listPublisher = async () => {
+    try {
+      const res = await axios.post("http://localhost:8600/list", {
+        text: text,
+        description: desc,
       });
-      console.log(res);
+      const data = [...list, res.data];
+      setText("");
+      setDesc("");
+      setList(data);
     } catch (error) {
       console.log(error);
     }
@@ -39,26 +53,26 @@ const App = () => {
         alignItems: "center",
       }}
     >
-      <input
-        value={desc}
-        style={style.inpStyle}
-        placeholder="description"
-        type="text"
-        onChange={(e) => setDesc(e.target.value)}
-      />
-      <input
-        value={text}
-        style={style.inpStyle}
-        placeholder="text"
-        type="text"
-        onChange={(el) => setText(el.target.value)}
-      />
+      <div>
+        <input
+          value={desc}
+          style={style.inpStyle}
+          placeholder="description"
+          type="text"
+          onChange={(e) => setDesc(e.target.value)}
+        />
+        <input
+          value={text}
+          style={style.inpStyle}
+          placeholder="text"
+          type="text"
+          onChange={(el) => setText(el.target.value)}
+        />
+      </div>
       <button
         style={style.inpStyle}
         onClick={() => {
-          postPublisher();
-          setList(...list, desc);
-          console.log(list);
+          listPublisher();
         }}
       >
         publish
@@ -70,9 +84,22 @@ const App = () => {
         }}
       >
         {list?.map((e, index) => {
-          return <List key={index} todo={e} />;
+          console.log(e);
+          return (
+            <List
+              todo={e}
+              list={list}
+              setList={setList}
+              text={text}
+              setText={setText}
+              desc={desc}
+              setDesc={setDesc}
+              key={index}
+            />
+          );
         })}
       </div>
+      <button onClick={() => deleteALL()}>delete all</button>
     </div>
   );
 };
@@ -83,13 +110,31 @@ const style = {
   },
 };
 
-const List = ({ todo }) => {
-  const updateList = (req, res) => {
+const List = ({ todo, list, setList, text, setText, desc, setDesc }) => {
+  const updateList = async (id) => {
+    setText("");
+    setDesc("");
     try {
+      const res = await axios.put(`http://localhost:8600/list/${id}`, {
+        text: text,
+        description: desc,
+      });
+      console.log(res);
     } catch (error) {
       console.log(error);
     }
   };
+  const deleteList = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8600/list/${id}`);
+      const item = list.filter((i) => i._id !== id);
+      setList(item);
+      console.log(item);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(todo);
   return (
     <div
       style={{
@@ -98,18 +143,18 @@ const List = ({ todo }) => {
         justifyContent: "space-around",
       }}
     >
-      <div> desciption: {todo.desc}</div>
+      <div> desciption: {todo.description}</div>
       <div>text: {todo.text}</div>
       <button
         onClick={() => {
-          console.log(todo);
+          deleteList(todo._id);
         }}
       >
         delete
       </button>
       <button
         onClick={() => {
-          updateList();
+          updateList(todo._id);
         }}
       >
         update list

@@ -1,4 +1,3 @@
-const { response } = require("express");
 const Post = require("../model/Posts");
 
 exports.getList = async (req, res) => {

@@ -6,7 +6,7 @@ const cors = require("cors");
 const listRouter = require("./router/listRouter");
 app.use(cors());
 app.use(express.json());
-app.use(listRouter)
+app.use("/list",listRouter)
 
 mongoose.connect(
   "mongodb+srv://Taivnaa032:88448634@cluster0.qxmgpix.mongodb.net/to-do-list?retryWrites=true&w=majority",
