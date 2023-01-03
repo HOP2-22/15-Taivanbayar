@@ -6,7 +6,7 @@ const app = express();
 const port = 8700;
 
 mongoose.connect(
-    "mongodb+srv://Taivnaa032:88448634@cluster0.qxmgpix.mongodb.net/test",
+    "mongodb+srv://Taivnaa032:88448634@cluster0.qxmgpix.mongodb.net/boginoo?retryWrites=true&w=majority",
     { useNewUrlParser: true }
 )
 
