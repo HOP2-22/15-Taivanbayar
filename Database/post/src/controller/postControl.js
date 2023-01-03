@@ -54,7 +54,7 @@ exports.updatePost = async (req, res) => {
   const _id = req.params.id;
   const post = req.body;
   try {
-    const updatedpost = await Post.findByIdAndUpdate({ _id }, post);
+    const updatedpost = await Post.findByIdAndUpdate({ _id }, {...post});
     res.send(updatedpost);
   } catch (error) {
     res.status(error.status).send(error.message);

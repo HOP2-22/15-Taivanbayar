@@ -4,6 +4,7 @@ import axios from "axios";
 const App = () => {
   const [text, setText] = useState("");
   const [desc, setDesc] = useState("");
+
   const [list, setList] = useState([]);
 
   useEffect(() => {
@@ -81,18 +82,7 @@ const App = () => {
         }}
       >
         {list?.map((e, index) => {
-          return (
-            <List
-              todo={e}
-              list={list}
-              setList={setList}
-              text={text}
-              setText={setText}
-              desc={desc}
-              setDesc={setDesc}
-              key={index}
-            />
-          );
+          return <List todo={e} list={list} setList={setList} key={index} />;
         })}
       </div>
       <button onClick={() => deleteALL()}>delete all</button>
@@ -106,7 +96,7 @@ const style = {
   },
 };
 
-const List = ({ todo, list, setList, text, setText, desc, setDesc }) => {
+const List = ({ todo, list, setList }) => {
   const [isEdited, setIsEdited] = useState(false);
   const [newText, setNewText] = useState(todo.text);
   const [newDesc, setNewDesc] = useState(todo.description);
@@ -123,13 +113,19 @@ const List = ({ todo, list, setList, text, setText, desc, setDesc }) => {
   };
 
   const updateList = async (id) => {
-    const res = await axios.put(`http://localhost:8600/list/${id}`, {
-      text: newText,
-      description: newDesc,
-    });
+    await axios
+      .put(`http://localhost:8600/list/${id}`, {
+        text: newText,
+        description: newDesc,
+      })
+      .then((response) => {
+        console.log(response);
+        setNewDesc(response.data.message.description);
+        setNewText(response.data.message.text);
+      });
     setIsEdited(false);
-    console.log(res);
   };
+
   if (isEdited) {
     return (
       <div
@@ -139,9 +135,9 @@ const List = ({ todo, list, setList, text, setText, desc, setDesc }) => {
           justifyContent: "space-around",
         }}
       >
-        description:{" "}
+        description:
         <input value={newDesc} onChange={(e) => setNewDesc(e.target.value)} />
-        text:{" "}
+        text:
         <input value={newText} onChange={(e) => setNewText(e.target.value)} />
         <button onClick={() => updateList(todo._id)}>save</button>
       </div>
@@ -155,8 +151,8 @@ const List = ({ todo, list, setList, text, setText, desc, setDesc }) => {
           justifyContent: "space-around",
         }}
       >
-        <div> desciption: {todo.description}</div>
-        <div>text: {todo.text}</div>
+        <div> desciption: {newDesc}</div>
+        <div>text: {newText}</div>
         <button
           onClick={() => {
             deleteList(todo._id);
@@ -167,7 +163,7 @@ const List = ({ todo, list, setList, text, setText, desc, setDesc }) => {
         <button
           onClick={() => {
             setIsEdited(true);
-            }}
+          }}
         >
           update list
         </button>
