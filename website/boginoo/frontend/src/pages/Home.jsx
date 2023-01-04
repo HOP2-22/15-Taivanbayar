@@ -1,11 +1,23 @@
-import { Box, Button, Container, Input } from "@mui/material";
+import { Box, Button, Container, Input, Typography } from "@mui/material";
 import { useState } from "react";
 import axios from "axios";
 import Logo from "../assets/images/logo-default.svg";
+import { LinkList } from "../components/LinkList";
 
 export const Home = () => {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState("");
   const [data, setData] = useState([]);
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const GenerateString = (length) => {
+    let result = "";
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  };
+  const randomValue = GenerateString(6);
   const linkTransfer = async () => {
     try {
       const res = await axios.post("http://localhost:8700", {
@@ -14,25 +26,10 @@ export const Home = () => {
       });
       const el = [...data, res.data];
       setData(el);
-      console.log(res);
     } catch (error) {
       console.log({ error: error });
     }
   };
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  const GenerateString = (length) => {
-    let result = "shortURL/";
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-
-    return result;
-  };
-  const randomValue = GenerateString(6);
-
-  console.log();
 
   return (
     <Container sx={style.designHome} maxWidth="xl">
@@ -40,27 +37,47 @@ export const Home = () => {
       <Box
         sx={{
           display: "flex",
-          gap: "1vw",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "15vh",
         }}
       >
-        <Input
-          disableUnderline={true}
-          type="text"
-          placeholder="https://www.web-huudas.mn"
-          style={style.inputHome}
-          value={value}
-          onChange={(e) => {
-            e.preventDefault();
-            setValue(e.target.value);
+        <Box
+          sx={{
+            display: "flex",
+            gap: "1vw",
           }}
-        />
-        <Button
-          variant="contained"
-          style={style.buttonHome}
-          onClick={() => linkTransfer}
         >
-          Богиносгох
-        </Button>
+          <Input
+            disableUnderline={true}
+            type="text"
+            placeholder="https://www.web-huudas.mn"
+            style={style.inputHome}
+            value={value}
+            onChange={(e) => {
+              e.preventDefault();
+              setValue(e.target.value);
+            }}
+          />
+          <Button
+            variant="contained"
+            style={style.buttonHome}
+            onClick={() => linkTransfer()}
+          >
+            Богиносгох
+          </Button>
+        </Box>
+        <Typography 
+          sx={{ color: "#02B589", fontWeight: "700", fontSize: "32px" }}
+        >
+          Түүх
+        </Typography>
+        <Box>
+          {data?.map((el, index) => {
+            return <LinkList key={index} list={el} />;
+          })}
+        </Box>
       </Box>
     </Container>
   );

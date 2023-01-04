@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const linkRouter = require("./router/routes");
 const app = express();
 
@@ -13,7 +14,8 @@ mongoose.connect(
 mongoose.connection.once("open", () => {
     console.log("Connected to Mongo")
 });
-
+    
+app.use(cors())
 app.use(express.json());
 app.use(linkRouter);
 

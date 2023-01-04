@@ -6,12 +6,13 @@ export const Header = () => {
   const navigate = useNavigate();
   return (
     <Container sx={style.designHeader} maxWidth="xl">
-      <Typography sx={style.instructionHeader} onClick={() => navigate("/")}>
+      <Typography sx={style.instructionHeader}>
         Хэрхэн ажилладаг вэ?
       </Typography>
       <Button
         variant="contained"
         style={style.buttonHeader}
+        onClick={() => navigate("/login")}
       >
         Нэвтрэх
       </Button>

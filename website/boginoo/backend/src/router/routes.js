@@ -1,8 +1,8 @@
 const express = require('express');
-const { getLink, createLink } = require('../controller/linkControl');
+const { getLink, createLink, goLink } = require('../controller/linkControl');
 
 const linkRouter = express.Router();
 
-linkRouter.get('/', getLink).post('/', createLink)
+linkRouter.get('/', getLink).post('/', createLink).get("/:id", goLink)
 
 module.exports = linkRouter
