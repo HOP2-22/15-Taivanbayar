@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/layout/layout";
-import { Client } from "./pages/Client";
+import { Client } from "./components/Client";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login/Login";
 import { ForgotPass } from "./pages/Login/ForgotPass";

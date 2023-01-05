@@ -1,9 +1,7 @@
 import { Link, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useState } from "react";
 
 export const LinkList = ({ list }) => {
-    const [linkValue, setLinkValue] = useState(list.short)
   return (
     <Box
       sx={{
@@ -32,7 +30,7 @@ export const LinkList = ({ list }) => {
           <Link
             sx={{ color: "#02B589", cursor: "pointer" }}
             onClick={() => {
-              navigator.clipboard.writeText(linkValue);
+              navigator.clipboard.writeText(list.short);
             }}
           >
             Хуулж авах

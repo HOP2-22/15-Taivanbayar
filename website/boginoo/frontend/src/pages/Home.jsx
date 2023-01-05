@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Box, Button, Container, Input, Typography } from "@mui/material";
+import { Box, Button, Container, Input, List, Typography } from "@mui/material";
 import axios from "axios";
 import Logo from "../assets/images/logo-default.svg";
 import { LinkList } from "../components/LinkList";
@@ -7,8 +7,8 @@ import { AllLinks } from "../components/AllLinks";
 
 export const Home = () => {
   const [value, setValue] = useState("");
-  const [data, setData] = useState([]);
-  const [list, setList] = useState();
+  const [arr, setArr] = useState([]);
+  const [list, setList] = useState([]);
 
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -25,22 +25,24 @@ export const Home = () => {
     const FetchData = async () => {
       try {
         const { data } = await axios.get("http://localhost:8700");
-        const el = [...list, data];
-        setList(el);
-        console.log(data);
-        console.log(list);
-      } catch (error) {}
+        const temp = [...list, data];
+        console.log(...temp);
+        setList(...temp);
+      } catch (error) {
+        console.log(error);
+      }
     };
     FetchData();
   }, [list]);
+  console.log(list);
   const linkTransfer = async () => {
     try {
       const res = await axios.post("http://localhost:8700", {
         original: value,
         short: randomValue,
       });
-      const el = [...data, res.data];
-      setData(el);
+      const el = [...arr, res.data];
+      setArr(el);
     } catch (error) {
       console.log({ error: error });
     }
@@ -83,18 +85,31 @@ export const Home = () => {
             Богиносгох
           </Button>
         </Box>
-        <Typography
-          sx={{ color: "#02B589", fontWeight: "700", fontSize: "32px" }}
+        {/* <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "5vh",
+            marginTop: "-8vh",
+          }}
         >
-          Түүх
-        </Typography>
-        {/* <Box>
-          {list.map((el, i) => {
-            return <AllLinks key={i} list={el} />;
+          <Typography
+            sx={{
+              color: "#02B589",
+              fontWeight: "700",
+              fontSize: "32px",
+              marginLeft: "15px",
+            }}
+          >
+            Түүх
+          </Typography>
+          {list?.map((el, index) => {
+            return <AllLinks key={index} list={el} />;
           })}
         </Box> */}
+
         <Box>
-          {data?.map((el, index) => {
+          {arr?.map((el, index  ) => {
             return <LinkList key={index} list={el} />;
           })}
         </Box>
@@ -104,7 +119,7 @@ export const Home = () => {
 };
 const style = {
   inputHome: {
-    width: "20vw",
+    width: "40vw",
     height: "4vh",
     background: "#FFFFFF",
     border: "1px solid #F0F0F0",
