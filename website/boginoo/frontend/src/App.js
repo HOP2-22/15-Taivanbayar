@@ -3,6 +3,8 @@ import { Layout } from "./components/layout/layout";
 import { Client } from "./pages/Client";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login/Login";
+import { ForgotPass } from "./pages/Login/ForgotPass";
+import { SignUp } from "./pages/Login/SignUp";
 
 function App() {
   document.title = "Boginoo";
@@ -11,10 +13,10 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element />
           <Route path="/:id" element={<Client />}/>
           <Route path="/login" element={<Login />}/>
-          <Route />
+          <Route path="/forgotpass" element={<ForgotPass />}/>
+          <Route path="/signup" element={<SignUp />}/>
         </Routes>
       </Layout>
     </BrowserRouter>

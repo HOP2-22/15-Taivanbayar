@@ -1,12 +1,15 @@
+import { useState, useEffect } from "react";
 import { Box, Button, Container, Input, Typography } from "@mui/material";
-import { useState } from "react";
 import axios from "axios";
 import Logo from "../assets/images/logo-default.svg";
 import { LinkList } from "../components/LinkList";
+import { AllLinks } from "../components/AllLinks";
 
 export const Home = () => {
   const [value, setValue] = useState("");
   const [data, setData] = useState([]);
+  const [list, setList] = useState();
+
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const GenerateString = (length) => {
@@ -18,6 +21,18 @@ export const Home = () => {
     return result;
   };
   const randomValue = GenerateString(6);
+  useEffect(() => {
+    const FetchData = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:8700");
+        const el = [...list, data];
+        setList(el);
+        console.log(data);
+        console.log(list);
+      } catch (error) {}
+    };
+    FetchData();
+  }, [list]);
   const linkTransfer = async () => {
     try {
       const res = await axios.post("http://localhost:8700", {
@@ -68,11 +83,16 @@ export const Home = () => {
             Богиносгох
           </Button>
         </Box>
-        <Typography 
+        <Typography
           sx={{ color: "#02B589", fontWeight: "700", fontSize: "32px" }}
         >
           Түүх
         </Typography>
+        {/* <Box>
+          {list.map((el, i) => {
+            return <AllLinks key={i} list={el} />;
+          })}
+        </Box> */}
         <Box>
           {data?.map((el, index) => {
             return <LinkList key={index} list={el} />;
