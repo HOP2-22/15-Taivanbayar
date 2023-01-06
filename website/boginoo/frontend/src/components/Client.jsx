@@ -18,3 +18,4 @@ export const Client = () => {
     GoLink();
   }, [id]);
 };
+Client();

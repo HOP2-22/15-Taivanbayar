@@ -24,7 +24,7 @@ export const Home = () => {
   useEffect(() => {
     const FetchData = async () => {
       try {
-        const { data } = await axios.get("http://localhost:8700");
+        const { data } = await axios.get("http://localhost:8800");
         const temp = [...list, data];
         console.log(...temp);
         setList(...temp);
@@ -37,12 +37,13 @@ export const Home = () => {
   console.log(list);
   const linkTransfer = async () => {
     try {
-      const res = await axios.post("http://localhost:8700", {
+      const res = await axios.post("http://localhost:8800", {
         original: value,
         short: randomValue,
       });
       const el = [...arr, res.data];
       setArr(el);
+      setValue("")
     } catch (error) {
       console.log({ error: error });
     }
@@ -80,7 +81,9 @@ export const Home = () => {
           <Button
             variant="contained"
             style={style.buttonHome}
-            onClick={() => linkTransfer()}
+            onClick={() => {
+              linkTransfer();
+            }}
           >
             Богиносгох
           </Button>
@@ -109,7 +112,9 @@ export const Home = () => {
         </Box> */}
 
         <Box>
-          {arr?.map((el, index  ) => {
+          {arr?.map((el, index) => {
+            console.log(el);
+            console.log(index)
             return <LinkList key={index} list={el} />;
           })}
         </Box>
