@@ -1,9 +1,33 @@
 import { Button, Input, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import { Link,  useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/logo-default.svg";
 
 export const Login = () => {
+  const navigate = useNavigate()
+  const [userinfo, setUserinfo] = useState({
+    email: "",
+    password: "",
+  })
+  const login = async () => {
+    try {
+      const {data} = await axios.post("http://localhost:8800/login", {
+        email: userinfo.email,
+        password: userinfo.password
+      })
+
+      if(data.match){
+        navigate('/', { state: data.match })
+      } else {
+        return <Box>Wrong Password or email</Box>
+      }
+      console.log(data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <Container
       sx={{
@@ -32,6 +56,7 @@ export const Login = () => {
             borderRadius: `100px`,
             paddingLeft: "15px",
           }}
+          onChange={(e)=> setUserinfo({...userinfo, email: e.target.value})}
         />
       </Box>
       <Box>
@@ -48,6 +73,7 @@ export const Login = () => {
             borderRadius: `100px`,
             paddingLeft: "15px",
           }}
+          onChange={(e)=> setUserinfo({...userinfo, password: e.target.value})}
         />
       </Box>
       <Box
@@ -82,6 +108,7 @@ export const Login = () => {
           width: "25vw",
           color: "white",
         }}
+        onClick={()=> login()}
       >
         Нэвтрэх
       </Button>

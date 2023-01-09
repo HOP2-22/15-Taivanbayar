@@ -18,7 +18,7 @@ export const Header = () => {
           display: touch && 'none'
         }}
         onClick={() => {
-          navigate("/log  in");
+          navigate("/login");
           setTouch(true)
         }}
       >

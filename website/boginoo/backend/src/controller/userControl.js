@@ -26,21 +26,21 @@ exports.getUsers = async (_req, res) => {
 
 const ACCESS_TOKEN_KEY = "766755hkjhhhh-jad-qfasd-fsdaf-afsadfadsf-asf"
 
-exports.Login = async (req, res) => {
-  const {email, password} = req.body;
-  try {
-    const user = await User.findOne({email: email});
-    const match = await bcrypt.compare(password, user.password);
-    if(match) {
-      const token = jwt.sign({
-        email: user.email
-      }, ACCESS_TOKEN_KEY)
-    res.send({ user: user, match: match, token: token });
+  exports.Login = async (req, res) => {
+    const {email, password} = req.body;
+    try {
+      const user = await User.findOne({email: email});
+      const match = await bcrypt.compare(password, user.password);
+      if(match) {
+        const token = jwt.sign({
+          email: user.email
+        }, ACCESS_TOKEN_KEY)
+      res.send({ user: user, match: match, token: token });
 
-    } else {
-      res.send({message: "failed"})
+      } else {
+        res.send({message: "failed"})
+      }
+    } catch (error) {
+      res.send({message: error})
     }
-  } catch (error) {
-    res.send({message: error})
   }
-}

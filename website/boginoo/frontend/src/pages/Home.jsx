@@ -3,12 +3,13 @@ import { Box, Button, Container, Input} from "@mui/material";
 import axios from "axios";
 import Logo from "../assets/images/logo-default.svg";
 import { LinkList } from "../components/LinkList";
-// import { AllLinks } from "../components/AllLinks";
+import { useLocation } from "react-router-dom";
 
 export const Home = () => {
+  const location = useLocation();
+  console.log(location.state);
   const [value, setValue] = useState("");
   const [arr, setArr] = useState([]);
-  // const [list, setList] = useState([]);
 
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -21,18 +22,7 @@ export const Home = () => {
     return result;
   };
   const randomValue = GenerateString(6);
-    // useEffect(() => {
-    //   const FetchData = async () => {
-    //     try {
-    //       const { data } = await axios.get("http://localhost:8800");
-    //       const temp = [...list, data];
-    //       setList(...temp);
-    //     } catch (error) {
-    //       console.log(error);
-    //     }
-    //   };
-    //   FetchData();
-    // }, [list]);
+
   const linkTransfer = async () => {
     try {
       const res = await axios.post("http://localhost:8800", {
