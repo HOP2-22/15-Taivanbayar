@@ -10,7 +10,7 @@ const port = process.env.PORT ;
 
 
 mongoose.connect(
-  process.env.MONGODB_URL || "", 
+  process.env.MONGODB_URL, 
   { useNewUrlParser: true }
 );
 
@@ -20,7 +20,7 @@ mongoose.connection.once("open", () => {
 
 app.use(cors());
 app.use(express.json());
-app.use(linkRouter); 
+// app.use(linkRouter); 
 app.use(userRouter);
 
 app.listen(port, () => {

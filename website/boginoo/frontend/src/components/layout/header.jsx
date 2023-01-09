@@ -1,9 +1,11 @@
 import { Button, Typography } from "@mui/material";
 import { Container } from "@mui/system";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const navigate = useNavigate();
+  const [touch, setTouch] = useState(false)
   return (
     <Container sx={style.designHeader} maxWidth="xl">
       <Typography sx={style.instructionHeader}>
@@ -12,7 +14,13 @@ export const Header = () => {
       <Button
         variant="contained"
         style={style.buttonHeader}
-        onClick={() => navigate("/login")}
+        sx={{
+          display: touch && 'none'
+        }}
+        onClick={() => {
+          navigate("/log  in");
+          setTouch(true)
+        }}
       >
         Нэвтрэх
       </Button>
@@ -34,6 +42,6 @@ const style = {
   buttonHeader: {
     backgroundColor: "#02B589",
     borderRadius: "100px",
-    padding: "3px 30px 3px 30px",
+    padding: "3px 30px 3px 30px"
   }
 };
