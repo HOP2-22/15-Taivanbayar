@@ -25,7 +25,7 @@ export const Home = () => {
 
   const linkTransfer = async () => {
     try {
-      const res = await axios.post("http://localhost:8800", {
+      const res = await axios.post("http://localhost:8800/link", {
         original: value,
         short: randomValue,
       });

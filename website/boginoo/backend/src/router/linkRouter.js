@@ -1,8 +1,17 @@
-const express = require('express');
-const { getLink, createLink, goLink } = require('../controller/linkControl');
+const express = require("express");
+const { getLink, createLink, goLink } = require("../controller/linkControl");
 
 const linkRouter = express.Router();
 
-linkRouter.get('/', getLink).post('/', createLink).get("/:id", goLink)
+const middleware = (req, res, next) => {
+  const isIsMyTicket = req.body.ticket;
+  if(isIsMyTicket) {
+      next();
+  } else {
+      res.send("You haven't logged in yet")
+  }
+};
 
-module.exports = linkRouter
+linkRouter.get("/", middleware, getLink).post("/", createLink).get("/:id", goLink);
+
+module.exports = linkRouter;
