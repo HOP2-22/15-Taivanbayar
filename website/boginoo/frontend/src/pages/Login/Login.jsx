@@ -6,8 +6,7 @@ import Logo from "../../assets/images/logo-default.svg";
 import { FuncContext } from "../../context/functions";
 
 export const Login = () => {
-
-  const {userinfo, setUserinfo, login} = useContext(FuncContext);
+  const { userinfo, setUserinfo, login } = useContext(FuncContext);
   return (
     <Container
       sx={{
@@ -56,6 +55,7 @@ export const Login = () => {
           onChange={(e) =>
             setUserinfo({ ...userinfo, password: e.target.value })
           }
+          onKeyDown={(e) => e.code === "Enter" && login()}
         />
       </Box>
       <Box

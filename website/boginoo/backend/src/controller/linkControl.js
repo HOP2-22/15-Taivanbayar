@@ -10,7 +10,7 @@ exports.createLink = async (req, res) => {
   }
 };
 
-exports.getLink = async (req, res, next) => {
+exports.getLink = async (_req, res, next) => {
   try {
     const url = await Link.find();
     res.status(200).send(url);
@@ -22,10 +22,10 @@ exports.getLink = async (req, res, next) => {
 exports.goLink = async (req, res) => {
   const id = req.params.id;
   try {
-    await Link.find({
+   const link = await Link.find({
       short: id,
     });
-    res.status(200).json("sucessfully created");
+    res.status(200).send(link);
   } catch (error) {
     res.status(404).send({ message: error });
   }

@@ -1,30 +1,12 @@
 import { Button, Input, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
-import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import Logo from "../../assets/images/logo-default.svg";
+import { FuncContext } from "../../context/functions";
 
 export const SignUp = () => {
-  const navigate = useNavigate();
-  const [userinfo, setUserinfo] = useState({
-    email: "",
-    password: "",
-  });
-  const createUser = async () => {
-    try {
-      console.log(userinfo.email, userinfo.password);
-      const res = await axios.post("http://localhost:8800/signup", {
-        email: userinfo.email,
-        password: userinfo.password,
-      });
-      navigate("/login");
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  console.log(userinfo);
+  const { userData, setUserData, createUser } = useContext(FuncContext);
+
   return (
     <Container sx={style.container}>
       <img src={Logo} alt="logo" />
@@ -35,9 +17,7 @@ export const SignUp = () => {
           disableUnderline={true}
           style={style.inp}
           placeholder="name@mail.domain"
-          onChange={(e) => {
-            setUserinfo({ ...userinfo, email: e.target.value });
-          }}
+          onChange={(e) => setUserData({ ...userData, email: e.target.value })}
         />
       </Box>
       <Box>
@@ -46,9 +26,9 @@ export const SignUp = () => {
           disableUnderline={true}
           style={style.inp}
           placeholder="••••••••••"
-          onChange={(e) => {
-            setUserinfo({ ...userinfo, password: e.target.value });
-          }}
+          onChange={(e) =>
+            setUserData({ ...userData, password: e.target.value })
+          }
         />
       </Box>
       <Box>
@@ -94,5 +74,5 @@ const style = {
     alignItems: "center",
     gap: "4vh",
   },
-  topic: {},
+  topic: { fontSize: "32px", color: "#02B589" },
 };

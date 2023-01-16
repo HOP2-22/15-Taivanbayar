@@ -8,8 +8,8 @@ export const Client = () => {
   useEffect(() => {
     const GoLink = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:8800/link/${id}`);
-        window.location.href = data;
+        const  {data}= await axios.get(`http://localhost:8800/link/${id}`);
+        window.location.href = data[0].original;
         console.log(data);
       } catch (error) {
         console.log(error);

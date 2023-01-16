@@ -35,7 +35,7 @@ exports.Login = async (req, res) => {
           email: user.email,
         },
         process.env.ACCESS_TOKEN_KEY,
-        { expiresIn: "1m" }
+        { expiresIn: "1h" }
       );
       res.send({ email: user.email, match: match, token: token });
     } else {

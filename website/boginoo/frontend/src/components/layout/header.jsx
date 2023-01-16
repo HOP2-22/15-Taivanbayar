@@ -1,6 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import { Container } from "@mui/system";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import {  useNavigate } from "react-router-dom";
 import { FuncContext } from "../../context/functions";
@@ -9,9 +9,9 @@ export const Header = () => {
   const { match, info } = useContext(FuncContext);
   const navigate = useNavigate();
   const [touch, setTouch] = useState(false);
-  useState(() => {
+  useEffect(() => {
     match && setTouch(true);
-  }, []);
+  }, [match]);
   console.log(info);
   return (
     <Container sx={style.designHeader} maxWidth="xl">

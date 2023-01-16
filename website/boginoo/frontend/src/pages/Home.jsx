@@ -1,42 +1,11 @@
-import { useState } from "react";
-import { Box, Button, Container, Input} from "@mui/material";
-import axios from "axios";
+import { Box, Button, Container, Input } from "@mui/material";
 import Logo from "../assets/images/logo-default.svg";
 import { LinkList } from "../components/LinkList";
-import { useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { FuncContext } from "../context/functions";
 
 export const Home = () => {
-  const location = useLocation();
-  console.log(location.state);
-  const [value, setValue] = useState("");
-  const [arr, setArr] = useState([]);
-
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  const GenerateString = (length) => {
-    let result = "";
-    const charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  };
-  const randomValue = GenerateString(6);
-
-  const linkTransfer = async () => {
-    try {
-      const res = await axios.post("http://localhost:8800/link", {
-        original: value,
-        short: randomValue,
-      });
-      const el = [...arr, res.data];
-      setArr(el);
-      setValue("")
-    } catch (error) {
-      console.log({ error: error });
-    }
-  };
-
+  const {linkTransfer, value, setValue, arr} = useContext(FuncContext)
   return (
     <Container sx={style.designHome} maxWidth="xl">
       <img src={Logo} alt="logo" />
