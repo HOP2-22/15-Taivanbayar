@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const FuncContext = createContext();
@@ -32,17 +32,21 @@ export const Functions = ({ children }) => {
   };
   const randomValue = GenerateString(6);
 
-  const linkTransfer = async () => {
+  const linkTransfer = async (token) => {
     try {
-      const { data } = await axios.post("http://localhost:8800/link", {
-        original: value,
-        short: randomValue,
-      });
-
-      const el = [...arr, data];
-      console.log(data);
-      setArr(el);
-      setValue("");
+      if (info) {
+        const { data } = await axios.post("http://localhost:8800/link", {
+          original: value,
+          short: randomValue,
+          user: info.email,
+          token: info.token,
+        });
+        const el = [...arr, data];
+        setArr(el);
+        setValue("");
+      } else {
+        alert("Login First");
+      }
     } catch (error) {
       console.log({ error: error });
     }
@@ -50,12 +54,11 @@ export const Functions = ({ children }) => {
 
   const createUser = async () => {
     try {
-      const res = await axios.post("http://localhost:8800/signup", {
+      await axios.post("http://localhost:8800/signup", {
         email: userData.email,
         password: userData.password,
       });
       navigate("/login");
-      console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -67,19 +70,40 @@ export const Functions = ({ children }) => {
         email: userinfo.email,
         password: userinfo.password,
       });
-      console.log(data);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("email", data.email);
       setInfo(data);
       if (data.match) {
         navigate("/");
         setMatch(true);
       } else {
-        alert("Wrong Password or email")
+        alert("Wrong Password or email");
       }
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
   };
+  useEffect(() => {
+    const authenticate = async () => {
+      const email = await localStorage.getItem("email");
+      const token = await localStorage.getItem("token");
+      const res = await axios.post(`http://localhost:8800/${email}`, {
+        token,
+      });
+      setMatch(true);
+      setInfo(res.data.user[0]);
+    };
+    authenticate();
+    const getHistory = async () => {
+      const email = await localStorage.getItem("email");
+      const token = await localStorage.getItem("token");
+      const history = await axios.get(`http://localhost:8800/${email}/list`, {
+        token,
+      });
+      console.log(history);
+    };
+    getHistory();
+  }, []);
 
   return (
     <FuncContext.Provider

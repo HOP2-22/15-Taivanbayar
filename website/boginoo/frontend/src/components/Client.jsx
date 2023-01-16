@@ -1,21 +1,27 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { FuncContext } from "../context/functions";
 
 export const Client = () => {
+  // const { info } = useContext(FuncContext);
   const { id } = useParams();
 
   useEffect(() => {
     const GoLink = async () => {
-      try {
-        const  {data}= await axios.get(`http://localhost:8800/link/${id}`);
-        window.location.href = data[0].original;
-        console.log(data);
-      } catch (error) {
-        console.log(error);
+      if (id) {
+        const token = await localStorage.getItem("token");
+        try {
+          const {data} = await axios.post(`http://localhost:8800/link/${id}`, {
+            token: token,
+          });
+          window.location.href = data[0].original;
+        } catch (error) {
+          console.log(error);
+        }
       }
     };
-    GoLink();
+    GoLink(); 
   }, [id]);
+  return <></>;
 };
-export default Client;

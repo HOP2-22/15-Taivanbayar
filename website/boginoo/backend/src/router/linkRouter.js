@@ -1,5 +1,5 @@
 const express = require("express");
-const { getLink, createLink, goLink } = require("../controller/linkControl");
+const { getLink, createLink, goLink, getHistory } = require("../controller/linkControl");
 const { authenticateToken } = require("../middleware/verifying");
 
 const linkRouter = express.Router();
@@ -7,6 +7,7 @@ const linkRouter = express.Router();
 linkRouter
   .get("/", authenticateToken, getLink)
   .post("/", authenticateToken, createLink)
-  .get("/:id", authenticateToken, goLink);
+  .post("/:id", authenticateToken, goLink)
+  .get("/:user/list", authenticateToken, getHistory)
 
 module.exports = linkRouter;

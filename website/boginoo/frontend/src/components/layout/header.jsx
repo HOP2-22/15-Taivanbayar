@@ -12,7 +12,6 @@ export const Header = () => {
   useEffect(() => {
     match && setTouch(true);
   }, [match]);
-  console.log(info);
   return (
     <Container sx={style.designHeader} maxWidth="xl">
       <Typography sx={style.instructionHeader}>Хэрхэн ажилладаг вэ?</Typography>

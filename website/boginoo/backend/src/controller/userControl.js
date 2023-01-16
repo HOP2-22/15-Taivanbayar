@@ -23,6 +23,16 @@ exports.getUsers = async (_req, res) => {
     res.send(error);
   }
 };
+exports.getUser = async (_req, res) => {
+  try {
+    const user = await User.find({
+      email: _req.params.email,
+    });
+    res.send({ user: user });
+  } catch (error) {
+    res.send(error);
+  }
+};
 
 exports.Login = async (req, res) => {
   const { email, password } = req.body;

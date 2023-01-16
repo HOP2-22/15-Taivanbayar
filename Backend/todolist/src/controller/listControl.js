@@ -43,8 +43,8 @@ exports.deleteList = async (req, res) => {
 
 exports.deleteAll = async (req, res) => {
   try {
-    await List.remove();
-    res.send({ message: "complete" });
+    await List.deleteMany();
+    res.send({ message: "completed" });
   } catch (error) {
     console.log(error);
   }
