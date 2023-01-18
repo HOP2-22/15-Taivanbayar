@@ -9,8 +9,8 @@ export const Functions = ({ children }) => {
   const [value, setValue] = useState("");
   const [arr, setArr] = useState([]);
   const [info, setInfo] = useState();
+  const [history, setHistory] = useState()
   const [match, setMatch] = useState(false);
-
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -73,6 +73,7 @@ export const Functions = ({ children }) => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("email", data.email);
       setInfo(data);
+      getHistory([data.token, data.email]);
       if (data.match) {
         navigate("/");
         setMatch(true);
@@ -83,28 +84,26 @@ export const Functions = ({ children }) => {
       console.log(error);
     }
   };
+  const getHistory = async (props) => {
+    const token = props[0];
+    const {data} = await axios.post(`http://localhost:8800/link/${props[1]}/list`, {
+      token,
+    });
+    setHistory(data);
+  };
   useEffect(() => {
     const authenticate = async () => {
       const email = await localStorage.getItem("email");
       const token = await localStorage.getItem("token");
       const res = await axios.post(`http://localhost:8800/${email}`, {
-        token,
+        token: token,
       });
       setMatch(true);
       setInfo(res.data.user[0]);
     };
     authenticate();
-    const getHistory = async () => {
-      const email = await localStorage.getItem("email");
-      const token = await localStorage.getItem("token");
-      const history = await axios.get(`http://localhost:8800/${email}/list`, {
-        token,
-      });
-      console.log(history);
-    };
-    getHistory();
   }, []);
-
+console.log(userinfo)
   return (
     <FuncContext.Provider
       value={{
@@ -114,6 +113,7 @@ export const Functions = ({ children }) => {
         arr: arr,
         value: value,
         userData: userData,
+        history: history,
         setUserData: setUserData,
         setUserinfo: setUserinfo,
         login: login,

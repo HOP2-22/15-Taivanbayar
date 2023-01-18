@@ -2,15 +2,14 @@ const jwt = require("jsonwebtoken");
 
 exports.authenticateToken = async (req, res, next) => {
   const { token } = req.body;
-  // console.log("Authenticate", JSON.stringify(req.headers));
   try {
     jwt.verify(token, process.env.ACCESS_TOKEN_KEY, (error, _user) => {
       if (error) {
-        return res.status(500).send(error, "Invalid credentials");
+        return res.send({ error: error}).status(500);
       }
       next();
     });
   } catch (error) {
-    res.status(404).send(error);
+    res.send(error).status(404);
   }
 };

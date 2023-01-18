@@ -22,7 +22,7 @@ mongoose.connection.once("open", () => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json());
-app.use("/link",linkRouter); 
+app.use("/link", linkRouter); 
 app.use(userRouter);
 
 app.listen(port, () => {

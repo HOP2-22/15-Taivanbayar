@@ -1,11 +1,13 @@
-import { Box, Button, Container, Input } from "@mui/material";
+import { Box, Button, Container, Input, Typography } from "@mui/material";
 import Logo from "../assets/images/logo-default.svg";
 import { LinkList } from "../components/LinkList";
 import { useContext } from "react";
 import { FuncContext } from "../context/functions";
+import { AllLinks } from "../components/AllLinks";
 
 export const Home = () => {
-  const {linkTransfer, value, setValue, arr} = useContext(FuncContext)
+  const { linkTransfer, value, setValue, arr, history } =
+    useContext(FuncContext);
   return (
     <Container sx={style.designHome} maxWidth="xl">
       <img src={Logo} alt="logo" />
@@ -45,28 +47,30 @@ export const Home = () => {
             Богиносгох
           </Button>
         </Box>
-        {/* <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "5vh",
-            marginTop: "-8vh",
-          }}
-        >
-          <Typography
+        {history && (
+          <Box
             sx={{
-              color: "#02B589",
-              fontWeight: "700",
-              fontSize: "32px",
-              marginLeft: "15px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "5vh",
+              marginTop: "-8vh",
             }}
           >
-            Түүх
-          </Typography>
-          {list?.map((el, index) => {
-            return <AllLinks key={index} list={el} />;
-          })}
-        </Box> */}
+            <Typography
+              sx={{
+                color: "#02B589",
+                fontWeight: "700",
+                fontSize: "32px",
+                marginLeft: "15px",
+              }}
+            >
+              Түүх
+            </Typography>
+            {history?.map((el, index) => {
+              return <AllLinks key={index} list={el} />;
+            })}
+          </Box>
+        )}
 
         <Box>
           {arr?.map((el, index) => {

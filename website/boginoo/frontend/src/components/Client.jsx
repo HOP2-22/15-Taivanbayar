@@ -1,10 +1,8 @@
 import axios from "axios";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { FuncContext } from "../context/functions";
 
 export const Client = () => {
-  // const { info } = useContext(FuncContext);
   const { id } = useParams();
 
   useEffect(() => {

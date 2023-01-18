@@ -1,7 +1,6 @@
 const Link = require("../model/links");
 
 exports.createLink = async (req, res) => {
-  console.log("createLink");
   try {
     const url = req.body;
     const link = await Link.create(url);
@@ -26,7 +25,6 @@ exports.goLink = async (req, res) => {
     const link = await Link.find({
       short: id,
     });
-    console.log(link);
     res.status(200).send(link);
   } catch (error) {
     res.status(404).send({ message: error });
@@ -39,6 +37,6 @@ exports.getHistory = async (req, res) => {
     const tasks = await Link.find({user: user});
     res.status(200).send(tasks)
   } catch (error) {
-    res.status(404).send({ message: "Failed to get history" }, error);
+    res.status(404).send({ message: error });
   }
 };

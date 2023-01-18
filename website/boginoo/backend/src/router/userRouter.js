@@ -11,7 +11,7 @@ const userRouter = express.Router();
 
 userRouter
   .get("/", getUsers)
-  .post("/:email", authenticateToken, getUser)
+  .post("/login/:email", authenticateToken, getUser)
   .post("/signup", createUser)
   .post("/login", Login);
 

@@ -3,7 +3,9 @@ import { Box, Container } from "@mui/system";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/images/logo-default.svg";
+import bieye from "../../assets/images/eye.svg";
 import { FuncContext } from "../../context/functions";
+import { InputPass } from "../../components/Passinput";
 
 export const Login = () => {
   const { userinfo, setUserinfo, login } = useContext(FuncContext);
@@ -23,25 +25,31 @@ export const Login = () => {
       </Typography>
       <Box>
         <Typography sx={{ marginLeft: "15px" }}>Цахим хаяг</Typography>
-        <Input
-          disableUnderline={true}
-          placeholder="name@mail.domain"
-          style={{
-            width: "25vw",
-            height: "4vh",
-            background: "#FFFFFF",
-            border: "1px solid #F0F0F0",
-            boxShadow: `0px 1px 5px rgba(0, 0, 0, 0.16)`,
-            borderRadius: `100px`,
-            paddingLeft: "15px",
-          }}
-          onChange={(e) => setUserinfo({ ...userinfo, email: e.target.value })}
-        />
+        <Box>
+          <Input
+            disableUnderline={true}
+            placeholder="name@mail.domain"
+            style={{
+              width: "25vw",
+              height: "4vh",
+              background: "#FFFFFF",
+              border: "1px solid #F0F0F0",
+              boxShadow: `0px 1px 5px rgba(0, 0, 0, 0.16)`,
+              borderRadius: `100px`,
+              paddingLeft: "15px",
+            }}
+            onChange={(e) =>
+              setUserinfo({ ...userinfo, email: e.target.value })
+            }
+          />
+        </Box>
       </Box>
       <Box>
         <Typography sx={{ marginLeft: "15px" }}>Нууц үг</Typography>
         <Input
           disableUnderline={true}
+          id="passInput"
+          type="password"
           placeholder="••••••••••"
           style={{
             width: "25vw",
@@ -57,6 +65,7 @@ export const Login = () => {
           }
           onKeyDown={(e) => e.code === "Enter" && login()}
         />
+        <InputPass />
       </Box>
       <Box
         sx={{

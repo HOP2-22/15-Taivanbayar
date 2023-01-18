@@ -8,6 +8,6 @@ linkRouter
   .get("/", authenticateToken, getLink)
   .post("/", authenticateToken, createLink)
   .post("/:id", authenticateToken, goLink)
-  .get("/:user/list", authenticateToken, getHistory)
+  .post("/:user/list", authenticateToken, getHistory)
 
 module.exports = linkRouter;

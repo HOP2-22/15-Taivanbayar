@@ -1,12 +1,21 @@
 import { Button, Input, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Logo from "../../assets/images/logo-default.svg";
+import { InputPass } from "../../components/Passinput";
 import { FuncContext } from "../../context/functions";
 
 export const SignUp = () => {
   const { userData, setUserData, createUser } = useContext(FuncContext);
-
+  const [check, setCheck] = useState("");
+  console.log(userData, "<-- userData", check, "<-- check");
+  const CheckPass = () => {
+    if(check === userData.password) {
+      createUser()
+    } else {
+      alert("Passwords do not match")
+    }
+  }
   return (
     <Container sx={style.container}>
       <img src={Logo} alt="logo" />
@@ -23,6 +32,8 @@ export const SignUp = () => {
       <Box>
         <Typography sx={style.cap}>Нууц үг</Typography>
         <Input
+          id="passInput"
+          type="password"
           disableUnderline={true}
           style={style.inp}
           placeholder="••••••••••"
@@ -30,16 +41,21 @@ export const SignUp = () => {
             setUserData({ ...userData, password: e.target.value })
           }
         />
+        <InputPass />
       </Box>
       <Box>
         <Typography sx={style.cap}>Нууц үгээ давтна уу?</Typography>
         <Input
+          id="passInputSign"
+          type="password"
           disableUnderline={true}
           style={style.inp}
           placeholder="••••••••••"
+          onChange={(e) => setCheck(e.target.value)}
         />
+        <InputPass check={true}/>
       </Box>
-      <Button style={style.but} onClick={() => createUser()}>
+      <Button style={style.but} onClick={() => CheckPass()}>
         Бүртгүүлэх
       </Button>
     </Container>

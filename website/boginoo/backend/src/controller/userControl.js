@@ -10,7 +10,6 @@ exports.createUser = async (req, res) => {
     const user = await User.create({ email, password: hashedPassword });
     res.send({ message: "created successfully", data: user });
   } catch (error) {
-    console.log(error);
     res.send(error);
   }
 };
@@ -47,11 +46,11 @@ exports.Login = async (req, res) => {
         process.env.ACCESS_TOKEN_KEY,
         { expiresIn: "1h" }
       );
-      res.send({ email: user.email, match: match, token: token });
+      res.send({ email: user.email, match: match, token: token }).status(200);
     } else {
-      res.send({ message: "failed" });
+      res.send({ message: "failed" }).status(500);
     }
   } catch (error) {
-    res.send({ message: error });
+    res.send({ message: error }).status(500);
   }
 };

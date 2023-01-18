@@ -29,8 +29,8 @@ const Home = () => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              paddingTop:"25vh",
-              gap:"10vh"
+              paddingTop: "25vh",
+              gap: "10vh",
             }}
           >
             <article>
@@ -53,15 +53,11 @@ const Home = () => {
           display: "flex",
           flexDirection: "column",
           background: theme,
-          gap:"3vh",
+          gap: "3vh",
           width: "100%",
-
         }}
       >
-        <MidPosts
-          image={MeetingImg}
-          topic={"Your Hub for teamwork"}
-        />
+        <MidPosts image={MeetingImg} topic={"Your Hub for teamwork"} />
         <MidPosts
           isReversed={false}
           image={smilingWoman}
@@ -84,9 +80,10 @@ const Home = () => {
             What people say about us
           </h1>
           <div className="main-end-comment">
-            {AllPeopleData.map((data) => {
+            {AllPeopleData.map((data, index) => {
               return (
                 <Data
+                  key={index}
                   surname={data.name}
                   starNum={data?.stars}
                   comment={data.comment}
