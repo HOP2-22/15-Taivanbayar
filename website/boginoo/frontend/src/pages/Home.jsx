@@ -8,6 +8,7 @@ import { AllLinks } from "../components/AllLinks";
 export const Home = () => {
   const { linkTransfer, value, setValue, arr, history } =
     useContext(FuncContext);
+
   return (
     <Container sx={style.designHome} maxWidth="xl">
       <img src={Logo} alt="logo" />
@@ -47,6 +48,10 @@ export const Home = () => {
             Богиносгох
           </Button>
         </Box>
+        {arr?.map((el, index) => {
+          return <LinkList key={index} list={el} />;
+        })}
+
         {history && (
           <Box
             sx={{
@@ -67,16 +72,10 @@ export const Home = () => {
               Түүх
             </Typography>
             {history?.map((el, index) => {
-              return <AllLinks key={index} list={el} />;
+              return <AllLinks key={index} list={el} index={index} />;
             })}
           </Box>
         )}
-
-        <Box>
-          {arr?.map((el, index) => {
-            return <LinkList key={index} list={el} />;
-          })}
-        </Box>
       </Box>
     </Container>
   );

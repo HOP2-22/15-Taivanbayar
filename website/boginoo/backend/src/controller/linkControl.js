@@ -40,3 +40,13 @@ exports.getHistory = async (req, res) => {
     res.status(404).send({ message: error });
   }
 };
+
+exports.deleteURL = async (req, res) => {
+  const _id = req.params.id;
+  try {
+    const deleteURL = await Link.findByIdAndDelete({_id});
+    res.send({deletedURL: deleteURL});
+  } catch (error) {
+    res.status(404).send({ message: error });
+  }
+}

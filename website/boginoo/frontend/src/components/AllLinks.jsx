@@ -1,8 +1,19 @@
 import { Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { FuncContext } from "../context/functions";
 
-export const AllLinks = ({ list }) => {
+export const AllLinks = ({ list, index }) => {
+  const { deleteURL, setHistory, history } = useContext(FuncContext);
+  const DeleteURL = (idx) => {
+    setHistory(
+      history.filter((el, i) => {
+        deleteURL(el._id);
+        return idx !== i;
+      })
+    );
+  };
   return (
     <Container
       sx={{
@@ -60,6 +71,12 @@ export const AllLinks = ({ list }) => {
         >
           Хуулж авах
         </Link>
+        <Typography
+          style={{ color: "#02B589", marginTop: "2vh", cursor: "pointer" }}
+          onClick={() => DeleteURL(index)}
+        >
+          Delete
+        </Typography>
       </Box>
     </Container>
   );

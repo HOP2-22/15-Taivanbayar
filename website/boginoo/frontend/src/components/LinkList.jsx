@@ -5,9 +5,11 @@ export const LinkList = ({ list }) => {
   return (
     <Box
       sx={{
+        width:"100%",
         display: "flex",
         flexDirection: "column",
         gap: "10vh",
+        alignItems: "flex-start",
       }}
     >
       <Box>

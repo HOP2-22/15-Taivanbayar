@@ -1,13 +1,15 @@
 import { Button, Typography } from "@mui/material";
-import { Container } from "@mui/system";
+import { Box, Container } from "@mui/system";
 import { useContext, useEffect } from "react";
 import { useState } from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FuncContext } from "../../context/functions";
+import More from "../../assets/images/icon-down.svg";
 
 export const Header = () => {
-  const { match, info } = useContext(FuncContext);
+  const { match, info, setInfo, setMatch } = useContext(FuncContext);
   const navigate = useNavigate();
+  const [menu, setMenu] = useState(false);
   const [touch, setTouch] = useState(false);
   useEffect(() => {
     match && setTouch(true);
@@ -15,7 +17,40 @@ export const Header = () => {
   return (
     <Container sx={style.designHeader} maxWidth="xl">
       <Typography sx={style.instructionHeader}>Хэрхэн ажилладаг вэ?</Typography>
-      {match && <Typography>{info?.email}</Typography>}
+      {match && (
+        <Box>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "5px",
+            }}
+          >
+            <Typography sx={{ fontSize: "20px" }}>{info?.email}</Typography>
+            <img
+              src={More}
+              alt="moreImg"
+              onClick={(e) => setMenu(menu ? false : true)}
+            />
+          </Box>
+          {menu && (
+            <Typography
+              sx={{
+                position: "absolute",
+                cursor:"pointer"
+              }}
+              onClick={()=> {
+                navigate("/login");
+                setInfo("");
+                setMatch(false);
+                setMenu(false);
+              }}
+            >
+              Log out
+            </Typography>
+          )}
+        </Box>
+      )}
+
       {!touch ? (
         <Button
           variant="contained"

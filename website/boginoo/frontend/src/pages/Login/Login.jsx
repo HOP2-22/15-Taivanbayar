@@ -3,12 +3,19 @@ import { Box, Container } from "@mui/system";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/images/logo-default.svg";
-import bieye from "../../assets/images/eye.svg";
 import { FuncContext } from "../../context/functions";
 import { InputPass } from "../../components/Passinput";
+import { useEffect } from "react";
 
 export const Login = () => {
-  const { userinfo, setUserinfo, login } = useContext(FuncContext);
+  const { userinfo, setUserinfo, login, inputChecker, emailRef, passwordRef } =
+    useContext(FuncContext);
+
+  useEffect(() => {
+
+    inputChecker();
+  }, []);
+
   return (
     <Container
       sx={{
@@ -38,6 +45,7 @@ export const Login = () => {
               borderRadius: `100px`,
               paddingLeft: "15px",
             }}
+            ref={emailRef}
             onChange={(e) =>
               setUserinfo({ ...userinfo, email: e.target.value })
             }
@@ -60,6 +68,7 @@ export const Login = () => {
             borderRadius: `100px`,
             paddingLeft: "15px",
           }}
+          ref={passwordRef}
           onChange={(e) =>
             setUserinfo({ ...userinfo, password: e.target.value })
           }

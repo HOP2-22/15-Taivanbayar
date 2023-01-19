@@ -1,15 +1,16 @@
 import axios from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const FuncContext = createContext();
 
 export const Functions = ({ children }) => {
   const navigate = useNavigate();
+  const [checkingInput, setCheckingInput] = useState(null);
   const [value, setValue] = useState("");
   const [arr, setArr] = useState([]);
   const [info, setInfo] = useState();
-  const [history, setHistory] = useState()
+  const [history, setHistory] = useState();
   const [match, setMatch] = useState(false);
   const [userData, setUserData] = useState({
     email: "",
@@ -19,6 +20,8 @@ export const Functions = ({ children }) => {
     email: "",
     password: "",
   });
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -53,42 +56,57 @@ export const Functions = ({ children }) => {
   };
 
   const createUser = async () => {
-    try {
-      await axios.post("http://localhost:8800/signup", {
-        email: userData.email,
-        password: userData.password,
-      });
-      navigate("/login");
-    } catch (error) {
-      console.log(error);
-    }
+
+        try {
+          await axios.post("http://localhost:8800/signup", {
+            email: userData.email,
+            password: userData.password,
+          });
+          navigate("/login");
+        } catch (error) {
+          console.log(error);
+        }
+
   };
 
   const login = async () => {
-    try {
-      const { data } = await axios.post("http://localhost:8800/login", {
-        email: userinfo.email,
-        password: userinfo.password,
-      });
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("email", data.email);
-      setInfo(data);
-      getHistory([data.token, data.email]);
-      if (data.match) {
-        navigate("/");
-        setMatch(true);
+    if (userinfo.email.includes("@") && userinfo.email  .includes(".")) {
+      if (userinfo.password.length === 8) {
+        try {
+          const { data } = await axios.post("http://localhost:8800/login", {
+            email: userinfo.email,
+            password: userinfo.password,
+          });
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("email", data.email);
+          setInfo(data);
+          getHistory([data.token, data.email]);
+          if (data.match) {
+            navigate("/");
+            setMatch(true);
+          } else {
+            alert("Email or password incorrect");
+          }
+        } catch (error) {
+          console.log(error);
+        }
       } else {
-        alert("Wrong Password or email");
+        setCheckingInput(true);
+        alert("Please enter valid password");
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      setCheckingInput(false);
+      alert("Please enter valid email");
     }
   };
   const getHistory = async (props) => {
     const token = props[0];
-    const {data} = await axios.post(`http://localhost:8800/link/${props[1]}/list`, {
-      token,
-    });
+    const { data } = await axios.post(
+      `http://localhost:8800/link/${props[1]}/list`,
+      {
+        token,
+      }
+    );
     setHistory(data);
   };
   useEffect(() => {
@@ -103,7 +121,13 @@ export const Functions = ({ children }) => {
     };
     authenticate();
   }, []);
-console.log(userinfo)
+
+  const deleteURL = async (id) => {
+    await axios.delete(`http://localhost:8800/link/delete/${id}`);
+  };
+  const inputChecker = () => {
+    checkingInput ? passwordRef.current.focus() : emailRef.current.focus();
+  };
   return (
     <FuncContext.Provider
       value={{
@@ -114,7 +138,16 @@ console.log(userinfo)
         value: value,
         userData: userData,
         history: history,
+        checkingInput: checkingInput,
+        emailRef: emailRef,
+        passwordRef: passwordRef,
+        setCheckingInput: setCheckingInput,
+        inputChecker: inputChecker,
+        setMatch: setMatch,
+        setInfo: setInfo,
+        setHistory: setHistory,
         setUserData: setUserData,
+        deleteURL: deleteURL,
         setUserinfo: setUserinfo,
         login: login,
         setValue: setValue,
