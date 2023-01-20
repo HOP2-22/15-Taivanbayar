@@ -8,7 +8,6 @@ import { AllLinks } from "../components/AllLinks";
 export const Home = () => {
   const { linkTransfer, value, setValue, arr, history } =
     useContext(FuncContext);
-
   return (
     <Container sx={style.designHome} maxWidth="xl">
       <img src={Logo} alt="logo" />
@@ -49,10 +48,11 @@ export const Home = () => {
           </Button>
         </Box>
         {arr?.map((el, index) => {
+          console.log(arr)
           return <LinkList key={index} list={el} />;
         })}
 
-        {history && (
+        {history.length > 0 && (
           <Box
             sx={{
               display: "flex",

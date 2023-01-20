@@ -10,7 +10,7 @@ export const Functions = ({ children }) => {
   const [value, setValue] = useState("");
   const [arr, setArr] = useState([]);
   const [info, setInfo] = useState();
-  const [history, setHistory] = useState();
+  const [history, setHistory] = useState([]);
   const [match, setMatch] = useState(false);
   const [userData, setUserData] = useState({
     email: "",
@@ -56,21 +56,19 @@ export const Functions = ({ children }) => {
   };
 
   const createUser = async () => {
-
-        try {
-          await axios.post("http://localhost:8800/signup", {
-            email: userData.email,
-            password: userData.password,
-          });
-          navigate("/login");
-        } catch (error) {
-          console.log(error);
-        }
-
+    try {
+      await axios.post("http://localhost:8800/signup", {
+        email: userData.email,
+        password: userData.password,
+      });
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const login = async () => {
-    if (userinfo.email.includes("@") && userinfo.email  .includes(".")) {
+    if (userinfo.email.includes("@") && userinfo.email.includes(".")) {
       if (userinfo.password.length === 8) {
         try {
           const { data } = await axios.post("http://localhost:8800/login", {
@@ -92,7 +90,7 @@ export const Functions = ({ children }) => {
         }
       } else {
         setCheckingInput(true);
-        alert("Please enter valid password");
+        alert("Please enter password length of 8 characters");
       }
     } else {
       setCheckingInput(false);
@@ -107,17 +105,19 @@ export const Functions = ({ children }) => {
         token,
       }
     );
-    setHistory(data);
+    setHistory(data ? data : []);
   };
   useEffect(() => {
     const authenticate = async () => {
       const email = await localStorage.getItem("email");
       const token = await localStorage.getItem("token");
-      const res = await axios.post(`http://localhost:8800/${email}`, {
+      const res = await axios.post(`http://localhost:8800/login/${email}`, {
         token: token,
       });
+      console.log(res)
       setMatch(true);
       setInfo(res.data.user[0]);
+      console.log(info)
     };
     authenticate();
   }, []);
