@@ -5,13 +5,12 @@ const {
   Login,
   getUser,
 } = require("../controller/userControl");
-const { authenticateToken } = require("../middleware/verifying");
 
 const userRouter = express.Router();
 
 userRouter
   .get("/", getUsers)
-  .post("/login/:email", authenticateToken, getUser)
+  .get("/login/checkUser", getUser)
   .post("/signup", createUser)
   .post("/login", Login);
 

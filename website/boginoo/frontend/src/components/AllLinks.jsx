@@ -5,15 +5,9 @@ import { Link } from "react-router-dom";
 import { FuncContext } from "../context/functions";
 
 export const AllLinks = ({ list, index }) => {
-  const { deleteURL, setHistory, history } = useContext(FuncContext);
-  const DeleteURL = (idx) => {
-    setHistory(
-      history.filter((el, i) => {
-        deleteURL(el._id);
-        return idx !== i;
-      })
-    );
-  };
+  const { deleteURL } = useContext(FuncContext);
+  console.log(list);
+
   return (
     <Container
       sx={{
@@ -73,7 +67,7 @@ export const AllLinks = ({ list, index }) => {
         </Link>
         <Typography
           style={{ color: "#02B589", marginTop: "2vh", cursor: "pointer" }}
-          onClick={() => DeleteURL(index)}
+          onClick={deleteURL(index)}
         >
           Delete
         </Typography>

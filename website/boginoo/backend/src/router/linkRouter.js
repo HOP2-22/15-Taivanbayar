@@ -9,6 +9,6 @@ linkRouter
   .post("/", authenticateToken, createLink)
   .post("/:id", authenticateToken, goLink)
   .post("/:user/list", authenticateToken, getHistory)
-  .delete("/delete/:id", deleteURL)
+  .delete("/delete/:id", authenticateToken,  deleteURL)
 
 module.exports = linkRouter;

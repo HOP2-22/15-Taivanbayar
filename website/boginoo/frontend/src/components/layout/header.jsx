@@ -29,7 +29,7 @@ export const Header = () => {
             <img
               src={More}
               alt="moreImg"
-              onClick={(e) => setMenu(menu ? false : true)}
+              onClick={() => setMenu(menu ? false : true)}
             />
           </Box>
           {menu && (

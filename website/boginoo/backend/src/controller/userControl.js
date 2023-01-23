@@ -23,14 +23,16 @@ exports.getUsers = async (_req, res) => {
     res.send(error);
   }
 };
-exports.getUser = async (_req, res) => {
+exports.getUser = async (req, res) => {
+  const token = req?.headers?.token
   try {
-    const user = await User.find({
-      email: _req.params.email,
-    });
-    res.send({ user: user });
+    if(!token) {
+      return res.status(404).send({message: "token not found"})
+    }
+    const decode = jwt.decode(token, process.env.ACCESS_TOKEN_KEY);
+    res.send(decode);
   } catch (error) {
-    res.send(error);
+    res.status(404).send({message: error})
   }
 };
 

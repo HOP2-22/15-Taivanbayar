@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 import { createContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -35,14 +36,24 @@ export const Functions = ({ children }) => {
   };
   const randomValue = GenerateString(6);
 
-  const linkTransfer = async (token) => {
+  axios.interceptors.request.use(
+    (config) => {
+      const token = Cookies.get("token");
+      config.headers.set("token", token);
+      return config;
+    },
+    (error) => {
+      console.log(error);
+      return Promise.reject(error);
+    }
+  );
+  const linkTransfer = async () => {
     try {
       if (info) {
         const { data } = await axios.post("http://localhost:8800/link", {
           original: value,
           short: randomValue,
           user: info.email,
-          token: info.token,
         });
         const el = [...arr, data];
         setArr(el);
@@ -75,13 +86,12 @@ export const Functions = ({ children }) => {
             email: userinfo.email,
             password: userinfo.password,
           });
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("email", data.email);
           setInfo(data);
-          getHistory([data.token, data.email]);
+          console.log(data);
           if (data.match) {
             navigate("/");
             setMatch(true);
+            Cookies.set("token", data.token, { expires: 7 });
           } else {
             alert("Email or password incorrect");
           }
@@ -97,33 +107,28 @@ export const Functions = ({ children }) => {
       alert("Please enter valid email");
     }
   };
-  const getHistory = async (props) => {
-    const token = props[0];
-    const { data } = await axios.post(
-      `http://localhost:8800/link/${props[1]}/list`,
-      {
-        token,
-      }
-    );
-    setHistory(data ? data : []);
-  };
+
   useEffect(() => {
     const authenticate = async () => {
-      const email = await localStorage.getItem("email");
-      const token = await localStorage.getItem("token");
-      const res = await axios.post(`http://localhost:8800/login/${email}`, {
-        token: token,
-      });
-      console.log(res)
+      const { data } = await axios.get("http://localhost:8800/login/checkUser");
       setMatch(true);
-      setInfo(res.data.user[0]);
-      console.log(info)
+      setInfo({ ...info, email: data.email });
     };
     authenticate();
-  }, []);
+    const getHistory = async () => {
+      const email = info.email;
+      const { data } = await axios.post(
+        `http://localhost:8800/link/${email}/list`
+      );
+      setHistory(data ? data : []);
+    };
+    getHistory();
+  }, [info]);
 
   const deleteURL = async (id) => {
-    await axios.delete(`http://localhost:8800/link/delete/${id}`);
+    const delet = await axios.delete(`http://localhost:8800/link/delete/${id}`);
+    console.log(delet);
+    // getHistory();
   };
   const inputChecker = () => {
     checkingInput ? passwordRef.current.focus() : emailRef.current.focus();

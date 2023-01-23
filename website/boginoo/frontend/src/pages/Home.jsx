@@ -48,7 +48,6 @@ export const Home = () => {
           </Button>
         </Box>
         {arr?.map((el, index) => {
-          console.log(arr)
           return <LinkList key={index} list={el} />;
         })}
 
