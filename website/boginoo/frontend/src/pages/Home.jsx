@@ -47,9 +47,7 @@ export const Home = () => {
             Богиносгох
           </Button>
         </Box>
-        {arr?.map((el, index) => {
-          return <LinkList key={index} list={el} />;
-        })}
+        {arr ? <LinkList list={arr} /> : null}
 
         {history.length > 0 && (
           <Box

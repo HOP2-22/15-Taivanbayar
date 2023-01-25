@@ -7,7 +7,7 @@ import { FuncContext } from "../../context/functions";
 import More from "../../assets/images/icon-down.svg";
 
 export const Header = () => {
-  const { match, info, setInfo, setMatch } = useContext(FuncContext);
+  const { match, info, setInfo, setMatch, LogOut } = useContext(FuncContext);
   const navigate = useNavigate();
   const [menu, setMenu] = useState(false);
   const [touch, setTouch] = useState(false);
@@ -36,14 +36,14 @@ export const Header = () => {
             <Typography
               sx={{
                 position: "absolute",
-                cursor:"pointer"
+                cursor: "pointer",
               }}
-              onClick={()=> {
+              onClick={() => {
+                setInfo(null);
                 navigate("/login");
-                setInfo('');
+                LogOut();
                 setMatch(false);
                 setMenu(false);
-                console.log(info);
               }}
             >
               Log out

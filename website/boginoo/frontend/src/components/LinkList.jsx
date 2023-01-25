@@ -1,7 +1,9 @@
 import { Link, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { useEffect } from "react";
 
 export const LinkList = ({ list }) => {
+
   return (
     <Box
       sx={{

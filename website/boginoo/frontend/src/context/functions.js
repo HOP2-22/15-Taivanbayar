@@ -7,8 +7,11 @@ export const FuncContext = createContext();
 
 export const Functions = ({ children }) => {
   const navigate = useNavigate();
+  const [checkUser, setCheckUser] = useState(false);
+  const [checkEmail, setCheckEmail] = useState(false);
+  const [checkPass, setCheckPass] = useState(false);
   const [value, setValue] = useState("");
-  const [arr, setArr] = useState([]);
+  const [arr, setArr] = useState();
   const [info, setInfo] = useState();
   const [history, setHistory] = useState([]);
   const [match, setMatch] = useState(false);
@@ -44,6 +47,11 @@ export const Functions = ({ children }) => {
       return Promise.reject(error);
     }
   );
+
+  const LogOut = () => {
+    Cookies.remove("token");
+    setInfo(null);
+  };
   const linkTransfer = async () => {
     try {
       if (info) {
@@ -52,8 +60,7 @@ export const Functions = ({ children }) => {
           short: randomValue,
           user: info.email,
         });
-        const el = [...arr, data];
-        setArr(el);
+        setArr(data);
         setValue("");
       } else {
         alert("Login First");
@@ -77,7 +84,9 @@ export const Functions = ({ children }) => {
 
   const login = async () => {
     if (userinfo.email.includes("@") && userinfo.email.includes(".")) {
+      setCheckEmail(false);
       if (userinfo.password.length === 8) {
+        setCheckPass(false)
         try {
           const { data } = await axios.post("http://localhost:8800/login", {
             email: userinfo.email,
@@ -87,43 +96,43 @@ export const Functions = ({ children }) => {
           if (data.match) {
             navigate("/");
             setMatch(true);
-            Cookies.set("token", data.token, { expires: 7 });
+            Cookies.set("token", data.token, { expires: 1 });
+            setCheckUser(false)
           } else {
-            alert("Email or password incorrect");
+            setCheckUser(true);
           }
         } catch (error) {
           console.log(error);
         }
       } else {
-        alert("Please enter password length of 8 characters");
+        setCheckPass(true);
       }
     } else {
-      alert("Please enter valid email");
+      setCheckEmail(true);
     }
   };
-
-
 
   useEffect(() => {
     const authenticate = async () => {
       const { data } = await axios.get("http://localhost:8800/login/checkUser");
-      setMatch(true);
-      console.log(data);
-      setInfo({ ...info, email: data.email });
+      if (data.exp * 1000 <= Date.now()) {
+        LogOut();
+      } else {
+        setMatch(true);
+        setInfo({ ...info, email: data.email });
+      }
     };
+
     authenticate();
     const getHistory = async () => {
-      const email = info?.email;
+      const email = info.email;
       const { data } = await axios.get(
         `http://localhost:8800/link/${email}/list`
       );
-      setHistory(data ? data : []);
+      setHistory(() => (data ? data : []));
     };
-    if(info) getHistory()
+    if (info) getHistory();
   }, [info]);
-
-
- 
 
   return (
     <FuncContext.Provider
@@ -135,6 +144,10 @@ export const Functions = ({ children }) => {
         value: value,
         userData: userData,
         history: history,
+        checkEmail: checkEmail,
+        checkPass: checkPass,
+        checkUser: checkUser,
+        LogOut: LogOut,
         setMatch: setMatch,
         setInfo: setInfo,
         setHistory: setHistory,

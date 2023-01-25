@@ -8,7 +8,6 @@ import { SignUp } from "./pages/Login/SignUp";
 import { Functions } from "./context/functions";
 
 function App() {
-  document.title = "Boginoo";
   return (
     <BrowserRouter>
       <Functions>

@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import {  Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -64,12 +64,12 @@ export const AllLinks = ({ list, index }) => {
         >
           Хуулж авах
         </Link>
-        <Button
+        <Typography
           style={{ color: "#02B589", marginTop: "2vh", cursor: "pointer" }}
           onClick={() => deleteURL(list._id)}
         >
           Delete
-        </Button>
+        </Typography>
       </Box>
     </Container>
   );

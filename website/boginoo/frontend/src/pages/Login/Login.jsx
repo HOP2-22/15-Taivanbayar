@@ -5,9 +5,16 @@ import { Link } from "react-router-dom";
 import Logo from "../../assets/images/logo-default.svg";
 import { FuncContext } from "../../context/functions";
 import { InputPass } from "../../components/Passinput";
+import { useRef } from "react";
 
 export const Login = () => {
-  const { userinfo, setUserinfo, login } = useContext(FuncContext);
+  const { userinfo, setUserinfo, login, checkEmail, checkPass, checkUser } =
+    useContext(FuncContext);
+  const emailRef = useRef(null);
+
+  const checkInput = () => {
+    checkEmail && emailRef.current.focus();
+  };
 
   return (
     <Container
@@ -24,7 +31,18 @@ export const Login = () => {
         Нэвтрэх
       </Typography>
       <Box>
-        <Typography sx={{ marginLeft: "15px" }}>Цахим хаяг</Typography>
+        {checkUser && (
+          <Typography sx={{ textAlign: "center", color: "red" }}>
+            Мэйл хаяг эсвэл нууц үг буруу байна
+          </Typography>
+        )}
+        {checkEmail ? (
+          <Typography sx={{ marginLeft: "15px", color: "red" }}>
+            Зөв мэйл хаяг оруулна уу
+          </Typography>
+        ) : (
+          <Typography sx={{ marginLeft: "15px" }}>Цахим хаяг</Typography>
+        )}
         <Box>
           <Input
             disableUnderline={true}
@@ -33,11 +51,12 @@ export const Login = () => {
               width: "25vw",
               height: "4vh",
               background: "#FFFFFF",
-              border: "1px solid #F0F0F0",
+              border: !checkEmail ? "1px solid #F0F0F0" : "1px solid red",
               boxShadow: `0px 1px 5px rgba(0, 0, 0, 0.16)`,
               borderRadius: `100px`,
               paddingLeft: "15px",
             }}
+            ref={emailRef}
             onChange={(e) =>
               setUserinfo({ ...userinfo, email: e.target.value })
             }
@@ -45,7 +64,13 @@ export const Login = () => {
         </Box>
       </Box>
       <Box>
-        <Typography sx={{ marginLeft: "15px" }}>Нууц үг</Typography>
+        {checkPass ? (
+          <Typography sx={{ marginLeft: "15px", color: "red" }}>
+            8ш урттай нууц үг оруулаарай
+          </Typography>
+        ) : (
+          <Typography sx={{ marginLeft: "15px" }}>Нууц үг</Typography>
+        )}
         <Input
           disableUnderline={true}
           id="passInput"
@@ -55,7 +80,7 @@ export const Login = () => {
             width: "25vw",
             height: "4vh",
             background: "#FFFFFF",
-            border: "1px solid #F0F0F0",
+            border: !checkPass ? "1px solid #F0F0F0" : "1px solid red",
             boxShadow: `0px 1px 5px rgba(0, 0, 0, 0.16)`,
             borderRadius: `100px`,
             paddingLeft: "15px",
@@ -99,7 +124,10 @@ export const Login = () => {
           width: "25vw",
           color: "white",
         }}
-        onClick={() => login()}
+        onClick={() => {
+          login();
+          checkInput();
+        }}
       >
         Нэвтрэх
       </Button>

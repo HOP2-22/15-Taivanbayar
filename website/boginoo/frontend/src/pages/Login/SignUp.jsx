@@ -6,70 +6,120 @@ import { InputPass } from "../../components/Passinput";
 import { FuncContext } from "../../context/functions";
 
 export const SignUp = () => {
-  const {
-    userData,
-    setUserData,
-    createUser,
-  } = useContext(FuncContext);
+  const { userData, setUserData, createUser } = useContext(FuncContext);
   const [check, setCheck] = useState("");
-
-  const CheckPass = () => {
-    if (userData.email.includes("@") && userData.email.includes(".")) {
-      if (userData.password.length === 8) {
-        if (check === userData.password) {
-          createUser();
-        } else {
-          alert("Passwords do not match");
-        }
+  const [checkPassword, setCheckPassword] = useState(false);
+  const [match, setMatch] = useState(false);
+  const checkPass = () => {
+    if (userData.password === 8) {
+      setCheckPassword(false);
+      if (userData.password === check) {
+        setMatch(true);
+        createUser();
       } else {
-        alert("Please enter valid password");
+        setMatch(true);
       }
     } else {
-      alert("Please enter valid email");
+      setCheckPassword(true);
     }
   };
+
   return (
     <Container sx={style.container}>
       <img src={Logo} alt="logo" />
       <Typography sx={style.topic}>Бүртгүүлэх</Typography>
-      <Box>
-        <Typography sx={style.cap}>Цахим хаяг</Typography>
-        <Input
-          disableUnderline={true}
-          style={style.inp}
-          placeholder="name@mail.domain"
-          onChange={(e) => setUserData({ ...userData, email: e.target.value })}
-        />
-      </Box>
-      <Box>
-        <Typography sx={style.cap}>Нууц үг</Typography>
-        <Input
-          id="passInput"
-          type="password"
-          disableUnderline={true}
-          style={style.inp}
-          placeholder="••••••••••"
-          onChange={(e) =>
-            setUserData({ ...userData, password: e.target.value })
-          }
-        />
-        <InputPass />
-      </Box>
-      <Box>
-        <Typography sx={style.cap}>Нууц үгээ давтна уу?</Typography>
-        <Input
-          id="passInputSign"
-          type="password"
-          disableUnderline={true}
-          style={style.inp}
-          placeholder="••••••••••"
-          onChange={(e) => setCheck(e.target.value)}
-        />
-        <InputPass check={true} />
-      </Box>
-      <Button style={style.but} onClick={() => CheckPass()}>
-        Бүртгүүлэх
-      </Button>
+      <form onSubmit={checkPass}>
+        <Box>
+          <Typography sx={style.cap}>Цахим хаяг</Typography>
+          <Input
+            disableUnderline={true}
+            required
+            type="email"
+            style={{
+              width: "25vw",
+              height: "4vh",
+              background: "#FFFFFF",
+              border: "1px solid #F0F0F0",
+              boxShadow: `0px 1px 5px rgba(0, 0, 0, 0.16)`,
+              borderRadius: `100px`,
+              paddingLeft: "15px",
+            }}
+            placeholder="name@mail.domain"
+            onChange={(e) =>
+              setUserData({ ...userData, email: e.target.value })
+            }
+          />
+        </Box>
+        <Box>
+          {checkPassword ? (
+            <Typography
+              sx={{
+                marginLeft: "15px",
+                color: "red",
+              }}
+            >
+              ш урттай нууц үг оруулаарай
+            </Typography>
+          ) : (
+            <Typography sx={style.cap}>Нууц үг</Typography>
+          )}
+          <Input
+            id="passInput"
+            type="password"
+            required
+            disableUnderline={true}
+            style={{
+              width: "25vw",
+              height: "4vh",
+              background: "#FFFFFF",
+              border: !checkPassword ? "1px solid #F0F0F0" : "1px solid red",
+              boxShadow: `0px 1px 5px rgba(0, 0, 0, 0.16)`,
+              borderRadius: `100px`,
+              paddingLeft: "15px",
+            }}
+            placeholder="••••••••••"
+            onChange={(e) =>
+              setUserData({ ...userData, password: e.target.value })
+            }
+          />
+          <InputPass />
+        </Box>
+        <Box>
+          {match ? (
+            <Typography
+              sx={{
+                marginLeft: "15px",
+                color: "red",
+              }}
+            >
+              Нууц үг таарахгүй байна
+            </Typography>
+          ) : (
+            <Typography sx={style.cap}>Нууц үгээ давтна уу?</Typography>
+          )}
+          <Input
+            id="passInputSign"
+            type="password"
+            required
+            disableUnderline={true}
+            style={{
+              width: "25vw",
+              height: "4vh",
+              background: "#FFFFFF",
+              border: !match ? "1px solid #F0F0F0" : "1px solid red",
+              boxShadow: `0px 1px 5px rgba(0, 0, 0, 0.16)`,
+              borderRadius: `100px`,
+              paddingLeft: "15px",
+            }}
+            placeholder="••••••••••"
+            onChange={(e) => setCheck(e.target.value)}
+          />
+          <InputPass check={true} />
+        </Box>
+        <Button style={style.but} type="submit">
+          Бүртгүүлэх
+        </Button>
+      </form>
     </Container>
   );
 };
