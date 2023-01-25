@@ -1,13 +1,12 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { createContext, useEffect, useRef, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const FuncContext = createContext();
 
 export const Functions = ({ children }) => {
   const navigate = useNavigate();
-  const [checkingInput, setCheckingInput] = useState(null);
   const [value, setValue] = useState("");
   const [arr, setArr] = useState([]);
   const [info, setInfo] = useState();
@@ -21,8 +20,6 @@ export const Functions = ({ children }) => {
     email: "",
     password: "",
   });
-  const emailRef = useRef();
-  const passwordRef = useRef();
 
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -87,7 +84,6 @@ export const Functions = ({ children }) => {
             password: userinfo.password,
           });
           setInfo(data);
-          console.log(data);
           if (data.match) {
             navigate("/");
             setMatch(true);
@@ -99,40 +95,36 @@ export const Functions = ({ children }) => {
           console.log(error);
         }
       } else {
-        setCheckingInput(true);
         alert("Please enter password length of 8 characters");
       }
     } else {
-      setCheckingInput(false);
       alert("Please enter valid email");
     }
   };
+
+
 
   useEffect(() => {
     const authenticate = async () => {
       const { data } = await axios.get("http://localhost:8800/login/checkUser");
       setMatch(true);
+      console.log(data);
       setInfo({ ...info, email: data.email });
     };
     authenticate();
     const getHistory = async () => {
-      const email = info.email;
-      const { data } = await axios.post(
+      const email = info?.email;
+      const { data } = await axios.get(
         `http://localhost:8800/link/${email}/list`
       );
       setHistory(data ? data : []);
     };
-    getHistory();
+    if(info) getHistory()
   }, [info]);
 
-  const deleteURL = async (id) => {
-    const delet = await axios.delete(`http://localhost:8800/link/delete/${id}`);
-    console.log(delet);
-    // getHistory();
-  };
-  const inputChecker = () => {
-    checkingInput ? passwordRef.current.focus() : emailRef.current.focus();
-  };
+
+ 
+
   return (
     <FuncContext.Provider
       value={{
@@ -143,16 +135,10 @@ export const Functions = ({ children }) => {
         value: value,
         userData: userData,
         history: history,
-        checkingInput: checkingInput,
-        emailRef: emailRef,
-        passwordRef: passwordRef,
-        setCheckingInput: setCheckingInput,
-        inputChecker: inputChecker,
         setMatch: setMatch,
         setInfo: setInfo,
         setHistory: setHistory,
         setUserData: setUserData,
-        deleteURL: deleteURL,
         setUserinfo: setUserinfo,
         login: login,
         setValue: setValue,

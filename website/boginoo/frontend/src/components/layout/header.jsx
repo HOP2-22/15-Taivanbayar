@@ -40,9 +40,10 @@ export const Header = () => {
               }}
               onClick={()=> {
                 navigate("/login");
-                setInfo("");
+                setInfo('');
                 setMatch(false);
                 setMenu(false);
+                console.log(info);
               }}
             >
               Log out

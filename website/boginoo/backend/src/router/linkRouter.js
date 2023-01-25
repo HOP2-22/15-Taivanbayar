@@ -7,8 +7,8 @@ const linkRouter = express.Router();
 linkRouter
   .get("/", authenticateToken, getLink)
   .post("/", authenticateToken, createLink)
-  .post("/:id", authenticateToken, goLink)
-  .post("/:user/list", authenticateToken, getHistory)
+  .get("/:id", authenticateToken, goLink)
+  .get("/:user/list", authenticateToken, getHistory)
   .delete("/delete/:id", authenticateToken,  deleteURL)
 
 module.exports = linkRouter;

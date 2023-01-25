@@ -5,16 +5,9 @@ import { Link } from "react-router-dom";
 import Logo from "../../assets/images/logo-default.svg";
 import { FuncContext } from "../../context/functions";
 import { InputPass } from "../../components/Passinput";
-import { useEffect } from "react";
 
 export const Login = () => {
-  const { userinfo, setUserinfo, login, inputChecker, emailRef, passwordRef } =
-    useContext(FuncContext);
-
-  useEffect(() => {
-
-    inputChecker();
-  }, []);
+  const { userinfo, setUserinfo, login } = useContext(FuncContext);
 
   return (
     <Container
@@ -45,7 +38,6 @@ export const Login = () => {
               borderRadius: `100px`,
               paddingLeft: "15px",
             }}
-            ref={emailRef}
             onChange={(e) =>
               setUserinfo({ ...userinfo, email: e.target.value })
             }
@@ -68,7 +60,6 @@ export const Login = () => {
             borderRadius: `100px`,
             paddingLeft: "15px",
           }}
-          ref={passwordRef}
           onChange={(e) =>
             setUserinfo({ ...userinfo, password: e.target.value })
           }

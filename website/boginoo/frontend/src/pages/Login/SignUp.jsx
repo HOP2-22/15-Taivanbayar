@@ -1,6 +1,5 @@
 import { Button, Input, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
-import { useEffect } from "react";
 import { useContext, useState } from "react";
 import Logo from "../../assets/images/logo-default.svg";
 import { InputPass } from "../../components/Passinput";
@@ -11,15 +10,9 @@ export const SignUp = () => {
     userData,
     setUserData,
     createUser,
-    inputChecker,
-    emailRef,
-    passwordRef,
-    setCheckingInput
   } = useContext(FuncContext);
   const [check, setCheck] = useState("");
-  useEffect(() => {
-    inputChecker();
-  }, []); 
+
   const CheckPass = () => {
     if (userData.email.includes("@") && userData.email.includes(".")) {
       if (userData.password.length === 8) {
@@ -29,11 +22,9 @@ export const SignUp = () => {
           alert("Passwords do not match");
         }
       } else {
-        setCheckingInput(true);
         alert("Please enter valid password");
       }
     } else {
-      setCheckingInput(false);
       alert("Please enter valid email");
     }
   };
@@ -48,7 +39,6 @@ export const SignUp = () => {
           style={style.inp}
           placeholder="name@mail.domain"
           onChange={(e) => setUserData({ ...userData, email: e.target.value })}
-          ref={emailRef}
         />
       </Box>
       <Box>
@@ -62,7 +52,6 @@ export const SignUp = () => {
           onChange={(e) =>
             setUserData({ ...userData, password: e.target.value })
           }
-          ref={passwordRef}
         />
         <InputPass />
       </Box>

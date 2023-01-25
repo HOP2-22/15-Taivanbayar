@@ -1,13 +1,12 @@
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
-import { useContext } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
-import { FuncContext } from "../context/functions";
 
 export const AllLinks = ({ list, index }) => {
-  const { deleteURL } = useContext(FuncContext);
-  console.log(list);
-
+  const deleteURL = async (id) => {
+    await axios.delete(`http://localhost:8800/link/delete/${id}`);
+  };
   return (
     <Container
       sx={{
@@ -65,12 +64,12 @@ export const AllLinks = ({ list, index }) => {
         >
           Хуулж авах
         </Link>
-        <Typography
+        <Button
           style={{ color: "#02B589", marginTop: "2vh", cursor: "pointer" }}
-          onClick={deleteURL(index)}
+          onClick={() => deleteURL(list._id)}
         >
           Delete
-        </Typography>
+        </Button>
       </Box>
     </Container>
   );
