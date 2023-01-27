@@ -11,10 +11,10 @@ export const SignUp = () => {
   const [checkPassword, setCheckPassword] = useState(false);
   const [match, setMatch] = useState(false);
   const checkPass = () => {
-    if (userData.password === 8) {
+    if (userData.password.length === 8) {
       setCheckPassword(false);
       if (userData.password === check) {
-        setMatch(true);
+        setMatch(false);
         createUser();
       } else {
         setMatch(true);
@@ -23,12 +23,12 @@ export const SignUp = () => {
       setCheckPassword(true);
     }
   };
+  console.log(userData);
 
   return (
     <Container sx={style.container}>
       <img src={Logo} alt="logo" />
       <Typography sx={style.topic}>Бүртгүүлэх</Typography>
-      <form onSubmit={checkPass}>
         <Box>
           <Typography sx={style.cap}>Цахим хаяг</Typography>
           <Input
@@ -58,7 +58,7 @@ export const SignUp = () => {
                 color: "red",
               }}
             >
-              ш урттай нууц үг оруулаарай
+              8 ш урттай нууц үг оруулаарай
             </Typography>
           ) : (
             <Typography sx={style.cap}>Нууц үг</Typography>
@@ -116,10 +116,9 @@ export const SignUp = () => {
           />
           <InputPass check={true} />
         </Box>
-        <Button style={style.but} type="submit">
+        <Button style={style.but} onClick={()=> checkPass()} >
           Бүртгүүлэх
         </Button>
-      </form>
     </Container>
   );
 };

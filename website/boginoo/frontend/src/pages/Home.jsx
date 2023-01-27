@@ -28,7 +28,7 @@ export const Home = () => {
         >
           <Input
             disableUnderline={true}
-            type="text"
+            type="email"
             placeholder="https://www.web-huudas.mn"
             style={style.inputHome}
             value={value}
