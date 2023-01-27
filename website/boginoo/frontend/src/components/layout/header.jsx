@@ -2,18 +2,20 @@ import { Button, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import { useContext, useEffect } from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { FuncContext } from "../../context/functions";
 import More from "../../assets/images/icon-down.svg";
 
-export const Header = () => {
-  const { match, info, setInfo, setMatch, LogOut } = useContext(FuncContext);
+export const Header = (props) => {
+  const { match, info, setMatch, LogOut } = useContext(FuncContext);
   const navigate = useNavigate();
   const [menu, setMenu] = useState(false);
   const [touch, setTouch] = useState(false);
   useEffect(() => {
-    match && setTouch(true);
-  }, [match]);
+    window.location.pathname === "/login" && setMatch(false);
+    match ? setTouch(true) : setTouch(false);
+  }, [match, setMatch]);
+  console.log(window.location.pathname, "<--location");
   return (
     <Container sx={style.designHeader} maxWidth="xl">
       <Typography sx={style.instructionHeader}>Хэрхэн ажилладаг вэ?</Typography>
@@ -39,7 +41,6 @@ export const Header = () => {
                 cursor: "pointer",
               }}
               onClick={() => {
-                setInfo(null);
                 navigate("/login");
                 LogOut();
                 setMatch(false);

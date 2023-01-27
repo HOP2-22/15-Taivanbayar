@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export const AllLinks = ({ list, index }) => {
   const deleteURL = async (id) => {
-    await axios.delete(`http://localhost:8800/link/delete/${id}`);
+    await axios.delete(`https://boginoo-backend.onrender.com/link/delete/${id}`);
   };
   return (
     <Container

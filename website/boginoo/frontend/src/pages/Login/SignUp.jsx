@@ -58,7 +58,7 @@ export const SignUp = () => {
                 color: "red",
               }}
             >
-              8 ш урттай нууц үг оруулаарай
+              8ш урттай нууц үг оруулаарай
             </Typography>
           ) : (
             <Typography sx={style.cap}>Нууц үг</Typography>

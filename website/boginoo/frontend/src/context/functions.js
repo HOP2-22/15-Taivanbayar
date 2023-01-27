@@ -7,6 +7,7 @@ export const FuncContext = createContext();
 
 export const Functions = ({ children }) => {
   const navigate = useNavigate();
+
   const [checkUser, setCheckUser] = useState(false);
   const [checkEmail, setCheckEmail] = useState(false);
   const [checkPass, setCheckPass] = useState(false);
@@ -55,7 +56,7 @@ export const Functions = ({ children }) => {
   const linkTransfer = async () => {
     try {
       if (info) {
-        const { data } = await axios.post("http://localhost:8800/link", {
+        const { data } = await axios.post("https://boginoo-backend.onrender.com/link", {
           original: value,
           short: randomValue,
           user: info.email,
@@ -72,7 +73,7 @@ export const Functions = ({ children }) => {
 
   const createUser = async () => {
     try {
-      await axios.post("http://localhost:8800/signup", {
+      await axios.post("https://boginoo-backend.onrender.com/signup", {
         email: userData.email,
         password: userData.password,
       });
@@ -88,7 +89,7 @@ export const Functions = ({ children }) => {
       if (userinfo.password.length === 8) {
         setCheckPass(false)
         try {
-          const { data } = await axios.post("http://localhost:8800/login", {
+          const { data } = await axios.post("https://boginoo-backend.onrender.com/login", {
             email: userinfo.email,
             password: userinfo.password,
           });
@@ -114,7 +115,7 @@ export const Functions = ({ children }) => {
 
   useEffect(() => {
     const authenticate = async () => {
-      const { data } = await axios.get("http://localhost:8800/login/checkUser");
+      const { data } = await axios.get("https://boginoo-backend.onrender.com/login/checkUser");
       if (data.exp * 1000 <= Date.now()) {
         LogOut();
       } else {
@@ -127,7 +128,7 @@ export const Functions = ({ children }) => {
     const getHistory = async () => {
       const email = info.email;
       const { data } = await axios.get(
-        `http://localhost:8800/link/${email}/list`
+        `https://boginoo-backend.onrender.com/link/${email}/list`
       );
       setHistory(() => (data ? data : []));
     };

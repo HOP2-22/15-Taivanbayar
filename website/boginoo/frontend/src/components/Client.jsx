@@ -10,7 +10,7 @@ export const Client = () => {
       if (id) {
         try {
           const { data } = await axios.get(
-            `http://localhost:8800/link/${id}`
+            `https://boginoo-backend.onrender.com/link/${id}`
           );
           window.location.href = data[0].original;
         } catch (error) {
