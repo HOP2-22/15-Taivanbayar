@@ -23,7 +23,6 @@ export const SignUp = () => {
       setCheckPassword(true);
     }
   };
-  console.log(userData);
 
   return (
     <Container sx={style.container}>

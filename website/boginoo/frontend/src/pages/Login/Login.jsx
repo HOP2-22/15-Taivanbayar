@@ -25,16 +25,21 @@ export const Login = () => {
         alignItems: "center",
         gap: "4vh",
       }}
+      maxWidth="xl"
     >
       <img src={Logo} alt="logo" />
       <Typography sx={{ color: "#02B589", fontSize: "32px" }}>
         Нэвтрэх
       </Typography>
-      <Box>
+      <Box sx={{
+        display: "flex",
+        flexDirection: "column", 
+        alignItems: "center"
+      }}>
         {checkUser && (
           <Typography sx={{ textAlign: "center", color: "red" }}>
             Мэйл хаяг эсвэл нууц үг буруу байна
-          </Typography>
+          </Typography> 
         )}
         {checkEmail ? (
           <Typography sx={{ marginLeft: "15px", color: "red" }}>
@@ -43,12 +48,11 @@ export const Login = () => {
         ) : (
           <Typography sx={{ marginLeft: "15px" }}>Цахим хаяг</Typography>
         )}
-        <Box>
           <Input
             disableUnderline={true}
             placeholder="name@mail.domain"
             style={{
-              width: "25vw",
+              width: "150%",
               height: "4vh",
               background: "#FFFFFF",
               border: !checkEmail ? "1px solid #F0F0F0" : "1px solid red",
@@ -61,15 +65,18 @@ export const Login = () => {
               setUserinfo({ ...userinfo, email: e.target.value })
             }
           />
-        </Box>
       </Box>
-      <Box>
+      <Box sx={{
+        display: "flex",
+        flexDirection: "column",  
+        alignItems: "center",
+      }}>
         {checkPass ? (
-          <Typography sx={{ marginLeft: "15px", color: "red" }}>
+          <Typography sx={{ textAlign:'left',  color: "red" }}>
             8ш урттай нууц үг оруулаарай
           </Typography>
         ) : (
-          <Typography sx={{ marginLeft: "15px" }}>Нууц үг</Typography>
+          <Typography sx={{ textAlign:'left' }}>Нууц үг</Typography>
         )}
         <Input
           disableUnderline={true}
@@ -77,7 +84,7 @@ export const Login = () => {
           type="password"
           placeholder="••••••••••"
           style={{
-            width: "25vw",
+            width: "150%",
             height: "4vh",
             background: "#FFFFFF",
             border: !checkPass ? "1px solid #F0F0F0" : "1px solid red",
@@ -95,8 +102,8 @@ export const Login = () => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "space-between",
-          width: "25vw",
+          justifyContent: "space-around",
+          gap:"5vw"
         }}
       >
         <Box
@@ -121,7 +128,7 @@ export const Login = () => {
           borderRadius: "100px",
           padding: "3px 33px 3px 33px",
           fontSize: "90%",
-          width: "25vw",
+          width: "300px",
           color: "white",
         }}
         onClick={() => {
