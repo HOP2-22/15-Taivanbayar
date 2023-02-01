@@ -1,35 +1,32 @@
-import {
-  Box,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Button,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import React from "react";
+import { AppBar, Container, Typography } from "@mui/material";
 
-export const Header = () => {
+function Header() {
+  const dark = true;
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <div>
       <AppBar
-        position="static"
+        sx={{
+          backgroundColor: dark ? "black" : "white",
+          display: "flex",
+          justifyContent: "space-evenly",
+          position: "fixed",
+        }}
       >
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2, zIndex: -1, filter: "blur(5px)" }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+        <Container>
+          <Typography variant="h5" sx={{ color: dark ? "white" : "black" }}>
+            Taivanbayar Erdenebaatar
           </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
+          <button
+            //   onClick={() => setDark(!dark)}
+            style={{ width: "100px", height: "20px" }}
+          >
+            dark
+          </button>
+        </Container>
       </AppBar>
-    </Box>
+    </div>
   );
-};
+}
+
+export default Header;
