@@ -1,5 +1,9 @@
+import { Box } from "@mui/system"
+
 export const Home = () => {
     return (
-        <div>hi</div>
+        <Box>
+            hi
+        </Box>
     )
 }
