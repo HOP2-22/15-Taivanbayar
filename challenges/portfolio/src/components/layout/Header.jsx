@@ -5,10 +5,11 @@ import { useContext } from "react";
 import { DataContext } from "../../context/DataContext";
 import LightMode from "../../images/sunny.png";
 import DarkMode from "../../images/crescent-moon.png";
+import { useState } from "react";
 
 const Header = () => {
   const { dark, setDark } = useContext(DataContext);
-  console.log(dark);
+  const [transition, setTransition] = useState(null);
   return (
     <AppBar
       sx={{
@@ -19,7 +20,7 @@ const Header = () => {
       }}
     >
       <Container
-        maxWidth="md"
+        maxWidth="sm"
         sx={{
           display: "flex",
           padding: 2,
@@ -62,8 +63,10 @@ const Header = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              transition: "0.2s ease-out",
+              transform: !transition && "translateY(-10px)",
+              opacity: !transition && 0.3,
             }}
-            className="Icon-mode-header-dark"
           >
             <img
               src={DarkMode}
@@ -72,7 +75,10 @@ const Header = () => {
                 width: "24px",
                 height: "24px",
               }}
-              onClick={() => setDark(!dark)}
+              onClick={() => {
+                setDark(!dark);
+                setTransition(false);
+              }}
             />
           </Box>
         ) : (
@@ -84,14 +90,19 @@ const Header = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              transition: "0.2s ease-out",
+              transform: transition && "translateY(-10px)",
+              opacity: transition && 0.3,
             }}
-            className="Icon-mode-header-light"
           >
             <img
               src={LightMode}
               alt="lightMode"
               style={{ width: "24px", height: "24px" }}
-              onClick={() => setDark(!dark)}
+              onClick={() => {
+                setDark(!dark);
+                setTransition(true);
+              }}
             />
           </Box>
         )}

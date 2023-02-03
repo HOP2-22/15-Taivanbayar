@@ -9,7 +9,10 @@ export const Layout = ({ children }) => {
   return (
     <Box
       sx={{
-        backgroundColor: !dark ? "white" : "black",
+        backgroundColor: !dark ? " #ffffe6" : "#000d1a",
+        display:"flex",
+        flexDirection: "column",
+        gap:"5vh"
       }}
     >
       <Header />
