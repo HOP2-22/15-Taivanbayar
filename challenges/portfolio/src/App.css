@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -34,5 +34,23 @@
   }
   to {
     transform: rotate(360deg);
+  }
+} */
+
+
+.Icon-mode-header-light:active {
+  animation: mode 0.4s ease-out;
+}
+
+.Icon-mode-header-dark:active {
+  animation: mode 0.4s ease-out;
+}
+@keyframes mode {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  } to {
+    opacity: 0.2;
+    transform: translateY(20px);
   }
 }
