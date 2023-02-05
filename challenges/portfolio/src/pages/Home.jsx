@@ -5,6 +5,7 @@ import { DataContext } from "../context/DataContext";
 import { Bio } from "../components/Bio";
 import { Work } from "../components/Work";
 import { Hobbies } from "../components/Hobbies";
+import { Projects } from "../components/Projects";
 
 export const Home = () => {
   const { dark } = useContext(DataContext);
@@ -91,6 +92,7 @@ export const Home = () => {
         <Work />
         <Bio />
         <Hobbies />
+        <Projects />
       </Container>
     </Box>
   );

@@ -25,6 +25,7 @@ const Header = () => {
           display: "flex",
           padding: 2,
           justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
         <Box
@@ -37,75 +38,59 @@ const Header = () => {
           <Typography variant="h6" sx={{ color: dark ? "white" : "black" }}>
             Taivanbayar Erdenebaatar
           </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              gap: 3,
-            }}
-          >
-            <Typography sx={{ color: dark ? "white" : "black" }}>
-              Works
-            </Typography>
-            <Typography sx={{ color: dark ? "white" : "black" }}>
-              About
-            </Typography>
-            <Typography sx={{ color: dark ? "white" : "black" }}>
-              Contact
-            </Typography>
-          </Box>
         </Box>
-        {!dark ? (
-          <Box
-            sx={{
-              width: "50px",
-              height: "50px",
-              background: "blue",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              transition: "0.2s ease-out",
-              transform: !transition && "translateY(-10px)",
-              opacity: !transition && 0.3,
+        <Box
+          sx={{
+            width: "50px",
+            height: "50px",
+            background: " #5c5cd6",
+            display: !dark ? "flex" : "none",
+            justifyContent: "center",
+            alignItems: "center",
+            transition: "transform 0.2s",
+            transform: !transition && "translateY(10px)",
+            opacity: !transition && 0.3,
+            borderRadius: "10px",
+          }}
+          onClick={() => {
+            setDark(!dark);
+            setTransition(false);
+
+          }}
+        >
+          <img
+            src={DarkMode}
+            alt="darkMode"
+            style={{
+              width: "24px",
+              height: "24px",
             }}
-          >
-            <img
-              src={DarkMode}
-              alt="darkMode"
-              style={{
-                width: "24px",
-                height: "24px",
-              }}
-              onClick={() => {
-                setDark(!dark);
-                setTransition(false);
-              }}
-            />
-          </Box>
-        ) : (
-          <Box
-            sx={{
-              width: "50px",
-              height: "50px",
-              background: "yellow",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              transition: "0.2s ease-out",
-              transform: transition && "translateY(-10px)",
-              opacity: transition && 0.3,
-            }}
-          >
-            <img
-              src={LightMode}
-              alt="lightMode"
-              style={{ width: "24px", height: "24px" }}
-              onClick={() => {
-                setDark(!dark);
-                setTransition(true);
-              }}
-            />
-          </Box>
-        )}
+          />
+        </Box>
+        <Box
+          sx={{
+            width: "50px",
+            height: "50px",
+            background: "#e6e600",
+            display: dark ? "flex" : "none",
+            justifyContent: "center",
+            alignItems: "center",
+            transition: "0.2s ease-out",
+            transform: transition && "translateY(10px)",
+            opacity: transition && 0.3,
+            borderRadius: "10px",
+          }}
+          onClick={() => {
+            setDark(!dark);
+            setTransition(true);
+          }}
+        >
+          <img
+            src={LightMode}
+            alt="lightMode"
+            style={{ width: "24px", height: "24px" }}
+          />
+        </Box>
       </Container>
     </AppBar>
   );

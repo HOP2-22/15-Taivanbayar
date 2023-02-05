@@ -15,7 +15,7 @@ export const Bio = () => {
       <Typography
         sx={{
           color: dark ? "white" : "black",
-          textDecoration: "underline #0040ff 8px  solid",
+          textDecoration: dark ? "underline #0040ff 8px  solid" : "underline black 8px  solid",
         }}
         variant="h5"
       >
