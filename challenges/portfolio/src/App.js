@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Layout } from "./components/layout/layout";
 import { Context } from "./context/DataContext";
+import { Layout } from "./layout/layout";
 import { Home } from "./pages/Home";
 
 const App = () => {

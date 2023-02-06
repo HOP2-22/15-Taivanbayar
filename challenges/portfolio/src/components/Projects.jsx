@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { DataContext } from "../context/DataContext";
 import Work1 from "../images/ss.png";
 import Work2 from "../images/Work2.png";
-import Work3 from "../images/Work3.png"
+import Work3 from "../images/Work3.png";
 
 export const Projects = () => {
   const { dark } = useContext(DataContext);
@@ -31,9 +31,9 @@ export const Projects = () => {
       <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
-          gap: "5vh",
-          alignItems: "center",
+          gap: "5%",
+          justifyContent:"center",
+          flexWrap: "wrap",
         }}
       >
         <Box
@@ -47,9 +47,10 @@ export const Projects = () => {
             src={Work1}
             alt="project1"
             style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: "40px",
+              width: "250px",
+              height: "150px",
+              borderRadius: "10px",
+                       objectFit: "cover",
             }}
           />
           <Typography variant="h5" sx={{ color: dark ? "white" : "black" }}>
@@ -70,9 +71,10 @@ export const Projects = () => {
             src={Work2}
             alt="project2"
             style={{
-              width: "100%",
-              height: "100%",
-              borderRadius: "40px",
+              width: "250px",
+              height: "150px",
+              borderRadius: "10px",
+              objectFit: "cover",
             }}
           />
           <Typography variant="h5" sx={{ color: dark ? "white" : "black" }}>
@@ -86,13 +88,11 @@ export const Projects = () => {
           <Button
             sx={{
               color: "white",
-              display: "flex",
-              alignItems: "center",
               backgroundColor: dark ? "#3385ff" : "#8080ff",
-              width: "30% ",
+              width: "200px ",
             }}
-            variant="h5"
-            onClick={()=> setMore(true)}
+           variant="h5"
+            onClick={() => setMore(true)}
           >
             More...
           </Button>
@@ -108,9 +108,10 @@ export const Projects = () => {
               src={Work3}
               alt="project3"
               style={{
-                width: "100%",
-                height: "100%",
-                borderRadius: "40px",
+                width: "250px",
+                height: "150px",
+                borderRadius: "10px",
+                objectFit: "cover",
               }}
             />
             <Typography variant="h5" sx={{ color: dark ? "white" : "black" }}>

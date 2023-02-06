@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e6c13ad2.css",
+    "main.js": "/static/js/main.28e8f763.js",
+    "static/media/Work3.png": "/static/media/Work3.726dce327f775d0a4f0c.png",
+    "static/media/Work2.png": "/static/media/Work2.ba3213c4178fa9828590.png",
+    "static/media/ss.png": "/static/media/ss.3e4705cb2d9bb65a4cc5.png",
+    "static/media/taivnaa.jpg": "/static/media/taivnaa.7c18de322d2e0bd2ed7a.jpg",
+    "static/media/sunny.png": "/static/media/sunny.aaf8be891f850a514929.png",
+    "static/media/crescent-moon.png": "/static/media/crescent-moon.3bea3d398a25611d421b.png",
+    "index.html": "/index.html",
+    "main.e6c13ad2.css.map": "/static/css/main.e6c13ad2.css.map",
+    "main.28e8f763.js.map": "/static/js/main.28e8f763.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.28e8f763.js"
+  ]
+}

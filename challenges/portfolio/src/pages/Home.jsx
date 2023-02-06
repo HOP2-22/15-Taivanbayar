@@ -6,6 +6,7 @@ import { Bio } from "../components/Bio";
 import { Work } from "../components/Work";
 import { Hobbies } from "../components/Hobbies";
 import { Projects } from "../components/Projects";
+import { Banner } from "../components/Banner";
 
 export const Home = () => {
   const { dark } = useContext(DataContext);
@@ -25,22 +26,20 @@ export const Home = () => {
       >
         <Box
           sx={{
-            marginTop: "50vh",
             width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            flexDirection: "column",
-            gap: "3vh",
+            height: "45vh",
           }}
         >
+          <Banner />
+        </Box>
+        <Box sx={styles.boxStyle}>
           <Typography
             sx={{
               color: dark ? "#fff2cc" : "black",
               width: "100%",
               height: "10%",
-              backgroundColor: dark ? "  #0033cc" : "#ffe6cc",
-              textAlign: "center",
+              backgroundColor:  "rgba(255, 255, 255, 0.25)",
+              // backdropFilter: "blur(10px)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -50,14 +49,7 @@ export const Home = () => {
           >
             Hello, I'm a Fullstack developer based in Mongolia
           </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "100%",
-            }}
-          >
+          <Box sx={styles.containerStyle}>
             <Box
               sx={{
                 display: "flex",
@@ -75,16 +67,7 @@ export const Home = () => {
               </Typography>
             </Box>
             <Box>
-              <img
-                src={Profile}
-                alt="profile"
-                style={{
-                  height: "110px",
-                  width: "110px",
-                  borderRadius: "50%",
-                  border: `2px solid white`,
-                }}
-              />
+              <img src={Profile} alt="profile" style={styles.profileImg} />
             </Box>
           </Box>
         </Box>
@@ -96,4 +79,30 @@ export const Home = () => {
       </Container>
     </Box>
   );
+};
+export const styles = {
+  profileImg: {
+    height: "110px",
+    width: "110px",
+    borderRadius: "50%",
+    border: `2px solid white`,
+    objectFit: "cover",
+  },
+  containerStyle: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+  },
+  boxStyle: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    flexDirection: "column",
+    gap: "3vh",
+    marginTop: -30,
+    position: "relative",
+    zIndex: 1,
+  },
 };
