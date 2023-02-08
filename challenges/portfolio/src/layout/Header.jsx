@@ -1,5 +1,5 @@
 import React from "react";
-  import { AppBar, Container, Typography, Box } from "@mui/material";
+import { AppBar, Container, Typography, Box } from "@mui/material";
 import { useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import LightMode from "../images/sunny.png";
@@ -12,17 +12,18 @@ const Header = () => {
   return (
     <AppBar
       sx={{
-        backgroundColor: dark ? "black" : "white",
+        backgroundColor: dark ? "#202023" : "#F4ECE4",
         display: "flex",
         justifyContent: "space-evenly",
         position: "fixed",
+        backdropFilter: "blur(10px)"
       }}
     >
       <Container
         maxWidth="sm"
         sx={{
           display: "flex",
-          padding: 2,
+          padding: 1,
           justifyContent: "space-between",
           alignItems: "center",
         }}
@@ -40,9 +41,9 @@ const Header = () => {
         </Box>
         <Box
           sx={{
-            width: "50px",
-            height: "50px",
-            background: " #5c5cd6",
+            width: "40px",
+            height: "40px",
+            background: "#805BD5",
             display: !dark && !transition ? "flex" : "none",
             justifyContent: "center",
             alignItems: "center",
@@ -59,16 +60,16 @@ const Header = () => {
             src={DarkMode}
             alt="darkMode"
             style={{
-              width: "24px",
-              height: "24px",
+              width: "16px",
+              height: "16px",
             }}
           />
         </Box>
         <Box
           sx={{
-            width: "50px",
-            height: "50px",
-            background: "#e6e600",
+            width: "40px",
+            height: "40px",
+            background: "#FAD18B",
             display: dark && transition ? "flex" : "none",
             justifyContent: "center",
             alignItems: "center",
@@ -84,7 +85,7 @@ const Header = () => {
           <img
             src={LightMode}
             alt="lightMode"
-            style={{ width: "24px", height: "24px" }}
+            style={{ width: "16px", height: "16px" }}
           />
         </Box>
       </Container>

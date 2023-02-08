@@ -5,29 +5,11 @@ import Work1 from "../images/ss.png";
 import Work2 from "../images/Work2.png";
 import Work3 from "../images/Work3.png";
 
-export const Projects = () => {
+const ProjectsImages = () => {
   const { dark } = useContext(DataContext);
   const [more, setMore] = useState(false);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "4vh",
-      }}
-    >
-      <Typography
-        sx={{
-          color: dark ? "white" : "black",
-          textDecoration: dark
-            ? "underline #0040ff 8px  solid"
-            : "underline black 8px  solid",
-        }}
-        variant="h5"
-      >
-        Projects
-      </Typography>
       <Box
         sx={{
           display: "flex",
@@ -123,6 +105,7 @@ export const Projects = () => {
           </Box>
         )}
       </Box>
-    </Box>
   );
 };
+
+export default ProjectsImages

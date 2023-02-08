@@ -9,7 +9,7 @@ export const Layout = ({ children }) => {
   return (
     <Box
       sx={{
-        backgroundColor: !dark ? " #fff2cc" : "#000d1a",
+        backgroundColor: !dark ? " #F0E6DB" : "#202023",
         display:"flex",
         flexDirection: "column",
         gap:"5vh"

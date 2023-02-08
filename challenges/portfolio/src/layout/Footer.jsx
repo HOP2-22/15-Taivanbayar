@@ -7,7 +7,7 @@ export const Footer = () => {
   return (
     <Container
       sx={{
-        color: dark ? "#0040ff" : "black",
+        color: dark ? "#F0E6DB" : "#202023",
         textAlign: "center",
         paddingBottom: "3vh",
       }}
