@@ -69,8 +69,8 @@ const ProjectsImages = () => {
         {!more ? (
           <Button
             sx={{
-              color: "white",
-              backgroundColor: dark ? "#3385ff" : "#8080ff",
+              color: !dark ? "#DCECEB" : "black",
+              backgroundColor: "#80E5D8",
               width: "200px ",
             }}
            variant="h5"
@@ -96,10 +96,10 @@ const ProjectsImages = () => {
                 objectFit: "cover",
               }}
             />
-            <Typography variant="h5" sx={{ color: dark ? "white" : "black" }}>
+            <Typography variant="h5">
               Blog Post
             </Typography>
-            <Typography variant="h6" sx={{ color: dark ? "white" : "black" }}>
+            <Typography variant="h6">
               Media site
             </Typography>
           </Box>

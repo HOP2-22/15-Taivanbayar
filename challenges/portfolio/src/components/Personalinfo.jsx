@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import BioText from "./Bio";
+import { Contact } from "./Contact";
 import ProjectsImages from "./Projects";
 
 export const PersonalInfo = ({
@@ -38,11 +39,7 @@ export const PersonalInfo = ({
           {Bio && <BioText />}
           {Hobbies && "Movies, Science, Playing Basketball, Music, Books"}
           {Projects && <ProjectsImages />}
-          {Web && (
-            <Box>
-                
-            </Box>
-          )}
+          {Web && <Contact />}
         </Box>
       </Box>
     </Box>
