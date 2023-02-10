@@ -10,7 +10,7 @@ export function Model(props) {
       receiveShadow
       geometry={nodes.Plane.geometry}
       material={materials["Material.001"]}
-      position={[-3.4, 0, -2.95]}
+      position={[-3.4, 2, -4]}
       scale={[7.05, 1, 7.05]}
     />
     <mesh

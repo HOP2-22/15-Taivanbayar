@@ -16,6 +16,7 @@ export const Functions = ({ children }) => {
   const [info, setInfo] = useState();
   const [history, setHistory] = useState([]);
   const [match, setMatch] = useState(false);
+  const [page, setPage] = useState(Number);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -56,11 +57,14 @@ export const Functions = ({ children }) => {
   const linkTransfer = async () => {
     try {
       if (info) {
-        const { data } = await axios.post("https://boginoo-backend.onrender.com/link", {
-          original: value,
-          short: randomValue,
-          user: info.email,
-        });
+        const { data } = await axios.post(
+          "https://boginoo-backend.onrender.com/link",
+          {
+            original: value,
+            short: randomValue,
+            user: info.email,
+          }
+        );
         setArr(data);
         setValue("");
       } else {
@@ -87,18 +91,21 @@ export const Functions = ({ children }) => {
     if (userinfo.email.includes("@") && userinfo.email.includes(".")) {
       setCheckEmail(false);
       if (userinfo.password.length === 8) {
-        setCheckPass(false)
+        setCheckPass(false);
         try {
-          const { data } = await axios.post("https://boginoo-backend.onrender.com/login", {
-            email: userinfo.email,
-            password: userinfo.password,
-          });
+          const { data } = await axios.post(
+            "https://boginoo-backend.onrender.com/login",
+            {
+              email: userinfo.email,
+              password: userinfo.password,
+            }
+          );
           setInfo(data);
           if (data.match) {
             navigate("/");
             setMatch(true);
             Cookies.set("token", data.token, { expires: 1 });
-            setCheckUser(false)
+            setCheckUser(false);
           } else {
             setCheckUser(true);
           }
@@ -115,7 +122,9 @@ export const Functions = ({ children }) => {
 
   useEffect(() => {
     const authenticate = async () => {
-      const { data } = await axios.get("https://boginoo-backend.onrender.com/login/checkUser");
+      const { data } = await axios.get(
+        "https://boginoo-backend.onrender.com/login/checkUser"
+      );
       if (data.exp * 1000 <= Date.now()) {
         LogOut();
       } else {
@@ -131,6 +140,17 @@ export const Functions = ({ children }) => {
         `https://boginoo-backend.onrender.com/link/${email}/list`
       );
       setHistory(() => (data ? data : []));
+      if (history.length < 5) {
+        setPage(1);
+      } else {
+        if(history.length % 4 !== 0) {
+          const number = parseInt(history.length / 4 )+ 1
+          setPage(number)
+        } else {
+          const length = history.length / 4;
+          setPage(length)
+        }
+      }
     };
     if (info) getHistory();
   }, [info]);
@@ -148,6 +168,7 @@ export const Functions = ({ children }) => {
         checkEmail: checkEmail,
         checkPass: checkPass,
         checkUser: checkUser,
+        setPage: setPage,
         LogOut: LogOut,
         setMatch: setMatch,
         setInfo: setInfo,

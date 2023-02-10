@@ -1,6 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FuncContext } from "../../context/functions";
@@ -10,11 +10,7 @@ export const Header = (props) => {
   const { match, info, setMatch, LogOut } = useContext(FuncContext);
   const navigate = useNavigate();
   const [menu, setMenu] = useState(false);
-  const [touch, setTouch] = useState(false);
-  useEffect(() => {
-    window.location.pathname === "/login" && setMatch(false);
-    if(!match) setTouch(false)
-  }, [match, setMatch, info]);
+  const [touch, setTouch] = useState(false)
   return (
     <Container sx={style.designHeader} maxWidth="xl">
       <Typography sx={style.instructionHeader}>Хэрхэн ажилладаг вэ?</Typography>
@@ -52,7 +48,7 @@ export const Header = (props) => {
         </Box>
       )}
 
-      {!touch ? (
+      {!touch && (
         <Button
           variant="contained"
           style={style.buttonHeader}
@@ -63,7 +59,7 @@ export const Header = (props) => {
         >
           Нэвтрэх
         </Button>
-      ) : null}
+      )}
     </Container>
   );
 };

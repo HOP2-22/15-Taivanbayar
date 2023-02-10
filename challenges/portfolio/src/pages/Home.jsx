@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import { useContext } from "react";
 import { DataContext } from "../context/DataContext";
 import { Banner } from "../components/Banner";
@@ -22,16 +22,16 @@ export const Home = () => {
       }}
     >
       <Container maxWidth="sm" display="flex" flexDirection="column" gap="2vh">
-        <Box width="100%" height="45vh">
-          <Banner />
-        </Box>
-        <ProfileComponent />
         <StyledDiv
           initial={{ y: 10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1}}
+          transition={{ duration: 2 }}
           mb={6}
         >
+          <Box width="100%" height="45vh">
+            <Banner />
+          </Box>
+          <ProfileComponent />
           <PersonalInfo Work={true} />
           <PersonalInfo Bio={true} />
           <PersonalInfo Hobbies={true} />

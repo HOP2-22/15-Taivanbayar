@@ -6,7 +6,7 @@ import { FuncContext } from "../context/functions";
 import { AllLinks } from "../components/AllLinks";
 
 export const Home = () => {
-  const { linkTransfer, value, setValue, arr, history } =
+  const { linkTransfer, value, setValue, arr, history, setPage } =
     useContext(FuncContext);
   return (
     <Container sx={style.designHome} maxWidth="xl">
@@ -42,6 +42,8 @@ export const Home = () => {
             style={style.buttonHome}
             onClick={() => {
               linkTransfer();
+              setPage(1);
+              console.log(history);
             }}
           >
             Богиносгох
