@@ -1,13 +1,25 @@
-import { Box, Button, Container, Input, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Input,
+  Pagination,
+  PaginationItem,
+  Stack,
+} from "@mui/material";
 import Logo from "../assets/images/logo-default.svg";
 import { LinkList } from "../components/LinkList";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FuncContext } from "../context/functions";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { AllLinks } from "../components/AllLinks";
 
 export const Home = () => {
-  const { linkTransfer, value, setValue, arr, history, setPage } =
+  const { linkTransfer, value, setValue, arr, setPage, history, countPag } =
     useContext(FuncContext);
+    const [disable, setDisable] = useState(false);
+    console.log(history)
   return (
     <Container sx={style.designHome} maxWidth="xl">
       <img src={Logo} alt="logo" />
@@ -42,37 +54,33 @@ export const Home = () => {
             style={style.buttonHome}
             onClick={() => {
               linkTransfer();
-              setPage(1);
-              console.log(history);
             }}
           >
             Богиносгох
           </Button>
         </Box>
         {arr ? <LinkList list={arr} /> : null}
-
-        {history.length > 0 && (
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "5vh",
-              marginTop: "-8vh",
-            }}
-          >
-            <Typography
-              sx={{
-                color: "#02B589",
-                fontWeight: "700",
-                fontSize: "32px",
-                marginLeft: "15px",
-              }}
-            >
-              Түүх
-            </Typography>
+        {history && (
+          <Box display={"flex"} flexDirection="column" alignItems={"center"} gap={2}>
             {history?.map((el, index) => {
               return <AllLinks key={index} list={el} index={index} />;
             })}
+            <Stack spacing={2}>
+              <Pagination
+                count={countPag}
+                renderItem={(item) => (
+                  <PaginationItem
+                    slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+                    {...item}
+                  />
+                )}
+                hideNextButton={disable}
+                onChange={(e, value) => {
+                  setPage(value);
+                  setDisable(value === countPag)
+                }}
+              />
+            </Stack>
           </Box>
         )}
       </Box>

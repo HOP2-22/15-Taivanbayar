@@ -10,7 +10,7 @@ export const Header = (props) => {
   const { match, info, setMatch, LogOut } = useContext(FuncContext);
   const navigate = useNavigate();
   const [menu, setMenu] = useState(false);
-  const [touch, setTouch] = useState(false)
+  const [touch, setTouch] = useState(false);
   return (
     <Container sx={style.designHeader} maxWidth="xl">
       <Typography sx={style.instructionHeader}>Хэрхэн ажилладаг вэ?</Typography>

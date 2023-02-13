@@ -35,6 +35,7 @@ exports.goLink = async (req, res) => {
 
 exports.getHistory = async (req, res) => {
   try {
+    const user = req.params.user
     const tasks = await Link.find({ user: user });
     res.status(200).send(tasks);
   } catch (error) {

@@ -25,7 +25,7 @@ export const Home = () => {
         <StyledDiv
           initial={{ y: 10, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 2 }}
+          transition={{ duration: 1 }}
           mb={6}
         >
           <Box width="100%" height="45vh">

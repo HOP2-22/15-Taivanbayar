@@ -14,9 +14,10 @@ export const Functions = ({ children }) => {
   const [value, setValue] = useState("");
   const [arr, setArr] = useState();
   const [info, setInfo] = useState();
-  const [history, setHistory] = useState([]);
   const [match, setMatch] = useState(false);
-  const [page, setPage] = useState(Number);
+  const [page, setPage] = useState(1);
+  const [countPag, setCountPag] = useState();
+  const [history, setHistory] = useState();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -52,7 +53,7 @@ export const Functions = ({ children }) => {
 
   const LogOut = () => {
     Cookies.remove("token");
-    setInfo(null);
+    setInfo("");
   };
   const linkTransfer = async () => {
     try {
@@ -132,28 +133,34 @@ export const Functions = ({ children }) => {
         setInfo({ ...info, email: data.email });
       }
     };
-
     authenticate();
-    const getHistory = async () => {
-      const email = info.email;
+  }, []);
+  useEffect(() => {
+    const getPagination = async () => {
+      const user = info.email;
+      const limit = 4;
       const { data } = await axios.get(
-        `https://boginoo-backend.onrender.com/link/${email}/list`
+        `https://boginoo-backend.onrender.com/link/${user}/${page}/${limit}`
       );
-      setHistory(() => (data ? data : []));
-      if (history.length < 5) {
-        setPage(1);
+      setHistory(() => (data ? data : []))
+      const res = await axios.get(
+        `https://boginoo-backend.onrender.com/link/${user}/list`
+      );
+      const list = res.data;
+      if (list.length < 5) {
+        setCountPag(1);
       } else {
-        if(history.length % 4 !== 0) {
-          const number = parseInt(history.length / 4 )+ 1
-          setPage(number)
+        if (list.length % 4 !== 0) {
+          const number = parseInt(list.length / 4) + 1;
+          setCountPag(number);
         } else {
-          const length = history.length / 4;
-          setPage(length)
+          const length = list.length / 4;
+          setCountPag(length);
         }
       }
     };
-    if (info) getHistory();
-  }, [info]);
+    if (info) getPagination();
+  }, [info, page]);
 
   return (
     <FuncContext.Provider
@@ -164,15 +171,15 @@ export const Functions = ({ children }) => {
         arr: arr,
         value: value,
         userData: userData,
-        history: history,
         checkEmail: checkEmail,
         checkPass: checkPass,
         checkUser: checkUser,
+        history: history,
+        countPag: countPag,
         setPage: setPage,
         LogOut: LogOut,
         setMatch: setMatch,
         setInfo: setInfo,
-        setHistory: setHistory,
         setUserData: setUserData,
         setUserinfo: setUserinfo,
         login: login,
