@@ -13,3 +13,4 @@ exports.authenticateToken = async (req, res, next) => {
     res.send(error).status(404);
   }
 };
+
